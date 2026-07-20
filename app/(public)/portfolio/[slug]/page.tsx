@@ -28,7 +28,7 @@ export async function generateMetadata({
   };
 }
 
-/** Picks a single representative file for a project — used for the hero
+/** Picks a single representative file for a project — used for the display
  *  background and for related-project thumbnails. Prefers the finished
  *  ("after") shot; falls back to a "before" shot if that's all there is. */
 function getCoverFile(item: PortfolioItemType): MediaFile | undefined {
@@ -73,7 +73,7 @@ export default async function PortfolioDetailPage({
 
   return (
     <>
-      {/* ── Lean hero — title only, meta lives in the spec band below ── */}
+      {/* ── Lean display — title only, meta lives in the spec band below ── */}
       <div className="relative h-[70vh] min-h-105 max-h-180 bg-charcoal overflow-hidden">
         {cover?.type === "video" ? (
           <video
@@ -126,7 +126,7 @@ export default async function PortfolioDetailPage({
                 <p className="font-sans text-[9px] text-white/40 uppercase tracking-[0.2em] mb-1.5">
                   {k}
                 </p>
-                <p className="font-hero text-lg text-white">{v}</p>
+                <p className="font-display text-lg text-white">{v}</p>
               </div>
             ))}
           </div>
@@ -145,7 +145,7 @@ export default async function PortfolioDetailPage({
                   The project
                 </p>
               </div>
-              <p className="font-hero text-[clamp(1.4rem,2.5vw,1.9rem)] text-charcoal leading-relaxed mb-8">
+              <p className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] text-charcoal leading-relaxed mb-8">
                 {item.description}
               </p>
               {item.tags.length > 0 && (
@@ -291,11 +291,11 @@ export default async function PortfolioDetailPage({
                       href={`/portfolio/${rel.slug}`}
                       className="group grid grid-cols-[2.5rem_1fr_3.5rem] sm:grid-cols-[3.5rem_1fr_5rem_4rem] items-center gap-x-5 sm:gap-x-8 py-7 border-b border-sand-200 hover:bg-sand-50 transition-colors duration-300"
                     >
-                      <p className="font-hero text-xl text-charcoal-muted/50 group-hover:text-brand-500 transition-colors duration-300">
+                      <p className="font-display text-xl text-charcoal-muted/50 group-hover:text-brand-500 transition-colors duration-300">
                         {String(i + 1).padStart(2, "0")}
                       </p>
                       <div className="min-w-0">
-                        <h4 className="font-hero text-lg sm:text-xl text-charcoal leading-tight truncate group-hover:text-brand-700 transition-colors duration-300">
+                        <h4 className="font-display text-lg sm:text-xl text-charcoal leading-tight truncate group-hover:text-brand-700 transition-colors duration-300">
                           {rel.title}
                         </h4>
                         <p className="font-sans text-[11px] text-charcoal-muted uppercase tracking-[0.16em] mt-1">
@@ -330,7 +330,7 @@ export default async function PortfolioDetailPage({
             <p className="font-sans text-[11px] text-brand-400 tracking-[0.28em] uppercase mb-5">
               Inspired by this project?
             </p>
-            <h2 className="font-hero text-[clamp(2rem,4vw,3.25rem)] text-white leading-tight mb-5">
+            <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-white leading-tight mb-5">
               Let&apos;s create something as remarkable for your space.
             </h2>
             <p className="font-sans text-white/50 text-sm leading-relaxed mb-10 max-w-md mx-auto">
