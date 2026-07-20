@@ -1,0 +1,127 @@
+@import url("https://fonts.bunny.net/css?family=inter:400,500,600&family=cormorant-garamond:300,400,500,600i");
+@import url(https://fonts.bunny.net/css?family=grandiflora-one:400|libre-caslon-display:400);
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-hero: "Libre Caslon Display", serif;
+
+  --color-brand-50: #f6f6f6;
+  --color-brand-100: #ede6da;
+  --color-brand-200: #d9cbba;
+  --color-brand-300: #c5b09a;
+  --color-brand-400: #b8956a;
+  --color-brand-500: #a07848;
+  --color-brand-600: #8c6a3f;
+  --color-brand-700: #725434;
+  --color-brand-800: #5c3f1e;
+  --color-brand-900: #3a260f;
+
+  --color-sand-50: #fdfaf6;
+  --color-sand-100: #f5efe6;
+  --color-sand-200: #ede0cc;
+  --color-sand-300: #e0cdb0;
+  --color-sand-400: #c8a97a;
+
+  --color-charcoal: #111111;
+  --color-charcoal-light: #1e1e1e; /* Cards, nav, surfaces */
+  --color-charcoal-muted: #6b7280; /* Muted text */
+
+  --color-strike: #bfbfbf80;
+  --color-strike-hover: #bfbfbf90;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: #b8956a33;
+}
+:focus-visible {
+  outline: 2px solid #b7bac2;
+  outline-offset: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.font-hero {
+  font-family: var(--font-hero);
+}
+
+/* ── Add inside your existing @theme block ── */
+/* --font-hero: "Libre Caslon Display", var(--font-display), serif; */
+
+/* ── Add anywhere outside @theme ── */
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.16) translate3d(-1%, -1%, 0);
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slide-active {
+  animation: kenburns 9s ease-out forwards;
+}
+
+.hero-reveal {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-active {
+    animation: none;
+  }
+  .hero-reveal {
+    animation: none;
+  }
+}

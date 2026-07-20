@@ -1,0 +1,396 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  phone         String?
+  role          Role      @default(CUSTOMER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  orders        Order[]
+  bookings      Booking[]
+  reviews       Review[]
+  wishlist      WishlistItem[]
+  addresses     Address[]
+  notifications Notification[]
+  inquiries     Inquiry[]
+
+  @@map("users")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sessions")
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Category {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String     @unique
+  description String?
+  image       String?
+  parentId    String?    @db.ObjectId
+  parent      Category?  @relation("SubCategories", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children    Category[] @relation("SubCategories")
+  products    Product[]
+  createdAt   DateTime   @default(now())
+  @@map("categories")
+}
+
+model Product {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  slug          String        @unique
+  description   String
+  price         Float
+  comparePrice  Float?
+  sku           String?       @unique
+  stock         Int           @default(0)
+  lowStockAlert Int           @default(5)
+  status        ProductStatus @default(DRAFT)
+  featured      Boolean       @default(false)
+  images        String[]
+  categoryId    String        @db.ObjectId
+  category      Category      @relation(fields: [categoryId], references: [id])
+  tags          String[]
+  dimensions    Json?
+  materials     String[]
+  colors        String[]
+  metaTitle     String?
+  metaDesc      String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  orderItems    OrderItem[]
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+  cartItems     CartItem[]
+  @@map("products")
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  rating    Int
+  title     String?
+  body      String
+  verified  Boolean  @default(false)
+  approved  Boolean  @default(false)
+  userId    String   @db.ObjectId
+  productId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  @@map("reviews")
+}
+
+model WishlistItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  productId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@unique([userId, productId])
+  @@map("wishlist_items")
+}
+
+model Cart {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId String?    @unique
+  userId    String?    @db.ObjectId @unique
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  @@map("carts")
+}
+
+model CartItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  cartId    String  @db.ObjectId
+  productId String  @db.ObjectId
+  quantity  Int     @default(1)
+  color     String?
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+  @@map("cart_items")
+}
+
+model Order {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  orderNumber     String        @unique
+  userId          String        @db.ObjectId
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(UNPAID)
+  paymentRef      String?
+  subtotal        Float
+  discount        Float         @default(0)
+  shipping        Float         @default(0)
+  tax             Float         @default(0)
+  total           Float
+  currency        String        @default("NGN")
+  notes           String?
+  shippingAddress Json
+  items           OrderItem[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  user User @relation(fields: [userId], references: [id])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String  @db.ObjectId
+  productId String  @db.ObjectId
+  name      String
+  image     String
+  price     Float
+  quantity  Int
+  color     String?
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+  @@map("order_items")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  PARTIALLY_PAID
+  REFUNDED
+}
+
+model Address {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String  @db.ObjectId
+  label      String?
+  firstName  String
+  lastName   String
+  street     String
+  city       String
+  state      String
+  country    String  @default("Nigeria")
+  postalCode String?
+  phone      String?
+  isDefault  Boolean @default(false)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("addresses")
+}
+
+model Service {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String    @unique
+  description String
+  icon        String?
+  features    String[]
+  priceFrom   Float?
+  duration    String?
+  image       String?
+  active      Boolean   @default(true)
+  order       Int       @default(0)
+  bookings    Booking[]
+  @@map("services")
+}
+
+model Booking {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String?       @db.ObjectId
+  serviceId     String        @db.ObjectId
+  status        BookingStatus @default(PENDING)
+  firstName     String
+  lastName      String
+  email         String
+  phone         String
+  projectType   String?
+  budget        String?
+  spaceSize     String?
+  timeline      String?
+  description   String
+  preferredDate DateTime?
+  adminNotes    String?
+  attachments   String[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  user    User?   @relation(fields: [userId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
+  @@map("bookings")
+}
+
+enum BookingStatus {
+  PENDING
+  REVIEWED
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model PortfolioItem {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String   @unique
+  description String
+  category    String
+  style       String?
+  client      String?
+  location    String?
+  year        Int?
+  coverImage  String
+  images      String[]
+  featured    Boolean  @default(false)
+  published   Boolean  @default(false)
+  tags        String[]
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  @@map("portfolio_items")
+}
+
+model BlogPost {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String        @unique
+  excerpt     String
+  content     String
+  coverImage  String?
+  authorId    String        @db.ObjectId
+  status      ContentStatus @default(DRAFT)
+  featured    Boolean       @default(false)
+  tags        String[]
+  category    String?
+  readTime    Int?
+  metaTitle   String?
+  metaDesc    String?
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  @@map("blog_posts")
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Testimonial {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  role       String?
+  company    String?
+  content    String
+  rating     Int      @default(5)
+  image      String?
+  featured   Boolean  @default(false)
+  approved   Boolean  @default(false)
+  projectRef String?
+  createdAt  DateTime @default(now())
+  @@map("testimonials")
+}
+
+model Inquiry {
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String?       @db.ObjectId
+  name       String
+  email      String
+  phone      String?
+  subject    String
+  message    String
+  status     InquiryStatus @default(UNREAD)
+  adminReply String?
+  createdAt  DateTime      @default(now())
+  user User? @relation(fields: [userId], references: [id])
+  @@map("inquiries")
+}
+
+enum InquiryStatus {
+  UNREAD
+  READ
+  REPLIED
+  CLOSED
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  type      String
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("notifications")
+}
+
+model SiteSettings {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  key   String @unique
+  value Json
+  @@map("site_settings")
+}
