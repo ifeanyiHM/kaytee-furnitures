@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   ),
   title: {
     default: "Luxe Interiors — Premium Interior Design & Furniture",
-    template: "%s | Luxe Interiors",
+    template: "%s | Kaytee Furnitures",
   },
   description:
     "Award-winning interior design studio crafting luxurious, personalised spaces. Explore our portfolio, shop curated furniture, or book a consultation.",
@@ -19,7 +19,11 @@ export const metadata: Metadata = {
     "interior designer Nigeria",
     "Lagos interior design",
   ],
-  openGraph: { type: "website", locale: "en_NG", siteName: "Luxe Interiors" },
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    siteName: "Kaytee Furnitures",
+  },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
