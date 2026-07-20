@@ -116,9 +116,9 @@
 //   );
 // }
 
+import { ContactForm } from "@/components/forms/ContactForm";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ContactForm } from "@/components/forms/contact-form";
 import {
   RiMapPin2Line,
   RiPhoneLine,

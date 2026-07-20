@@ -2,9 +2,13 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { CustomerSidebar } from "@/components/layout/customer-sidebar";
+import { CustomerSidebar } from "@/components/layout/CustomerSidebar";
 
-export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
+export default async function CustomerLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const session = await auth();
   if (!session?.user) redirect("/login");
 

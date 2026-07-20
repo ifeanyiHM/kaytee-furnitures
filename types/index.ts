@@ -148,6 +148,7 @@ export type PortfolioItemType = {
   description: string;
   tags: string[];
   featured?: boolean;
+  published?: boolean;
   challenge?: string;
   solution?: string;
   highlights?: string[];

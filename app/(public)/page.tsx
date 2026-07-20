@@ -1,13 +1,13 @@
-import { HeroSection } from "@/components/home/hero-section";
-import { ServicesSection } from "@/components/home/services-section";
-import { StatsSection } from "@/components/home/stats-section";
-import { PortfolioPreview } from "@/components/home/portfolio-preview";
-import { ProcessSection } from "@/components/home/process-section";
-import { TestimonialsSection } from "@/components/home/testimonials-section";
-import { CtaSection } from "@/components/home/cta-section";
+import { HeroSection } from "@/components/home/HeroSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { PortfolioPreview } from "@/components/home/PortfolioPreview";
+import { ProcessSection } from "@/components/home/ProcessSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { CtaSection } from "@/components/home/CtaSection";
 import { getFeaturedPortfolio } from "@/actions/portfolio";
 import { getFeaturedProducts } from "@/actions/products";
 import { getTestimonials } from "@/actions/admin";
+import { StatsSection } from "@/components/home/StatsSection";
 
 export default async function HomePage() {
   const [portfolio, products, testimonials] = await Promise.all([

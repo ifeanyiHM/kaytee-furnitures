@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ReadingProgress } from "@/components/legal/reading-progress";
-import { LegalToc } from "@/components/legal/legal-toc";
+import { ReadingProgress } from "@/components/legal/ReadingProgress";
+import { LegalToc } from "@/components/legal/LegalToc";
 import { RiCheckLine } from "react-icons/ri";
 
 export const metadata: Metadata = {

@@ -5,8 +5,8 @@ import { PORTFOLIO_CATEGORIES } from "@/lib/utils/constants";
 import { Pagination } from "@/components/ui/pagination";
 import { PORTFOLIO_MOCK } from "@/lib/portfolio-data";
 import { RiArrowRightLine, RiArrowRightUpLine } from "react-icons/ri";
-import { ProjectMediaViewer } from "@/components/portfolio/project-media-viewer";
 import Image from "next/image";
+import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 
 export const metadata: Metadata = {
   title: "Portfolio",

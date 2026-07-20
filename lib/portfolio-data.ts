@@ -13,6 +13,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "Eko Atlantic, Lagos",
     year: 2024,
     featured: true,
+    published: true,
     tags: ["penthouse", "contemporary", "luxury", "open-plan"],
     challenge:
       "The space had extraordinary bones — sky-high ceilings, wraparound glazing, ocean views — but the original fit-out was developer-standard. The challenge was to honour the architecture's ambition without competing with the views.",
@@ -84,6 +85,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "Maitama, Abuja",
     year: 2024,
     featured: true,
+    published: true,
     tags: ["family home", "warm", "villa", "abuja"],
     challenge:
       "The family needed spaces that worked simultaneously as a formal entertaining home and a relaxed family retreat — for young children and grandparents alike.",
@@ -143,6 +145,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "Lekki Phase 1, Lagos",
     year: 2023,
     featured: false,
+    published: true,
     tags: ["loft", "minimalist", "industrial", "open-plan"],
     challenge:
       "Clients wanted zero visual noise — no visible storage, no handles, no ceiling fixtures — while still having a fully functional family kitchen and workspace.",
@@ -192,6 +195,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "Victoria Island, Lagos",
     year: 2023,
     featured: true,
+    published: true,
     tags: ["commercial", "office", "corporate", "vi"],
     challenge:
       "A financial firm needs to feel authoritative and trustworthy — but also attract millennial talent who want to work somewhere they're proud to show colleagues.",
@@ -241,6 +245,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "Old Ikoyi, Lagos",
     year: 2022,
     featured: false,
+    published: true,
     tags: ["heritage", "restoration", "ikoyi", "colonial"],
     challenge:
       "Original terrazzo floors, timber jalousies, and high coved ceilings were worth preserving — but decades of patchy renovations had created a confusing patchwork of eras.",
@@ -293,6 +298,7 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
     location: "GRA Ikeja, Lagos",
     year: 2023,
     featured: false,
+    published: false,
     tags: ["smart home", "technology", "warm", "ikeja"],
     challenge:
       "Tech infrastructure — wiring conduits, AV racks, automation panels — tends to create cold, clinical aesthetics that conflict with how people actually want to live.",

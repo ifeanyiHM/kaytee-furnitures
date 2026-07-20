@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/shop/product-card";
+import { ProductCard } from "@/components/shop/ProductCard";
 import type { ProductType } from "@/types";
 
 export function FeaturedProducts({ products }: { products: ProductType[] }) {

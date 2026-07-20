@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { getTestimonials, updateTestimonial, createTestimonial } from "@/actions/admin";
-import { AdminTestimonialsManager } from "@/components/admin/testimonials-manager";
+import {
+  getTestimonials,
+  updateTestimonial,
+  createTestimonial,
+} from "@/actions/admin";
+import { AdminTestimonialsManager } from "@/components/admin/TestimonialsManager";
 
 export const metadata: Metadata = { title: "Testimonials — Admin" };
 

@@ -10,7 +10,7 @@ import {
   RiCheckLine,
 } from "react-icons/ri";
 import { MediaFile, PortfolioItemType } from "@/types";
-import { ProjectMediaViewer } from "@/components/portfolio/project-media-viewer";
+import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 
 export async function generateMetadata({
   params,
