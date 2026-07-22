@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: "https://kaytee-furnitures.vercel.app/", // replace with your domain
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Kaytee Furnitures",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Kaytee Furnitures",
     description:
       "Premium furniture thoughtfully designed to elevate every space you call home.",
-    images: ["/opengraph-image.jpg"],
+    images: ["/opengraph-image.png"],
   },
 
   robots: {
