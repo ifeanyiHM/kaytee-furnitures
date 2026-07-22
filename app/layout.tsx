@@ -6,26 +6,45 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   ),
+
   title: {
-    default: "Luxe Interiors — Premium Interior Design & Furniture",
+    default: "Kaytee Furnitures",
     template: "%s | Kaytee Furnitures",
   },
+
   description:
-    "Award-winning interior design studio crafting luxurious, personalised spaces. Explore our portfolio, shop curated furniture, or book a consultation.",
-  keywords: [
-    "interior design",
-    "luxury furniture",
-    "home decor",
-    "interior designer Nigeria",
-    "Lagos interior design",
-  ],
+    "Premium furniture thoughtfully designed to elevate every space you call home.",
+
   openGraph: {
     type: "website",
     locale: "en_NG",
     siteName: "Kaytee Furnitures",
+    title: "Kaytee Furnitures",
+    description:
+      "Premium furniture thoughtfully designed to elevate every space you call home.",
+    url: "https://kaytee-furnitures.vercel.app/", // replace with your domain
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kaytee Furnitures",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Kaytee Furnitures",
+    description:
+      "Premium furniture thoughtfully designed to elevate every space you call home.",
+    images: ["/images/og-image.jpg"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
