@@ -20,7 +20,7 @@ const PROJECTS = [
   },
   {
     title: "Modern Sitting Room Makeover",
-    category: "Sitting Room",
+    category: "Living Room",
     location: "Lekki Phase 1, Lagos",
     before: "/images/portfolio/port9/before.jpg",
     after: "/images/portfolio/port9/after.jpg",
@@ -38,8 +38,8 @@ const PROJECTS = [
     title: "Luxury Kitchen Renovation",
     category: "Kitchen",
     location: "Maitama, Abuja",
-    before: "/images/portfolio/port8/before.jpg",
-    after: "/images/portfolio/port8/after.jpg",
+    before: "/images/portfolio/port8/before3.jpg",
+    after: "/images/portfolio/port8/after3.jpg",
     slug: "luxury-kitchen-renovation",
   },
   // {

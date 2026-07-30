@@ -400,6 +400,11 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
           src: "/images/portfolio/port10/palour_after.jpg",
           alt: "Modern luxury living room featuring a bespoke illuminated TV wall",
         },
+        {
+          type: "image",
+          src: "/images/portfolio/port10/interior_after.jpg",
+          alt: "Modern luxury living room featuring a bespoke illuminated TV wall",
+        },
       ],
     },
   },
@@ -696,6 +701,11 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
           src: "/images/portfolio/port3/wardrobe4.jpg",
           alt: "Custom wardrobe with illuminated storage compartments and organized interior layout",
         },
+        {
+          type: "image",
+          src: "/images/portfolio/port3/wardrobe5.jpg",
+          alt: "Custom wardrobe with illuminated storage compartments and organized interior layout",
+        },
       ],
     },
   },
@@ -828,6 +838,92 @@ export const PORTFOLIO_MOCK: PortfolioItemType[] = [
           type: "image",
           src: "/images/portfolio/port2/after7.jpg",
           alt: "Custom media wall with decorative panelling, floating cabinetry and illuminated walnut display shelves",
+        },
+      ],
+    },
+  },
+  {
+    _id: "7",
+    title: "Modern Kitchen Renovation",
+    slug: "modern-kitchen-renovation",
+    description:
+      "A complete kitchen transformation featuring bespoke cabinetry, premium countertops, kitchen islands, integrated appliances, layered lighting, and contemporary finishes that elevate both functionality and aesthetics.",
+
+    category: ["Kitchen", "Renovation"],
+    style: "Modern Contemporary",
+    client: "Private Residence",
+    location: "Lagos, Nigeria",
+    year: 2023,
+    featured: true,
+    published: true,
+
+    tags: [
+      "modern kitchen",
+      "kitchen renovation",
+      "custom cabinetry",
+      "kitchen island",
+      "contemporary kitchen",
+      "interior renovation",
+      "premium finishes",
+      "integrated appliances",
+      "lighting design",
+      "luxury kitchen",
+    ],
+
+    challenge:
+      "The existing kitchens were outdated, lacked storage efficiency, and no longer reflected the homeowners' lifestyles. Each space required a complete redesign that improved workflow, increased storage capacity, and delivered a timeless contemporary aesthetic.",
+
+    solution:
+      "We completely reimagined each kitchen with custom-built cabinetry, durable stone countertops, integrated appliances, modern kitchen islands where applicable, layered ambient and task lighting, and carefully selected finishes that maximize functionality while creating elegant, inviting spaces.",
+
+    // duration: "6 weeks",
+    // area: "35 sqm",
+
+    highlights: [
+      "Custom-built kitchen cabinetry",
+      "Premium stone countertops",
+      "Contemporary kitchen islands",
+      "Integrated built-in appliances",
+      "Ambient LED ceiling lighting",
+      "Modern backsplash finishes",
+      "Optimized storage solutions",
+      "Luxury contemporary detailing",
+    ],
+
+    media: {
+      before: [
+        {
+          type: "image",
+          src: "/images/portfolio/port8/before3.jpg",
+          alt: "Kitchen under construction before cabinetry installation",
+        },
+        {
+          type: "image",
+          src: "/images/portfolio/port8/before1.jpg",
+          alt: "Kitchen with red cabinetry before renovation",
+        },
+        {
+          type: "image",
+          src: "/images/portfolio/port8/before2.jpg",
+          alt: "Kitchen with dark wood cabinets before renovation",
+        },
+      ],
+
+      after: [
+        {
+          type: "image",
+          src: "/images/portfolio/port8/after3.jpg",
+          alt: "Modern beige kitchen with custom cabinetry, stone island, and integrated appliances",
+        },
+        {
+          type: "image",
+          src: "/images/portfolio/port8/after1.jpg",
+          alt: "Modern kitchen with charcoal cabinetry, island, and recessed ceiling lighting",
+        },
+        {
+          type: "image",
+          src: "/images/portfolio/port8/after2.jpg",
+          alt: "Luxury contemporary kitchen with glossy cabinetry, marble backsplash, and warm LED lighting",
         },
       ],
     },
