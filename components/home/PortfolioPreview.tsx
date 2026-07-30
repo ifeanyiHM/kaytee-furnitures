@@ -11,45 +11,45 @@ import { Media } from "../ui/Media";
 
 const PROJECTS = [
   {
-    title: "The Lagos Penthouse",
-    category: "Living Room",
-    location: "Eko Atlantic, Lagos",
-    before:
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1200&q=85&auto=format&fit=crop",
-    after:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=85&auto=format&fit=crop",
-    slug: "lagos-penthouse",
-  },
-  {
-    title: "Abuja Family Villa",
+    title: "Classic Bedroom Renovation",
     category: "Bedroom",
-    location: "Maitama, Abuja",
-    before:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=85&auto=format&fit=crop",
-    after:
-      "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&q=85&auto=format&fit=crop",
-    slug: "abuja-villa",
+    location: "Ikeja, Lagos",
+    before: "/images/portfolio/port11/before.jpg",
+    after: "/images/portfolio/port11/after.jpg",
+    slug: "classic-bedroom-renovation",
   },
   {
-    title: "Lekki Modern Loft",
-    category: "Kitchen",
+    title: "Modern Sitting Room Makeover",
+    category: "Sitting Room",
     location: "Lekki Phase 1, Lagos",
-    before:
-      "https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=1200&q=85&auto=format&fit=crop",
-    after:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=85&auto=format&fit=crop",
-    slug: "lekki-loft",
+    before: "/images/portfolio/port9/before.jpg",
+    after: "/images/portfolio/port9/after.jpg",
+    slug: "modern-sitting-room-makeover",
   },
   {
-    title: "Ikoyi Heritage Residence",
+    title: "Dining Room Renovation",
     category: "Dining Room",
     location: "Old Ikoyi, Lagos",
-    before:
-      "https://images.unsplash.com/photo-1561753757-d8880c5a3551?w=1200&q=85&auto=format&fit=crop",
-    after:
-      "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=85&auto=format&fit=crop",
-    slug: "ikoyi-residence",
+    before: "/images/portfolio/port10/dining_before.jpg",
+    after: "/images/portfolio/port10/dining_after.jpg",
+    slug: "dining-room-renovation",
   },
+  {
+    title: "Luxury Kitchen Renovation",
+    category: "Kitchen",
+    location: "Maitama, Abuja",
+    before: "/images/portfolio/port8/before.jpg",
+    after: "/images/portfolio/port8/after.jpg",
+    slug: "luxury-kitchen-renovation",
+  },
+  // {
+  //   title: "Kitchen Renovation",
+  //   category: "Kitchen",
+  //   location: "Eko Atlantic, Lagos",
+  //   before: "/images/portfolio/port7/before.jpg",
+  //   after: "/images/portfolio/port7/after.jpg",
+  //   slug: "kitchen-renovation",
+  // },
 ];
 
 function BeforeAfterSlider({

@@ -11,6 +11,7 @@ import {
 } from "react-icons/ri";
 import { MediaFile, PortfolioItemType } from "@/types";
 import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
+import ProjectGallery from "@/components/portfolio/ProjectGallery";
 
 export async function generateMetadata({
   params,
@@ -45,12 +46,30 @@ export default async function PortfolioDetailPage({
   const item = dbItem ?? PORTFOLIO_MOCK.find((p) => p.slug === slug);
   if (!item) notFound();
 
+  const normalizedItemCategories: string[] = Array.isArray(item.category)
+    ? item.category
+    : item.category
+      ? [item.category]
+      : [];
+  const categoryParam = normalizedItemCategories[0] ?? "";
+  const categoryLabel = normalizedItemCategories.join(", ");
+
   const { data: relatedDb } = await getPortfolioItems({
-    category: item.category,
+    category: categoryParam,
     limit: 3,
   }).catch(() => ({ data: [] }));
   const related = (relatedDb.length > 0 ? relatedDb : PORTFOLIO_MOCK)
-    .filter((p) => p.slug !== slug && p.category === item.category)
+    .filter((p) => {
+      const pCategories = Array.isArray(p.category)
+        ? p.category
+        : p.category
+          ? [p.category]
+          : [];
+      return (
+        p.slug !== slug &&
+        pCategories.some((c) => normalizedItemCategories.includes(c))
+      );
+    })
     .slice(0, 3);
 
   const cover = getCoverFile(item);
@@ -62,7 +81,7 @@ export default async function PortfolioDetailPage({
   // stats section, used here for facts instead of a boxed sidebar card.
   const facts = (
     [
-      ["Category", item.category],
+      ["Category", categoryLabel],
       ["Style", item.style],
       ["Location", item.location],
       ["Year", item.year?.toString()],
@@ -209,20 +228,10 @@ export default async function PortfolioDetailPage({
                 Browse each side independently — every file, image or video, is
                 listed below its frame.
               </p>
-              <div className="lg:grid lg:grid-cols-2 gap-10 lg:gap-12">
-                <div>
-                  <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.22em] mb-4">
-                    Before
-                  </p>
-                  <ProjectMediaViewer media={beforeFiles} />
-                </div>
-                <div>
-                  <p className="font-sans text-[10px] text-brand-600 uppercase tracking-[0.22em] mb-4">
-                    After
-                  </p>
-                  <ProjectMediaViewer media={afterFiles} />
-                </div>
-              </div>
+              <ProjectGallery
+                beforeFiles={beforeFiles}
+                afterFiles={afterFiles}
+              />
             </div>
           )}
 

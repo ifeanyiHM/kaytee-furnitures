@@ -36,7 +36,11 @@ export default async function PortfolioPage({
   const allItems = dbItems.length > 0 ? dbItems : PORTFOLIO_MOCK;
   const filtered =
     category && category !== "All"
-      ? allItems.filter((i) => i.category === category)
+      ? allItems.filter((i) =>
+          Array.isArray(i.category)
+            ? i.category.includes(category)
+            : i.category === category,
+        )
       : allItems;
 
   const featured = filtered.filter((i) => i.featured).slice(0, 3);

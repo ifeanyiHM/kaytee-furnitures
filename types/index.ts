@@ -138,7 +138,7 @@ export type PortfolioItemType = {
   _id: string;
   slug: string;
   title: string;
-  category: string;
+  category: string[];
   location?: string;
   year?: number;
   style?: string;

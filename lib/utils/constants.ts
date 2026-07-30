@@ -22,6 +22,8 @@ export const PORTFOLIO_CATEGORIES = [
   "Home Office",
   "Bathroom",
   "Commercial",
+  "Wardrobe",
+  "TV Console",
 ];
 
 export const PRODUCT_SORT_OPTIONS = [
