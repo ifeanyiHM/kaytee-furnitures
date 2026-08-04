@@ -113,10 +113,10 @@ export default async function ConsultationPage() {
                 href="tel:+2348012345678"
                 className="font-display text-base text-white/60 hover:text-white transition-colors"
               >
-                +234 801 234 5678
+                +234 807 919 7554
               </a>
               <p className="font-sans text-[10px] text-white/25 mt-1">
-                Mon–Fri · 9am–6pm WAT
+                Mon–Fri · 9am–5pm WAT
               </p>
             </div>
           </div>

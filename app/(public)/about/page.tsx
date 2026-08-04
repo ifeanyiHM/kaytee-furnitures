@@ -38,12 +38,12 @@ const TEAM = [
     img: "/images/ceo1.jpg",
     bio: "15 years transforming spaces across West Africa and beyond.",
   },
-  {
-    name: "Kofi Mensah",
-    role: "Technician",
-    img: "",
-    bio: "Specialises in contemporary African design fused with global trends.",
-  },
+  // {
+  //   name: "Kofi Mensah",
+  //   role: "Technician",
+  //   img: "",
+  //   bio: "Specialises in contemporary African design fused with global trends.",
+  // },
   {
     name: "Ifeanyi Iheme",
     role: "Website Developer",
@@ -260,7 +260,7 @@ export default function AboutPage() {
               Meet our team
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:w-1/2 mx-auto">
             {TEAM.map((member) => (
               <div key={member.name} className="text-center">
                 <div className="relative w-40 h-40 mx-auto mb-5 rounded-full overflow-hidden">

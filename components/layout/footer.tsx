@@ -9,6 +9,7 @@ import {
   RiMapPin2Line,
   RiPhoneLine,
   RiMailLine,
+  RiTiktokFill,
 } from "react-icons/ri";
 import { NewsletterForm } from "../forms/NewsLetterForm";
 import { cn } from "@/lib/utils/cn";
@@ -39,19 +40,23 @@ const NAV = {
 
 const SOCIALS = [
   {
-    href: "https://www.instagram.com/kayteefurnitureandinteriors?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    href: "https://www.instagram.com/kayteefurnitureandinteriors?utm_source=qr",
     Icon: RiInstagramLine,
     label: "Instagram",
   },
-  { href: "https://twitter.com", Icon: RiTwitterXLine, label: "X (Twitter)" },
-  { href: "https://facebook.com", Icon: RiFacebookBoxLine, label: "Facebook" },
+  {
+    href: "https://www.tiktok.com/@kayteefurnitureinteriors?_r=1&_t=ZS-98Zqp8c3Ytp",
+    Icon: RiTiktokFill,
+    label: "TikTok",
+  },
+  // { href: "https://facebook.com", Icon: RiFacebookBoxLine, label: "Facebook" },
   { href: "https://pinterest.com", Icon: RiPinterestLine, label: "Pinterest" },
 ];
 
 const CONTACT = [
-  { Icon: RiMapPin2Line, value: "14 Design Blvd, Victoria Island, Lagos" },
-  { Icon: RiPhoneLine, value: "+234 801 234 5678" },
-  { Icon: RiMailLine, value: "hello@kayteefurnitures.com" },
+  { Icon: RiMapPin2Line, value: "22 Oremerin, Itire Surulere, Lagos" },
+  { Icon: RiPhoneLine, value: "+234 807 919 7554" },
+  { Icon: RiMailLine, value: "hello@kayteefurniture.com" },
 ];
 
 export function Footer() {
