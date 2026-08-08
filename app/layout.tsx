@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import "./globals.css";
+import KayteeChatWidget from "@/components/KayteeChatWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kaytee-furnitures.vercel.app"),
@@ -44,7 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-sand-50 text-charcoal antialiased">
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          {children}
+          <KayteeChatWidget />
+        </SessionProvider>
       </body>
     </html>
   );
