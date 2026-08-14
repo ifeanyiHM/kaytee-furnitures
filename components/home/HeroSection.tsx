@@ -82,19 +82,19 @@ export function HeroSection() {
       </div>
 
       {/* Center content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center pt-28">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center pt-28 xxl:pt-32 xl2:pt-36 xl3:pt-40 xl4:pt-44">
         <div
-          className={`flex items-center gap-3 mb-7 ${mounted ? "hero-reveal" : "opacity-0"}`}
+          className={`flex items-center gap-3 mb-7 xxl:mb-8 xl2:mb-9 xl3:mb-10 ${mounted ? "hero-reveal" : "opacity-0"}`}
         >
           <span className="inline-block w-8 h-px bg-brand-400" />
-          <p className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase text-brand-200">
+          <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[12px] font-medium tracking-[0.32em] uppercase text-brand-200">
             Interior Design &amp; Bespoke Furniture — Lagos, Nigeria
           </p>
           <span className="inline-block w-8 h-px bg-brand-400" />
         </div>
 
         <h1
-          className={`font-hero text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[1.05] tracking-tight text-white max-w-4xl ${mounted ? "hero-reveal" : "opacity-0"}`}
+          className={`font-hero text-[clamp(2.75rem,7vw,5.5rem)] xxl:text-[clamp(3.2rem,5.5vw,6.1rem)] xl2:text-[clamp(3.5rem,5vw,6.5rem)] xl3:text-[clamp(3.9rem,4.8vw,7rem)] xl4:text-[clamp(4.2rem,4.6vw,7.7rem)] font-normal leading-[1.05] tracking-tight text-white max-w-4xl xxl:max-w-[46rem] xl2:max-w-[48rem] xl3:max-w-[52rem] xl4:max-w-[56rem] ${mounted ? "hero-reveal" : "opacity-0"}`}
           style={{
             animationDelay: "0.1s",
             // textShadow: "0 4px 28px rgba(0,0,0,0.35)",

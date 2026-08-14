@@ -3,6 +3,11 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xxl: 1440px;
+  --breakpoint-xl2: 1536px;
+  --breakpoint-xl3: 1680px;
+  --breakpoint-xl4: 1920px;
+
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-hero: "Libre Caslon Display", serif;
@@ -30,6 +35,36 @@
 
   --color-strike: #bfbfbf80;
   --color-strike-hover: #bfbfbf90;
+}
+
+@layer components {
+  .site-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xxl:max-w-[95%] xl2:max-w-[95%] xl3:max-w-[94%] xl4:max-w-[93%];
+  }
+
+  .site-section {
+    @apply py-16 xxl:py-20 xl2:py-24 xl3:py-28 xl4:py-32;
+  }
+
+  .site-section-tight {
+    @apply py-12 xxl:py-14 xl2:py-16 xl3:py-20 xl4:py-24;
+  }
+
+  .site-kicker {
+    @apply font-sans text-[10px] xxl:text-[11px] xl2:text-[11px] xl3:text-[12px] xl4:text-[12px] font-medium tracking-[0.28em] uppercase;
+  }
+
+  .site-heading {
+    @apply font-display text-[clamp(2rem,4vw,3rem)] xxl:text-[clamp(2.1rem,3.8vw,3.2rem)] xl2:text-[clamp(2.3rem,3.5vw,3.5rem)] xl3:text-[clamp(2.6rem,3.3vw,3.9rem)] xl4:text-[clamp(2.9rem,3.1vw,4.2rem)] leading-[1.05] tracking-tight text-charcoal;
+  }
+
+  .site-heading-light {
+    @apply font-display text-[clamp(2rem,4vw,3rem)] xxl:text-[clamp(2.1rem,3.8vw,3.2rem)] xl2:text-[clamp(2.3rem,3.5vw,3.5rem)] xl3:text-[clamp(2.6rem,3.3vw,3.9rem)] xl4:text-[clamp(2.9rem,3.1vw,4.2rem)] leading-[1.05] tracking-tight text-white;
+  }
+
+  .site-copy {
+    @apply font-sans text-sm xl2:text-[15px] xl3:text-base xl4:text-base text-charcoal-muted leading-relaxed;
+  }
 }
 
 @keyframes fadeUp {

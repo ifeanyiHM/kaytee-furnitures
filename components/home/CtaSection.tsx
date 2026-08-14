@@ -10,8 +10,8 @@ const TRUST_ITEMS = [
 
 export function CtaSection() {
   return (
-    <section className="bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white overflow-hidden site-section-tight">
+      <div className="site-container">
         {/* Main CTA block — asymmetric split */}
         <div className="grid lg:grid-cols-2 lg:min-h-160">
           {/* Left — text content */}
@@ -24,7 +24,7 @@ export function CtaSection() {
             </div>
 
             {/* <h2 className="font-display text-[clamp(2.5rem,5vw,4.25rem)] text-charcoal leading-[1.05] mb-6"> */}
-            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-charcoal leading-[1.05] tracking-tight mb-6">
+            <h2 className="site-heading mb-6">
               Let's design your dream space together
             </h2>
 

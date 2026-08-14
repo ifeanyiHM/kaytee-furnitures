@@ -65,16 +65,14 @@ export function ProcessSection() {
   }, []);
 
   return (
-    <section className="bg-brand-50 py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-brand-50 site-section-tight">
+      <div className="site-container">
         {/* Header */}
         <div className="max-w-2xl mb-16">
           <p className="font-sans text-[11px] font-medium text-brand-600 tracking-[0.24em] uppercase mb-3">
             How we work
           </p>
-          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-charcoal leading-[1.05] tracking-tight mb-4">
-            A seamless design journey
-          </h2>
+          <h2 className="site-heading mb-4">A seamless design journey</h2>
           <p className="font-sans text-charcoal-muted leading-relaxed max-w-lg">
             From first hello to final reveal, our process is designed to be as
             enjoyable and stress-free as possible.

@@ -53,7 +53,7 @@ export function Header() {
         )}
       />
 
-      <div className="relative flex items-center justify-between h-20 max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="site-container relative flex items-center justify-between h-20 px-6 lg:px-10">
         {/* Logo — wordmark + brass rule + locale, single baseline */}
         <Link
           href="/"

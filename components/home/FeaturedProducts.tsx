@@ -5,16 +5,14 @@ import type { ProductType } from "@/types";
 
 export function FeaturedProducts({ products }: { products: ProductType[] }) {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="site-section-tight bg-white">
+      <div className="site-container">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <p className="font-sans text-xs text-brand-600 tracking-[0.2em] uppercase mb-3">
               Shop the look
             </p>
-            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-charcoal leading-tight">
-              Curated furniture &amp; décor
-            </h2>
+            <h2 className="site-heading">Curated furniture &amp; décor</h2>
           </div>
           <Link href="/shop">
             <Button variant="outline">Browse all products</Button>

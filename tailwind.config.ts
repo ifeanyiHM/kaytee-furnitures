@@ -70,6 +70,12 @@ const config: Config = {
           "50%": { transform: "translateY(-8px)" },
         },
       },
+      screens: {
+        xxl: "1440px",
+        xl2: "1536px",
+        xl3: "1680px",
+        xl4: "1920px",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

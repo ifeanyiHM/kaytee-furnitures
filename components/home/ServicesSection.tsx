@@ -81,8 +81,8 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="py-32 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="site-section bg-white overflow-hidden">
+      <div className="site-container">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20">
           <div className="max-w-xl">
@@ -92,7 +92,7 @@ export function ServicesSection() {
                 What we offer
               </p>
             </div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-charcoal leading-[1.05] tracking-tight">
+            <h2 className="site-heading">
               Six disciplines.
               <br />
               <span className="text-brand-600">One studio.</span>

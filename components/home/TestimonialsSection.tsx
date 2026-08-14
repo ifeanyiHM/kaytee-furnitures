@@ -115,13 +115,13 @@ export function TestimonialsSection({
     typeof t.projectRef === "string" ? PROJECT_IMAGES[t.projectRef] : null;
 
   return (
-    <section className="py-32 bg-charcoal overflow-hidden relative">
+    <section className="site-section bg-charcoal overflow-hidden relative">
       {/* Decorative background quote mark */}
       <div className="absolute top-16 left-1/2 -translate-x-1/2 pointer-events-none select-none">
         <RiDoubleQuotesL className="w-64 h-64 text-white/2.5" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="site-container relative z-10">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
           <div>
@@ -132,7 +132,7 @@ export function TestimonialsSection({
               </p>
             </div>
 
-            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-white leading-[1.05] tracking-tight">
+            <h2 className="site-heading-light">
               Heard from the people <br className="hidden lg:block" />
               <span className="text-brand-400">who live in it.</span>
             </h2>

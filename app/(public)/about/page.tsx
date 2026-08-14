@@ -89,7 +89,7 @@ export default function AboutPage() {
 
       {/* ── Story + stats band ── */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div className="site-container py-20 lg:py-24">
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
             <div>
               <div className="flex items-center gap-3 mb-8">
@@ -251,7 +251,7 @@ export default function AboutPage() {
       </section> */}
       {/* Team */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <div className="text-center mb-16">
             <p className="font-sans text-xs text-brand-600 tracking-[0.2em] uppercase mb-3">
               The people behind the work

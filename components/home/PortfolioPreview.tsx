@@ -151,8 +151,8 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
   const project = PROJECTS[active];
 
   return (
-    <section className="py-32 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="site-section bg-white overflow-hidden">
+      <div className="site-container">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
           <div>
@@ -162,9 +162,7 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
                 Our work
               </p>
             </div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-charcoal leading-[1.05] tracking-tight">
-              Before &amp; after.
-            </h2>
+            <h2 className="site-heading">Before &amp; after.</h2>
             <p className="font-sans text-charcoal-muted mt-3 max-w-md leading-relaxed text-sm">
               Drag the slider to see exactly how we transform a space — from
               what was, to what it became.

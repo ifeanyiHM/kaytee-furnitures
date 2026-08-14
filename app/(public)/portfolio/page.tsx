@@ -50,7 +50,7 @@ export default async function PortfolioPage({
     <>
       {/* ── Hero ── */}
       {/* <section className="pt-32 pb-12 bg-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="site-container text-center">
           <p className="font-sans text-xs text-brand-400 tracking-[0.25em] uppercase mb-4">
             Our work
           </p>
@@ -91,7 +91,7 @@ export default async function PortfolioPage({
 
       {/* ── Filter bar ── */}
       <div className="sticky top-16 lg:top-20 z-30 bg-white/95 backdrop-blur-md border-b border-sand-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <div className="flex items-center gap-2 overflow-x-auto py-3.5 scrollbar-none">
             {PORTFOLIO_CATEGORIES.map((cat) => {
               const active = (cat === "All" && !category) || cat === category;
