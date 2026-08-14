@@ -35,7 +35,7 @@ export default async function CartPage() {
     <>
       <Header />
       <main className="pt-24 pb-16 min-h-screen bg-sand-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container max-w-5xl xxl:max-w-[56rem] xl2:max-w-[58rem] xl3:max-w-[60rem] xl4:max-w-[62rem]">
           <h1 className="font-display text-3xl text-charcoal mb-8">
             Your cart
           </h1>

@@ -133,7 +133,7 @@ export function Footer() {
           {/* Nav columns */}
           {Object.entries(NAV).map(([title, items]) => (
             <div key={title}>
-              <h4 className="font-sans text-[10px] font-semibold tracking-[0.24em] uppercase text-brand-400 mb-5">
+              <h4 className="site-label text-brand-400 tracking-[0.24em] mb-5">
                 {title}
               </h4>
               <ul className="space-y-3">

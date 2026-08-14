@@ -136,10 +136,10 @@ function BeforeAfterSlider({
       </div>
 
       {/* Labels */}
-      <span className="absolute top-4 left-4 font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-white bg-charcoal/60 backdrop-blur-sm px-2.5 py-1 rounded-full pointer-events-none">
+      <span className="absolute top-4 left-4 font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] font-medium tracking-[0.2em] uppercase text-white bg-charcoal/60 backdrop-blur-sm px-2.5 py-1 rounded-full pointer-events-none">
         Before
       </span>
-      <span className="absolute top-4 right-4 font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-white bg-charcoal/60 backdrop-blur-sm px-2.5 py-1 rounded-full pointer-events-none">
+      <span className="absolute top-4 right-4 font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] font-medium tracking-[0.2em] uppercase text-white bg-charcoal/60 backdrop-blur-sm px-2.5 py-1 rounded-full pointer-events-none">
         After
       </span>
     </div>
@@ -158,19 +158,19 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-px bg-brand-600" />
-              <p className="font-sans text-[11px] font-medium text-brand-600 tracking-[0.28em] uppercase">
+              <p className="site-label text-brand-600 tracking-[0.28em]">
                 Our work
               </p>
             </div>
             <h2 className="site-heading">Before &amp; after.</h2>
-            <p className="font-sans text-charcoal-muted mt-3 max-w-md leading-relaxed text-sm">
+            <p className="site-copy text-charcoal-muted mt-3 max-w-md">
               Drag the slider to see exactly how we transform a space — from
               what was, to what it became.
             </p>
           </div>
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-2 font-sans text-sm font-medium text-charcoal border border-sand-300 hover:border-brand-600 hover:text-brand-700 px-5 py-2.5 rounded-full transition-all self-start lg:self-auto shrink-0"
+            className="group inline-flex items-center gap-2 font-sans text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base font-medium text-charcoal border border-sand-300 hover:border-brand-600 hover:text-brand-700 px-5 xxl:px-6 xl2:px-6 xl3:px-7 xl4:px-7 py-2.5 xxl:py-3 xl2:py-3 xl3:py-3.5 xl4:py-3.5 rounded-full transition-all self-start lg:self-auto shrink-0"
           >
             View all projects
             <RiArrowRightUpLine className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -192,14 +192,14 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
             />
             {/* Project caption bar */}
             <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-charcoal/80 to-transparent pt-16 px-6 pb-5 pointer-events-none">
-              <p className="font-sans text-[10px] text-brand-300 uppercase tracking-widest mb-1">
+              <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] text-brand-300 uppercase tracking-widest mb-1">
                 {project.category}
               </p>
               <div className="flex items-end justify-between">
-                <h3 className="font-display text-2xl text-white">
+                <h3 className="font-display text-2xl xxl:text-[2.2rem] xl2:text-[2.35rem] xl3:text-[2.6rem] xl4:text-[2.9rem] text-white">
                   {project.title}
                 </h3>
-                <p className="font-sans text-xs text-white/50">
+                <p className="font-sans text-xs xxl:text-[13px] xl2:text-[13px] xl3:text-[14px] xl4:text-[15px] text-white/50">
                   {project.location}
                 </p>
               </div>
@@ -208,7 +208,7 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
 
           {/* Project selector list */}
           <div className="flex flex-col gap-2">
-            <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.2em] mb-2 px-1">
+            <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] text-charcoal-muted uppercase tracking-[0.2em] mb-2 px-1">
               Select a project
             </p>
             {PROJECTS.map((p, i) => (
@@ -234,16 +234,16 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
                   {/* Meta */}
                   <div className="flex-1 min-w-0">
                     <p
-                      className={`font-sans text-[10px] uppercase tracking-wider mb-0.5 ${active === i ? "text-brand-600" : "text-charcoal-muted"}`}
+                      className={`font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] uppercase tracking-wider mb-0.5 ${active === i ? "text-brand-600" : "text-charcoal-muted"}`}
                     >
                       {p.category}
                     </p>
                     <p
-                      className={`font-display text-base leading-snug truncate ${active === i ? "text-charcoal" : "text-charcoal-muted"}`}
+                      className={`font-display text-base xxl:text-[1.15rem] xl2:text-[1.25rem] xl3:text-[1.4rem] xl4:text-[1.5rem] leading-snug truncate ${active === i ? "text-charcoal" : "text-charcoal-muted"}`}
                     >
                       {p.title}
                     </p>
-                    <p className="font-sans text-[11px] text-charcoal-muted/60 mt-0.5 truncate">
+                    <p className="font-sans text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] text-charcoal-muted/60 mt-0.5 truncate">
                       {p.location}
                     </p>
                   </div>
@@ -259,15 +259,15 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
 
             {/* CTA card */}
             <div className="mt-4 bg-brand-50 border border-strike rounded-xl p-5">
-              <p className="font-display text-lg text-charcoal mb-1">
+              <p className="font-display text-lg xxl:text-[1.5rem] xl2:text-[1.7rem] xl3:text-[1.9rem] xl4:text-[2.1rem] text-charcoal mb-1">
                 Ready to transform your space?
               </p>
-              <p className="font-sans text-xs text-charcoal-muted leading-relaxed mb-4">
+              <p className="font-sans text-xs xxl:text-[13px] xl2:text-[13px] xl3:text-[14px] xl4:text-[15px] text-charcoal-muted leading-relaxed mb-4">
                 Book a free consultation and let's talk about your project.
               </p>
               <Link
                 href="/consultation"
-                className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-800 text-white font-sans text-xs font-medium tracking-wide px-4 py-2.5 rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-800 text-white font-sans text-xs xxl:text-[13px] xl2:text-[13px] xl3:text-[14px] xl4:text-[15px] font-medium tracking-wide px-4 xxl:px-5 xl2:px-5 xl3:px-6 xl4:px-6 py-2.5 xxl:py-3 xl2:py-3 xl3:py-3.5 xl4:py-3.5 rounded-lg transition-colors"
               >
                 Book free consultation
                 <RiArrowRightLine className="w-3.5 h-3.5" />

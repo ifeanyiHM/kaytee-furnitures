@@ -171,7 +171,7 @@ export function ServicesAccordion({ services }: { services: Service[] }) {
 
                     <Link
                       href="/consultation"
-                      className="inline-flex items-center gap-2 font-sans text-[11px] font-medium text-charcoal tracking-[0.14em] uppercase border-b border-charcoal/30 pb-1 hover:border-brand-600 hover:text-brand-700 transition-colors w-fit"
+                      className="inline-flex items-center gap-2 font-sans text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] font-medium text-charcoal tracking-[0.14em] uppercase border-b border-charcoal/30 pb-1 hover:border-brand-600 hover:text-brand-700 transition-colors w-fit"
                     >
                       Book a consultation
                       <RiArrowRightUpLine className="w-3.5 h-3.5" />

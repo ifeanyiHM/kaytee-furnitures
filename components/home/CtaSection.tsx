@@ -18,7 +18,7 @@ export function CtaSection() {
           <div className="flex flex-col justify-center py-20 lg:py-28 lg:pr-16">
             <div className="flex items-center gap-3 mb-7">
               <div className="w-8 h-px bg-brand-600" />
-              <p className="font-sans text-[11px] font-medium text-brand-600 tracking-[0.28em] uppercase">
+              <p className="site-label text-brand-600 tracking-[0.28em]">
                 Start your project
               </p>
             </div>
@@ -46,7 +46,7 @@ export function CtaSection() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/consultation"
-                className="group inline-flex items-center justify-center gap-2.5 bg-brand-600 hover:bg-brand-800 text-white font-sans font-medium text-sm px-7 py-4 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
+                className="site-button-primary group gap-2.5 shadow-sm hover:shadow-md"
               >
                 <RiCalendarLine className="w-4 h-4" />
                 Book free consultation

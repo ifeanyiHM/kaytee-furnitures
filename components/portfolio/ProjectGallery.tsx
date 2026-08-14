@@ -15,7 +15,7 @@ export default function ProjectGallery({ beforeFiles, afterFiles }: Props) {
   return (
     <div className="lg:grid lg:grid-cols-2 gap-10 lg:gap-12">
       <div>
-        <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.22em] mb-4">
+        <p className="site-label text-charcoal-muted tracking-[0.22em] mb-4">
           Before
         </p>
 
@@ -27,7 +27,7 @@ export default function ProjectGallery({ beforeFiles, afterFiles }: Props) {
       </div>
 
       <div>
-        <p className="font-sans text-[10px] text-brand-600 uppercase tracking-[0.22em] mb-4">
+        <p className="site-label text-brand-600 tracking-[0.22em] mb-4">
           After
         </p>
 

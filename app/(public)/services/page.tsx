@@ -140,7 +140,7 @@ export default async function ServicesPage() {
 
       {/* ── Accordion index ── */}
       <section className="bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="site-container max-w-5xl xxl:max-w-[56rem] xl2:max-w-[58rem] xl3:max-w-[60rem] xl4:max-w-[62rem] py-16 sm:py-20">
           <div className="flex items-center justify-between mb-2">
             <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.22em]">
               Full range
@@ -155,7 +155,7 @@ export default async function ServicesPage() {
 
       {/* ── CTA band — consistent with the rest of the site ── */}
       <section className="py-20 bg-charcoal">
-        <div className="max-w-2xl mx-auto px-4 text-center">
+        <div className="mx-auto max-w-2xl xxl:max-w-[34rem] xl2:max-w-[36rem] xl3:max-w-[38rem] xl4:max-w-[40rem] px-4 text-center">
           <p className="font-sans text-[11px] text-brand-400 tracking-[0.25em] uppercase mb-4">
             Not sure where to start?
           </p>

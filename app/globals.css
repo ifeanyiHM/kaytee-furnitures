@@ -54,6 +54,30 @@
     @apply font-sans text-[10px] xxl:text-[11px] xl2:text-[11px] xl3:text-[12px] xl4:text-[12px] font-medium tracking-[0.28em] uppercase;
   }
 
+  .site-label {
+    @apply font-sans text-[10px] xxl:text-[11px] xl2:text-[11px] xl3:text-[12px] xl4:text-[12px] font-medium uppercase tracking-[0.2em] text-charcoal-muted;
+  }
+
+  .site-label-tight {
+    @apply font-sans text-[10px] xxl:text-[11px] xl2:text-[11px] xl3:text-[12px] xl4:text-[12px] font-medium uppercase tracking-[0.14em] text-charcoal-muted;
+  }
+
+  .site-tag {
+    @apply font-sans text-[10px] xxl:text-[11px] xl2:text-[11px] xl3:text-[12px] xl4:text-[12px] uppercase tracking-[0.18em] text-charcoal-light/70 border border-charcoal-light/70 bg-brand-50 px-2 py-0.5 rounded-full;
+  }
+
+  .site-nav-link {
+    @apply relative text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[15px] font-medium tracking-[0.14em] uppercase transition-colors pb-1;
+  }
+
+  .site-button-primary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-sm bg-brand-600 text-white font-sans font-medium text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] tracking-[0.16em] uppercase px-5 py-2.5 xxl:px-6 xl2:px-6 xl3:px-7 xl4:px-7 xxl:py-3 xl2:py-3 xl3:py-3.5 xl4:py-3.5 transition-colors;
+  }
+
+  .site-button-secondary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-sm border border-white/25 bg-white/5 text-white font-sans font-medium text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] tracking-[0.16em] uppercase px-5 py-2.5 xxl:px-6 xl2:px-6 xl3:px-7 xl4:px-7 xxl:py-3 xl2:py-3 xl3:py-3.5 xl4:py-3.5 transition-colors;
+  }
+
   .site-heading {
     @apply font-display text-[clamp(2rem,4vw,3rem)] xxl:text-[clamp(2.1rem,3.8vw,3.2rem)] xl2:text-[clamp(2.3rem,3.5vw,3.5rem)] xl3:text-[clamp(2.6rem,3.3vw,3.9rem)] xl4:text-[clamp(2.9rem,3.1vw,4.2rem)] leading-[1.05] tracking-tight text-charcoal;
   }
@@ -63,7 +87,7 @@
   }
 
   .site-copy {
-    @apply font-sans text-sm xl2:text-[15px] xl3:text-base xl4:text-base text-charcoal-muted leading-relaxed;
+    @apply font-sans text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base text-charcoal-muted leading-relaxed;
   }
 }
 

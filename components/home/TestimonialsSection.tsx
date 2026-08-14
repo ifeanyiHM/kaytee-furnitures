@@ -127,7 +127,7 @@ export function TestimonialsSection({
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-px bg-brand-400" />
-              <p className="font-sans text-[11px] font-medium text-brand-400 tracking-[0.28em] uppercase">
+              <p className="site-label text-brand-400 tracking-[0.28em]">
                 Client love
               </p>
             </div>
@@ -141,7 +141,7 @@ export function TestimonialsSection({
           {/* Aggregate rating */}
           <div className="flex items-center gap-5 border border-white/10 rounded-2xl px-6 py-4 self-start lg:self-auto shrink-0">
             <div>
-              <p className="font-display text-4xl text-white leading-none">
+              <p className="font-display text-4xl xxl:text-[3.2rem] xl2:text-[3.5rem] xl3:text-[3.8rem] xl4:text-[4.2rem] text-white leading-none">
                 5.0
               </p>
               <div className="flex gap-0.5 mt-1.5">
@@ -152,10 +152,10 @@ export function TestimonialsSection({
             </div>
             <div className="w-px h-10 bg-white/10" />
             <div>
-              <p className="font-sans text-sm font-medium text-white">
+              <p className="font-sans text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base font-medium text-white">
                 {display.length * 12}+ reviews
               </p>
-              <p className="font-sans text-xs text-white/40 mt-0.5">
+              <p className="font-sans text-xs xxl:text-[12px] xl2:text-[13px] xl3:text-[13px] xl4:text-[14px] text-white/40 mt-0.5">
                 Verified clients
               </p>
             </div>
@@ -181,7 +181,7 @@ export function TestimonialsSection({
                 transform: animating ? "translateY(10px)" : "translateY(0)",
               }}
             >
-              <p className="font-display text-[clamp(1.35rem,2.5vw,1.85rem)] text-white leading-normal italic mb-10">
+              <p className="font-display text-[clamp(1.35rem,2.5vw,1.85rem)] xxl:text-[clamp(1.5rem,2.1vw,2.2rem)] xl2:text-[clamp(1.7rem,2vw,2.45rem)] xl3:text-[clamp(1.9rem,1.9vw,2.7rem)] xl4:text-[clamp(2.1rem,1.8vw,3.1rem)] text-white leading-normal italic mb-10">
                 &ldquo;{t.content}&rdquo;
               </p>
             </blockquote>
@@ -224,15 +224,15 @@ export function TestimonialsSection({
                 />
               </div>
               <div>
-                <p className="font-sans font-semibold text-white text-sm">
+                <p className="font-sans font-semibold text-white text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base">
                   {t.name}
                 </p>
-                <p className="font-sans text-xs text-white/50 mt-0.5">
+                <p className="font-sans text-xs xxl:text-[12px] xl2:text-[13px] xl3:text-[13px] xl4:text-[14px] text-white/50 mt-0.5">
                   {t.role}
                   {t.company ? ` · ${t.company}` : ""}
                 </p>
                 {/* {t.projectRef && (
-                  <p className="font-sans text-[10px] text-brand-400 mt-1 uppercase tracking-wider">
+                  <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] text-brand-400 mt-1 uppercase tracking-wider">
                     Project: {t.projectRef}
                   </p>
                 )} */}
@@ -294,10 +294,10 @@ export function TestimonialsSection({
               <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-transparent" />
               {/* {t.projectRef && (
                 <div className="absolute bottom-5 left-5">
-                  <p className="font-sans text-[10px] text-brand-300 uppercase tracking-widest mb-1">
+                  <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] text-brand-300 uppercase tracking-widest mb-1">
                     Featured project
                   </p>
-                  <p className="font-display text-xl text-white">
+                  <p className="font-display text-xl xxl:text-[1.5rem] xl2:text-[1.7rem] xl3:text-[1.9rem] xl4:text-[2.1rem] text-white">
                     {t.projectRef}
                   </p>
                 </div>

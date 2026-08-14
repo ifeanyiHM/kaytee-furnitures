@@ -36,7 +36,7 @@ export default async function ProductPage({
 
   return (
     <div className="pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="site-container py-12">
         <nav className="flex gap-2 font-sans text-sm text-charcoal-muted mb-8">
           <Link href="/shop" className="hover:text-charcoal">
             Shop

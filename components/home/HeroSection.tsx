@@ -87,14 +87,14 @@ export function HeroSection() {
           className={`flex items-center gap-3 mb-7 xxl:mb-8 xl2:mb-9 xl3:mb-10 ${mounted ? "hero-reveal" : "opacity-0"}`}
         >
           <span className="inline-block w-8 h-px bg-brand-400" />
-          <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[12px] font-medium tracking-[0.32em] uppercase text-brand-200">
+          <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[13px] xl4:text-[14px] font-medium tracking-[0.32em] uppercase text-brand-200">
             Interior Design &amp; Bespoke Furniture — Lagos, Nigeria
           </p>
           <span className="inline-block w-8 h-px bg-brand-400" />
         </div>
 
         <h1
-          className={`font-hero text-[clamp(2.75rem,7vw,5.5rem)] xxl:text-[clamp(3.2rem,5.5vw,6.1rem)] xl2:text-[clamp(3.5rem,5vw,6.5rem)] xl3:text-[clamp(3.9rem,4.8vw,7rem)] xl4:text-[clamp(4.2rem,4.6vw,7.7rem)] font-normal leading-[1.05] tracking-tight text-white max-w-4xl xxl:max-w-[46rem] xl2:max-w-[48rem] xl3:max-w-[52rem] xl4:max-w-[56rem] ${mounted ? "hero-reveal" : "opacity-0"}`}
+          className={`font-hero text-[clamp(2.75rem,7vw,5.5rem)] xxl:text-[6rem] xl2:text-[6.2rem] xl3:text-[6.7rem] xl4:text-[7.7rem] font-normal leading-[1.05] tracking-tight text-white max-w-4xl xxl:max-w-184 xl2:max-w-3xl xl3:max-w-208 xl4:max-w-240 ${mounted ? "hero-reveal" : "opacity-0"}`}
           style={{
             animationDelay: "0.1s",
             // textShadow: "0 4px 28px rgba(0,0,0,0.35)",
@@ -119,12 +119,12 @@ export function HeroSection() {
           style={{ animationDelay: "0.3s" }}
         >
           <Link href="/consultation">
-            <button className="bg-brand-600 hover:bg-brand-700 text-white px-8 py-3.5 text-[11px] tracking-[0.18em] uppercase font-medium rounded-sm transition-colors">
+            <button className="bg-brand-600 hover:bg-brand-700 text-white px-8 xxl:px-9 xl2:px-10 xl3:px-10 xl4:px-11 py-3.5 xxl:py-4 xl2:py-4 xl3:py-4.5 xl4:py-4.5 text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] tracking-[0.18em] uppercase font-medium rounded-sm transition-colors">
               Book a consultation
             </button>
           </Link>
           <Link href="/portfolio">
-            <button className="backdrop-blur-sm border border-white/25 bg-white/5 hover:bg-white/10 text-white px-8 py-3.5 text-[11px] tracking-[0.18em] uppercase font-medium rounded-sm transition-colors">
+            <button className="backdrop-blur-sm border border-white/25 bg-white/5 hover:bg-white/10 text-white px-8 xxl:px-9 xl2:px-10 xl3:px-10 xl4:px-11 py-3.5 xxl:py-4 xl2:py-4 xl3:py-4.5 xl4:py-4.5 text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] tracking-[0.18em] uppercase font-medium rounded-sm transition-colors">
               View our work
             </button>
           </Link>

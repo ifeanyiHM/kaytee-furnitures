@@ -116,7 +116,7 @@ export default async function PortfolioDetailPage({
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-charcoal via-charcoal/15 to-charcoal/40" />
 
-        <div className="absolute top-0 left-0 right-0 pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="site-container absolute top-0 left-0 right-0 pt-24 px-4 sm:px-6 lg:px-8">
           <Link
             href="/portfolio"
             className="inline-flex items-center gap-2 font-sans text-xs text-white/50 hover:text-white transition-colors tracking-wider uppercase"
@@ -126,7 +126,7 @@ export default async function PortfolioDetailPage({
           </Link>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+        <div className="site-container absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8 pb-14">
           <p className="font-sans text-[10px] text-brand-400 uppercase tracking-[0.28em] mb-4">
             {item.category}
           </p>
@@ -138,7 +138,7 @@ export default async function PortfolioDetailPage({
 
       {/* ── Spec band ── */}
       <div className="bg-charcoal border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y divide-x divide-white/10 lg:divide-y-0">
             {facts.map(([k, v]) => (
               <div key={k} className="py-6 px-6 first:pl-0">
@@ -154,7 +154,7 @@ export default async function PortfolioDetailPage({
 
       {/* ── Main content ── */}
       <article className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           {/* Description + highlights */}
           <div className="grid lg:grid-cols-[1fr_360px] gap-16 py-20 border-b border-sand-200">
             <div>

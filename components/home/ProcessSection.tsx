@@ -69,11 +69,11 @@ export function ProcessSection() {
       <div className="site-container">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <p className="font-sans text-[11px] font-medium text-brand-600 tracking-[0.24em] uppercase mb-3">
+          <p className="site-label text-brand-600 tracking-[0.24em] mb-3">
             How we work
           </p>
           <h2 className="site-heading mb-4">A seamless design journey</h2>
-          <p className="font-sans text-charcoal-muted leading-relaxed max-w-lg">
+          <p className="site-copy text-charcoal-muted max-w-lg">
             From first hello to final reveal, our process is designed to be as
             enjoyable and stress-free as possible.
           </p>
@@ -112,7 +112,7 @@ export function ProcessSection() {
 
               {/* Live step caption */}
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="font-sans text-[10px] tracking-[0.28em] uppercase text-brand-300 mb-2">
+                <p className="site-label text-brand-300 tracking-[0.28em] mb-2">
                   Step {steps[active].num} of 0{steps.length}
                 </p>
                 <p className="font-hero text-2xl text-white leading-snug">
@@ -164,7 +164,7 @@ export function ProcessSection() {
                 <div className="flex-1 flex items-start justify-between gap-5">
                   <div className="pt-2">
                     <h3
-                      className={`font-display text-xl sm:text-2xl mb-3 transition-colors duration-300 ${
+                      className={`font-display text-xl sm:text-2xl xxl:text-[2.1rem] xl2:text-[2.25rem] xl3:text-[2.5rem] xl4:text-[2.8rem] mb-3 transition-colors duration-300 ${
                         i === active
                           ? "text-charcoal"
                           : "text-charcoal/70 group-hover:text-charcoal"
@@ -172,7 +172,7 @@ export function ProcessSection() {
                     >
                       {step.title}
                     </h3>
-                    <p className="font-sans text-sm text-charcoal-muted leading-relaxed max-w-md">
+                    <p className="site-copy text-charcoal-muted max-w-md">
                       {step.desc}
                     </p>
                   </div>

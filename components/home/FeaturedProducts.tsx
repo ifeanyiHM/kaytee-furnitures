@@ -9,7 +9,7 @@ export function FeaturedProducts({ products }: { products: ProductType[] }) {
       <div className="site-container">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
-            <p className="font-sans text-xs text-brand-600 tracking-[0.2em] uppercase mb-3">
+            <p className="site-label text-brand-600 tracking-[0.2em] mb-3">
               Shop the look
             </p>
             <h2 className="site-heading">Curated furniture &amp; décor</h2>
@@ -65,13 +65,13 @@ export function FeaturedProducts({ products }: { products: ProductType[] }) {
                   />
                 </div>
                 <div className="p-4">
-                  <p className="font-sans text-xs text-brand-400 uppercase tracking-widest mb-1">
+                  <p className="font-sans text-[10px] xxl:text-[11px] xl2:text-[12px] xl3:text-[12px] xl4:text-[13px] text-brand-400 uppercase tracking-widest mb-1">
                     {item.cat}
                   </p>
-                  <h3 className="font-display text-lg text-charcoal mb-2">
+                  <h3 className="font-display text-lg xxl:text-[1.35rem] xl2:text-[1.5rem] xl3:text-[1.7rem] xl4:text-[1.8rem] text-charcoal mb-2">
                     {item.name}
                   </h3>
-                  <p className="font-sans font-medium text-charcoal">
+                  <p className="font-sans font-medium text-charcoal text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base">
                     ₦{item.price.toLocaleString()}
                   </p>
                 </div>

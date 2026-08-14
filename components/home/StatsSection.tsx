@@ -28,8 +28,8 @@ export function StatsSection() {
       <div className="absolute top-0 left-0 w-24 h-24 border-t border-l border-brand-400/20 hidden lg:block" />
       <div className="absolute bottom-0 right-0 w-24 h-24 border-b border-r border-brand-400/20 hidden lg:block" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="font-sans text-[11px] font-medium text-brand-300 tracking-[0.24em] uppercase text-center lg:text-left mb-12">
+      <div className="site-container">
+        <p className="site-label text-brand-300 tracking-[0.24em] text-center lg:text-left mb-12">
           By the numbers
         </p>
 
@@ -42,10 +42,10 @@ export function StatsSection() {
               <p className="font-hero text-[clamp(2.5rem,5vw,3.75rem)] text-white leading-none mb-3">
                 {stat.value}
               </p>
-              <p className="font-sans font-medium text-white text-sm tracking-wide mb-1.5">
+              <p className="font-sans font-medium text-white text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base tracking-wide mb-1.5">
                 {stat.label}
               </p>
-              <p className="font-sans text-white/40 text-xs leading-relaxed hidden lg:block max-w-[16rem]">
+              <p className="font-sans text-white/40 text-xs xxl:text-[12px] xl2:text-[13px] xl3:text-[13px] xl4:text-[14px] leading-relaxed hidden lg:block max-w-[16rem] xxl:max-w-[18rem] xl2:max-w-[18rem] xl3:max-w-[19rem] xl4:max-w-[20rem]">
                 {stat.desc}
               </p>
             </div>

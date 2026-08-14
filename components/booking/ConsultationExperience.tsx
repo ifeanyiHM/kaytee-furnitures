@@ -27,7 +27,7 @@ function Field({
 }) {
   return (
     <div className="group">
-      <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-charcoal-muted mb-2">
+      <label className="block site-label mb-2 text-charcoal-muted tracking-[0.2em]">
         {label}
       </label>
       {children}
@@ -159,10 +159,10 @@ function ServicePicker({
   return (
     <div>
       <div className="flex items-baseline justify-between mb-3">
-        <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-charcoal-muted">
+        <p className="site-label text-charcoal-muted tracking-[0.2em]">
           What can we help with?
         </p>
-        <p className="font-sans text-[10px] text-charcoal-muted/50">
+        <p className="site-label text-charcoal-muted/50 tracking-[0.2em]">
           Select all that apply
         </p>
       </div>
@@ -196,7 +196,7 @@ function ServicePicker({
         })}
       </div>
       {values.length > 0 && (
-        <p className="font-sans text-[11px] text-charcoal-light/70 mt-2.5">
+        <p className="font-sans text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] text-charcoal-light/70 mt-2.5">
           {values.length} service{values.length > 1 ? "s" : ""} selected
         </p>
       )}
@@ -326,7 +326,7 @@ export function ConsultationExperience({
                   )}
                 </div>
                 <span
-                  className={`font-sans text-[10px] uppercase tracking-wider ${current ? "text-charcoal" : "text-charcoal-muted/50"}`}
+                  className={`site-label ${current ? "text-charcoal" : "text-charcoal-muted/50"}`}
                 >
                   {s.label}
                 </span>

@@ -15,7 +15,7 @@ export default async function SearchPage({
 
   return (
     <div className="pt-32 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container">
         <h1 className="font-display text-3xl text-charcoal mb-2">
           Search results
         </h1>

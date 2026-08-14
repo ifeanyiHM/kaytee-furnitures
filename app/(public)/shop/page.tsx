@@ -37,7 +37,7 @@ export default async function ShopPage({
   return (
     <>
       <section className="pt-32 pb-8 bg-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container">
           <p className="font-sans text-xs text-brand-400 tracking-[0.25em] uppercase mb-3">
             Our collection
           </p>
@@ -47,7 +47,7 @@ export default async function ShopPage({
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="site-container py-8">
         {/* Filters bar */}
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-8">
           <div className="flex gap-2 flex-wrap">

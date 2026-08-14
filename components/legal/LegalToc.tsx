@@ -28,7 +28,7 @@ export function LegalToc({ sections }: { sections: Section[] }) {
 
   return (
     <div className="sticky top-28">
-      <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.2em] mb-5">
+      <p className="site-label text-charcoal-muted tracking-[0.2em] mb-5">
         On this page
       </p>
       <div className="relative pl-4">
