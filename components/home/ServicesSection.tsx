@@ -113,10 +113,16 @@ export function ServicesSection() {
               className="group flex flex-col sm:flex-row items-stretch border border-strike hover:border-strike-hover bg-white hover:bg-brand-50/30 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md"
             >
               {/* Image — alternates left/right */}
-              <div
+              {/* <div
                 className={`relative w-full sm:w-48 lg:w-64 xxl:w-72 xl2:w-80 xl3:w-96 xl4:w-md shrink-0 overflow-hidden ${i % 2 !== 0 ? "sm:order-last" : "sm:order-first"}`}
+              > */}
+              <div
+                style={{ width: "clamp(18rem, 25%, 24rem)" }}
+                className={`relative w-full sm:w-48 lg:w-64 shrink-0 overflow-hidden ${
+                  i % 2 !== 0 ? "sm:order-last" : "sm:order-first"
+                }`}
               >
-                <div className="aspect-video sm:aspect-auto sm:h-full min-h-36 xxl:min-h-40">
+                <div className="sm:h-full min-h-36 xxl:min-h-40">
                   <Image
                     src={s.image}
                     alt={s.title}

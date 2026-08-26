@@ -33,8 +33,8 @@ const CONTACT_ITEMS = [
   {
     icon: RiMailLine,
     label: "Email",
-    value: "hello@kayteefurniture.com",
-    href: "mailto:hello@kayteefurniture.com",
+    value: "kayteefurnitureandinterior@gmail.com",
+    href: "mailto:kayteefurnitureandinterior@gmail.com",
   },
   {
     icon: RiTimeLine,

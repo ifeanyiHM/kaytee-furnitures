@@ -56,7 +56,7 @@ const SOCIALS = [
 const CONTACT = [
   { Icon: RiMapPin2Line, value: "22 Oremerin, Itire Surulere, Lagos" },
   { Icon: RiPhoneLine, value: "+234 807 919 7554" },
-  { Icon: RiMailLine, value: "hello@kayteefurniture.com" },
+  { Icon: RiMailLine, value: "kayteefurnitureandinterior@gmail.com" },
 ];
 
 export function Footer() {
@@ -209,7 +209,7 @@ export function Footer() {
             >
               Website by
               <a
-                href="https://ihemestudio.vercel.app/"
+                href="https://www.ihemestudio.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
