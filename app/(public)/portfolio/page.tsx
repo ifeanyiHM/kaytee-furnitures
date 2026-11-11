@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { getPortfolioItems } from "@/actions/portfolio";
-import { PORTFOLIO_CATEGORIES } from "@/lib/utils/constants";
+import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 import { Pagination } from "@/components/ui/pagination";
 import { PORTFOLIO_MOCK } from "@/lib/portfolio-data";
+import { PORTFOLIO_CATEGORIES } from "@/lib/utils/constants";
+import { motion } from "motion/react";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { RiArrowRightLine, RiArrowRightUpLine } from "react-icons/ri";
-import Image from "next/image";
-import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
+import { PageHero } from "../../../components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -49,50 +50,21 @@ export default async function PortfolioPage({
   return (
     <>
       {/* ── Hero ── */}
-      {/* <section className="pt-32 pb-12 bg-charcoal">
-        <div className="site-container text-center">
-          <p className="font-sans text-xs text-brand-400 tracking-[0.25em] uppercase mb-4">
-            Our work
-          </p>
-          <h1 className="font-hero text-[clamp(2.5rem,5vw,4.5rem)] text-white mb-6">
-            Project portfolio
-          </h1>
-          <p className="font-sans text-white/60 text-lg max-w-xl mx-auto">
-            200+ projects crafted with intention across Nigeria and beyond.
-          </p>
-        </div>
-      </section> */}
-      <section className="relative pt-40 pb-24 bg-charcoal overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://i.pinimg.com/736x/4b/0b/28/4b0b28e142e5281f3515fc5479a1b199.jpg"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        {/* Legibility overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-charcoal/55 via-charcoal/15 to-charcoal/10" />
-        <div className="absolute inset-0 bg-linear-to-t from-charcoal via-charcoal/10 to-transparent" />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-sans text-[11px] text-brand-400 tracking-[0.28em] uppercase mb-5">
-            Our work
-          </p>
-          <h1 className="font-hero text-[clamp(2.5rem,5.5vw,4.5rem)] text-white leading-[1.05] mb-6">
-            Project portfolio
-          </h1>
-          <p className="font-sans text-white/55 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            200+ projects crafted with intention across Nigeria and beyond.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Portfolio"
+        lines={["Work made", "to be lived in."]}
+        intro="A selection of completed interiors and bespoke furniture projects across Lagos — before, after, and everything in between."
+        image="/images/hero/hero1.jpg"
+      />
 
       {/* ── Filter bar ── */}
-      <div className="sticky top-16 lg:top-20 z-30 bg-white/95 backdrop-blur-md border-b border-sand-200 shadow-sm">
-        <div className="site-container">
-          <div className="flex items-center gap-2 overflow-x-auto py-3.5 scrollbar-none">
+      <div className="sticky top-0 z-30 border-b border-sand-200 bg-white/92 backdrop-blur-md">
+        <div className="site-container flex items-center justify-between gap-6 py-4 xl3:py-5">
+          <div
+            role="tablist"
+            aria-label="Filter by room"
+            className="scrollbar-none -mx-1 flex gap-1 overflow-x-auto"
+          >
             {PORTFOLIO_CATEGORIES.map((cat) => {
               const active = (cat === "All" && !category) || cat === category;
               return (
@@ -103,13 +75,20 @@ export default async function PortfolioPage({
                       ? "/portfolio"
                       : `/portfolio?category=${encodeURIComponent(cat)}`
                   }
-                  className={`shrink-0 px-4 py-1.5 rounded-full font-sans text-sm transition-all duration-200 ${
-                    active
-                      ? "bg-charcoal text-white shadow-sm"
-                      : "text-charcoal-muted hover:text-charcoal hover:bg-sand-100"
-                  }`}
+                  // className={`shrink-0 px-4 py-1.5 rounded-full font-sans text-sm transition-all duration-200 ${
+                  //   active
+                  //     ? "bg-charcoal text-white shadow-sm"
+                  //     : "text-charcoal-muted hover:text-charcoal hover:bg-sand-100"
+                  // }`}
+                  className={`relative shrink-0 px-3 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.16em] transition-colors xl3:text-[13px] ${active ? "text-charcoal" : "text-charcoal-muted hover:text-charcoal"}`}
                 >
                   {cat}
+                  {active && (
+                    <motion.span
+                      layoutId="cat-underline"
+                      className="absolute inset-x-3 bottom-0 h-px bg-brand-600"
+                    />
+                  )}
                 </Link>
               );
             })}

@@ -1,20 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  RiInstagramLine,
-  RiTwitterXLine,
-  RiFacebookBoxLine,
-  RiPinterestLine,
-  RiArrowRightLine,
-  RiMapPin2Line,
-  RiPhoneLine,
-  RiMailLine,
-  RiTiktokFill,
-} from "react-icons/ri";
-import { NewsletterForm } from "../forms/NewsLetterForm";
-import { cn } from "@/lib/utils/cn";
+import { RiInstagramLine, RiTiktokFill, RiArrowRightUpLine } from "react-icons/ri";
+import { Reveal } from "@/components/motion/Reveal";
 
 const NAV = {
+  Studio: [
+    { href: "/about", label: "About" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/services", label: "Services" },
+    { href: "/contact", label: "Contact" },
+  ],
   Services: [
     { href: "/services#interior-design", label: "Interior Design" },
     { href: "/services#space-planning", label: "Space Planning" },
@@ -22,200 +17,92 @@ const NAV = {
     { href: "/services#virtual-consultation", label: "Virtual Consultation" },
     { href: "/services#renovation-management", label: "Renovation Management" },
   ],
-  Explore: [
-    { href: "/portfolio", label: "Portfolio" },
-    // { href: "/shop", label: "Shop furniture" },
-    // { href: "/blog", label: "Design journal" },
-    { href: "/about", label: "Our story" },
-    { href: "/services", label: "Our services" },
-  ],
-  Client: [
-    { href: "/consultation", label: "Book a consultation" },
-    // { href: "/dashboard", label: "My account" },
-    // { href: "/orders", label: "Track my order" },
-    { href: "/contact", label: "Get in touch" },
-    { href: "/faq", label: "FAQ" },
-  ],
 };
 
 const SOCIALS = [
-  {
-    href: "https://www.instagram.com/kayteefurnitureandinteriors?utm_source=qr",
-    Icon: RiInstagramLine,
-    label: "Instagram",
-  },
-  {
-    href: "https://www.tiktok.com/@kayteefurnitureinteriors?_r=1&_t=ZS-98Zqp8c3Ytp",
-    Icon: RiTiktokFill,
-    label: "TikTok",
-  },
-  // { href: "https://facebook.com", Icon: RiFacebookBoxLine, label: "Facebook" },
-  { href: "https://pinterest.com", Icon: RiPinterestLine, label: "Pinterest" },
-];
-
-const CONTACT = [
-  { Icon: RiMapPin2Line, value: "22 Oremerin, Itire Surulere, Lagos" },
-  { Icon: RiPhoneLine, value: "+234 807 919 7554" },
-  { Icon: RiMailLine, value: "kayteefurnitureandinterior@gmail.com" },
+  { href: "https://www.instagram.com/kayteefurnitureandinteriors?utm_source=qr", Icon: RiInstagramLine, label: "Instagram" },
+  { href: "https://www.tiktok.com/@kayteefurnitureinteriors?_r=1&_t=ZS-98Zqp8c3Ytp", Icon: RiTiktokFill, label: "TikTok" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-white overflow-hidden">
-      {/* ── Top band: newsletter ── */}
-      <div className="border-b border-white/8">
-        <div className="site-container py-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="max-w-sm">
-              <p className="font-display text-xl text-white mb-1">
-                Stay in the loop.
-              </p>
-              <p className="font-sans text-sm text-white/40 leading-relaxed">
-                Design inspiration, project reveals, and studio news — straight
-                to your inbox.
-              </p>
-            </div>
-            <NewsletterForm />
-          </div>
+    <footer className="overflow-hidden bg-charcoal text-white">
+      {/* Closing invitation */}
+      <div className="border-b border-white/10">
+        <div className="site-container py-24 xl1:py-28 xl3:py-36 xl4:py-44">
+          <Reveal>
+            <p className="site-kicker mb-8 flex items-center gap-4 text-brand-300">
+              <span className="h-px w-10 bg-brand-400" />
+              Start a project
+            </p>
+            <Link href="/consultation" className="group block">
+              <span className="display-page block max-w-[14ch] text-white transition-colors duration-500 group-hover:text-brand-300 xl3:max-w-[16ch]">
+                Let&apos;s make a room worth coming home to.
+              </span>
+              <span className="link-draw mt-10 text-white">
+                Book a consultation <RiArrowRightUpLine className="h-4 w-4" />
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </div>
 
-      {/* ── Main footer body ── */}
-      <div className="site-container py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-12 lg:gap-8">
-          {/* Brand column */}
+      <div className="site-container py-16 xl3:py-20">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-10">
           <div>
-            {/* Logo */}
-            <Link
-              href="/"
-              className="flex items-center gap-3 shrink-0 mb-6 group"
-              aria-label="Kaytee Furnitures — Home"
-            >
-              <Image
-                src="/images/logo.png"
-                alt="Kaytee Furnitures"
-                width={717}
-                height={421}
-                priority
-                className={cn("h-12 w-auto transition-all duration-500")}
-              />
+            <Link href="/" aria-label="Kaytee Furnitures & Interior — Home" className="mb-6 inline-block">
+              <Image src="/images/logo.png" alt="Kaytee Furnitures & Interior" width={717} height={421} className="h-12 w-auto xl3:h-14" />
             </Link>
+            <p className="max-w-xs font-display text-xl font-light leading-snug text-white/60 xl3:text-2xl">
+              Bespoke furniture and considered interiors, built room by room across Lagos.
+            </p>
+          </div>
 
-            {/* Contact details */}
-            <div className="space-y-3 mb-8">
-              {CONTACT.map(({ Icon, value }) => (
-                <div key={value} className="flex items-start gap-3">
-                  <Icon className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
-                  <p className="font-sans text-xs text-white/40 leading-relaxed">
-                    {value}
-                  </p>
-                </div>
-              ))}
-            </div>
+          {Object.entries(NAV).map(([title, items]) => (
+            <nav key={title} aria-label={title}>
+              <h2 className="site-label mb-6 text-brand-400">{title}</h2>
+              <ul className="space-y-3.5">
+                {items.map((item) => (
+                  <li key={item.href}>
+                    {/* Hash links use a plain anchor so the services accordion
+                        (which listens for native hashchange) always reacts. */}
+                    {item.href.includes("#") ? (
+                      <a href={item.href} className="font-sans text-sm text-white/55 transition-colors hover:text-white xl3:text-[15px]">{item.label}</a>
+                    ) : (
+                      <Link href={item.href} className="font-sans text-sm text-white/55 transition-colors hover:text-white xl3:text-[15px]">{item.label}</Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
-            {/* Socials */}
-            <div className="flex gap-2">
+          <div>
+            <h2 className="site-label mb-6 text-brand-400">Studio</h2>
+            <address className="space-y-3.5 font-sans text-sm not-italic leading-relaxed text-white/55 xl3:text-[15px]">
+              <p>22 Oremerin, Itire<br />Surulere, Lagos</p>
+              <p><a href="tel:+2348079197554" className="transition-colors hover:text-white">+234 807 919 7554</a></p>
+              <p><a href="mailto:kayteefurnitureandinterior@gmail.com" className="break-all transition-colors hover:text-white">kayteefurnitureandinterior@gmail.com</a></p>
+            </address>
+            <div className="mt-6 flex gap-2">
               {SOCIALS.map(({ href, Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-brand-400 hover:bg-brand-600/10 transition-all"
-                >
-                  <Icon className="w-4 h-4" />
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center border border-white/15 text-white/55 transition-colors hover:border-brand-400 hover:text-white">
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
-
-          {/* Nav columns */}
-          {Object.entries(NAV).map(([title, items]) => (
-            <div key={title}>
-              <h4 className="site-label text-brand-400 tracking-[0.24em] mb-5">
-                {title}
-              </h4>
-              <ul className="space-y-3">
-                {items.map((item) => {
-                  // Items pointing at a hash on /services are same-page
-                  // anchor jumps wearing a URL. next/link updates the URL
-                  // via the History API directly and never fires a native
-                  // `hashchange` event — which is what the services
-                  // accordion listens for to know which panel to open.
-                  // That's true whether you arrive via a fresh page load,
-                  // an in-page click, or a browser-back then click, since
-                  // Next can reuse an already-mounted /services instance
-                  // in any of those cases. A plain <a> always goes through
-                  // the browser's real navigation/hash path, so it behaves
-                  // consistently no matter how you arrive at it.
-                  const isHashLink = item.href.includes("#");
-
-                  return (
-                    <li key={item.href}>
-                      {isHashLink ? (
-                        <a
-                          href={item.href}
-                          className="group inline-flex items-center gap-1.5 font-sans text-sm text-white/45 hover:text-white transition-colors"
-                        >
-                          <span className="w-0 group-hover:w-3 h-px bg-brand-400 transition-all duration-200 shrink-0" />
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className="group inline-flex items-center gap-1.5 font-sans text-sm text-white/45 hover:text-white transition-colors"
-                        >
-                          <span className="w-0 group-hover:w-3 h-px bg-brand-400 transition-all duration-200 shrink-0" />
-                          {item.label}
-                        </Link>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
         </div>
 
-        {/* ── Bottom bar ── */}
-        <div className="mt-8 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-xs text-white/25">
-            © {new Date().getFullYear()} Kaytee Furnitures Ltd. All rights
-            reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            {[
-              { href: "/privacy", label: "Privacy Policy" },
-              { href: "/terms", label: "Terms of Use" },
-              // { href: "/cookies", label: "Cookie Settings" },
-            ].map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="font-sans text-xs text-white/25 hover:text-white/60 transition-colors"
-              >
-                {label}
-              </Link>
-            ))}
-            <span
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                fontSize: "0.78rem",
-              }}
-              className="font-sans text-xs text-white/25 hover:text-white/60 transition-colors"
-            >
-              Website by
-              <a
-                href="https://www.ihemestudio.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                Iheme Studio
-              </a>
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+          <p className="font-sans text-xs text-white/35">© {new Date().getFullYear()} Kaytee Furnitures &amp; Interior. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-xs text-white/35">
+            <Link href="/privacy" className="transition-colors hover:text-white/70">Privacy Policy</Link>
+            <Link href="/terms" className="transition-colors hover:text-white/70">Terms of Use</Link>
+            <span>
+              Website by{" "}
+              <a href="https://www.ihemestudio.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 hover:underline">Iheme Studio</a>
             </span>
           </div>
         </div>

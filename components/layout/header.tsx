@@ -1,247 +1,195 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  RiMenuLine,
-  RiCloseLine,
-  RiShoppingBag2Line,
-  RiUserLine,
-  RiHeartLine,
-} from "react-icons/ri";
+import { AnimatePresence, motion } from "motion/react";
+import { RiArrowRightUpLine } from "react-icons/ri";
 import { cn } from "@/lib/utils/cn";
 import { NAV_LINKS } from "@/lib/utils/constants";
-import Image from "next/image";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+// Routes that open on a dark full-bleed hero, so the bar starts transparent.
+const DARK_HERO = ["/", "/about", "/services", "/portfolio", "/contact", "/consultation", "/privacy", "/terms"];
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { data: session } = useSession();
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
-  const isHome =
-    pathname === "/" ||
-    pathname === "/services" ||
-    pathname === "/portfolio" ||
-    pathname === "/about" ||
-    pathname === "/privacy" ||
-    pathname === "/terms";
+  const hasDarkHero = DARK_HERO.includes(pathname) || pathname.startsWith("/portfolio/");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      // Tuck away while reading down, return on any upward scroll.
+      setHidden(y > 500 && y > last + 4 ? true : y < last - 4 ? false : hidden);
+      last = y;
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isTransparent = isHome && !scrolled && !open;
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [open]);
+
+  const light = hasDarkHero && !scrolled; // white text over imagery
+  const onDark = light || open;
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isTransparent
-          ? "bg-transparent"
-          : "bg-white/95 backdrop-blur-md border-b border-sand-200 shadow-[0_1px_0_0_rgba(0,0,0,0.03)]",
-      )}
-    >
-      {/* Hairline brass accent — only shows once the header solidifies */}
-      <div
+    <>
+      <header
         className={cn(
-          "h-px w-full bg-linear-to-r from-transparent via-brand-400/50 to-transparent transition-opacity duration-500",
-          isTransparent ? "opacity-0" : "opacity-100",
+          "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500",
+          hidden && !open ? "-translate-y-full" : "translate-y-0",
+          light || open
+            ? "border-b border-transparent bg-transparent"
+            : "border-b border-sand-200 bg-sand-50/90 backdrop-blur-md",
         )}
-      />
-
-      <div className="site-container relative flex items-center justify-between h-20 xl3:h-24 xl4:h-28 px-6 lg:px-10">
-        {/* Logo — wordmark + brass rule + locale, single baseline */}
-        <Link
-          href="/"
-          className="flex items-center gap-3 shrink-0 group"
-          aria-label="Kaytee Furnitures — Home"
-        >
-          <Image
-            src="/images/logo.png"
-            alt="Kaytee Furnitures"
-            width={717}
-            height={421}
-            priority
-            className={cn("h-12 w-auto transition-all duration-500")}
-            style={{
-              filter: isTransparent
-                ? "none"
-                : "sepia(100%) saturate(3000%) hue-rotate(340deg) brightness(30%)",
-            }}
-          />
-        </Link>
-
-        {/* Desktop nav — absolutely centered */}
-        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 xxl:gap-10 xl2:gap-12 xl3:gap-14 xl4:gap-16">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "site-nav-link",
-                "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:rounded-full after:transition-opacity after:duration-300",
-                isTransparent
-                  ? "text-white/85 hover:text-white after:bg-brand-300"
-                  : "text-charcoal-muted hover:text-charcoal after:bg-brand-600",
-                pathname === link.href
-                  ? "after:opacity-100"
-                  : "after:opacity-0 hover:after:opacity-60",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Desktop actions */}
-        <div className="hidden lg:flex items-center gap-2">
-          {/* <Link
-            href="/wishlist"
-            className={cn(
-              "w-9 h-9 flex items-center justify-center transition-colors",
-              isTransparent
-                ? "text-white/75 hover:text-white"
-                : "text-charcoal-muted hover:text-charcoal",
-            )}
-          >
-            <RiHeartLine className="w-4.5 h-4.5" />
+      >
+        <div className="site-container flex h-20 items-center justify-between xl1:h-24 xl3:h-28">
+          <Link href="/" aria-label="Kaytee Furnitures & Interior — Home" className="relative z-10 shrink-0">
+            <Image
+              src="/images/logo.png"
+              alt="Kaytee Furnitures & Interior"
+              width={717}
+              height={421}
+              priority
+              className="h-11 w-auto transition-[filter] duration-500 xl1:h-12 xl3:h-14"
+              style={{
+                filter: onDark
+                  ? "none"
+                  : "sepia(100%) saturate(3000%) hue-rotate(340deg) brightness(30%)",
+              }}
+            />
           </Link>
-          <Link
-            href="/cart"
-            className={cn(
-              "w-9 h-9 flex items-center justify-center transition-colors",
-              isTransparent
-                ? "text-white/75 hover:text-white"
-                : "text-charcoal-muted hover:text-charcoal",
-            )}
-          >
-            <RiShoppingBag2Line className="w-4.5 h-4.5" />
-          </Link> */}
-          <Link href="/consultation">
-            <button
-              className={cn(
-                "site-button-primary ml-2",
-                isTransparent
-                  ? "bg-white/10 text-white border border-white/25 hover:bg-white/20"
-                  : "bg-brand-600 text-white hover:bg-brand-700",
-              )}
-            >
-              Book a consultation
-            </button>
-          </Link>
-        </div>
 
-        {/* Mobile: icons + burger */}
-        <div className="flex lg:hidden items-center gap-1">
-          {/* <Link
-            href="/wishlist"
-            className={cn(
-              "w-9 h-9 flex items-center justify-center transition-colors",
-              isTransparent
-                ? "text-white/80 hover:text-white"
-                : "text-charcoal-muted hover:text-charcoal",
-            )}
-          >
-            <RiHeartLine className="w-5 h-5" />
-          </Link>
-          <Link
-            href="/cart"
-            className={cn(
-              "w-9 h-9 flex items-center justify-center transition-colors",
-              isTransparent
-                ? "text-white/80 hover:text-white"
-                : "text-charcoal-muted hover:text-charcoal",
-            )}
-          >
-            <RiShoppingBag2Line className="w-5 h-5" />
-          </Link> */}
-          <button
-            onClick={() => setOpen(!open)}
-            className={cn(
-              "w-9 h-9 flex items-center justify-center transition-colors ml-1",
-              isTransparent ? "text-white" : "text-charcoal",
-            )}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-          >
-            {open ? (
-              <RiCloseLine className="w-5 h-5" />
-            ) : (
-              <RiMenuLine className="w-5 h-5" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden bg-white border-t border-sand-200">
-          <nav className="site-container px-6 py-5 space-y-0.5">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "flex items-center justify-between px-3 py-3 text-sm font-light tracking-[0.08em] uppercase transition-colors rounded-sm",
-                  pathname === link.href
-                    ? "text-brand-600 bg-brand-50"
-                    : "text-charcoal-muted hover:text-charcoal hover:bg-sand-100",
-                )}
-              >
-                {link.label}
-                {pathname === link.href && (
-                  <span className="w-1 h-1 rounded-full bg-brand-500" />
-                )}
-              </Link>
-            ))}
-
-            <Link href="/consultation" onClick={() => setOpen(false)}>
-              <button className="w-full bg-brand-600 hover:bg-brand-700 text-white text-[12px] xxl:text-[13px] xl2:text-[13px] xl3:text-[14px] xl4:text-[14px] tracking-widest uppercase font-light py-3 xxl:py-3.5 xl2:py-3.5 xl3:py-4 xl4:py-4 rounded-sm transition-colors">
-                Book a consultation
-              </button>
-            </Link>
-
-            {/* <div className="pt-4 mt-4 border-t border-sand-200 space-y-2">
-              {session ? (
-                <>
-                  <Link href="/dashboard" onClick={() => setOpen(false)}>
-                    <button className="w-full text-left px-3 py-3 text-sm font-light tracking-[0.08em] uppercase text-charcoal-muted hover:text-charcoal flex items-center gap-2">
-                      <RiUserLine className="w-4 h-4" /> My Account
-                    </button>
-                  </Link>
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-3 text-sm font-light tracking-[0.08em] uppercase text-charcoal-muted hover:text-charcoal"
-                  >
-                    Sign out
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" onClick={() => setOpen(false)}>
-                    <button className="w-full border border-sand-300 text-charcoal text-[12px] tracking-widest uppercase font-light py-3 rounded-sm hover:bg-sand-100 transition-colors">
-                      Sign in
-                    </button>
-                  </Link>
-                  <Link href="/consultation" onClick={() => setOpen(false)}>
-                    <button className="w-full bg-brand-600 hover:bg-brand-700 text-white text-[12px] tracking-widest uppercase font-light py-3 rounded-sm transition-colors">
-                      Book a consultation
-                    </button>
-                  </Link>
-                </>
-              )}
-            </div> */}
+          <nav aria-label="Primary" className="hidden items-center gap-9 lg:flex xl1:gap-11 xl3:gap-14">
+            {NAV_LINKS.filter((l) => l.href !== "/").map((link) => {
+              const active = pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "site-nav-link after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:transition-transform after:duration-500 hover:after:scale-x-100",
+                    active && "after:scale-x-100",
+                    onDark
+                      ? "text-white/80 hover:text-white after:bg-brand-300"
+                      : "text-charcoal/70 hover:text-charcoal after:bg-brand-600",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
+
+          <div className="flex items-center gap-4">
+            <Link
+              href="/consultation"
+              className={cn(
+                "hidden items-center gap-2 border px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 lg:inline-flex xl1:px-6 xl1:py-3.5 xl3:text-[13px]",
+                onDark
+                  ? "border-white/40 text-white hover:bg-white hover:text-charcoal"
+                  : "border-charcoal/70 text-charcoal hover:bg-charcoal hover:text-white",
+              )}
+            >
+              Start a project
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              className={cn(
+                "relative z-10 flex h-11 w-11 items-center justify-center lg:hidden",
+                onDark ? "text-white" : "text-charcoal",
+              )}
+            >
+              <span className="relative block h-3 w-7">
+                <span className={cn("absolute left-0 block h-px w-full bg-current transition-all duration-500", open ? "top-1/2 rotate-45" : "top-0")} />
+                <span className={cn("absolute left-0 block h-px bg-current transition-all duration-500", open ? "top-1/2 w-full -rotate-45" : "top-full w-2/3")} />
+              </span>
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+            data-lenis-prevent
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-charcoal px-5 pb-10 pt-28 sm:px-8 lg:hidden"
+          >
+            <nav aria-label="Mobile" className="flex-1">
+              <ul className="border-t border-white/10">
+                {NAV_LINKS.map((link, i) => {
+                  const active = pathname === link.href;
+                  return (
+                    <li key={link.href} className="overflow-hidden border-b border-white/10">
+                      <motion.div
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.9, delay: 0.25 + i * 0.07, ease: EASE }}
+                      >
+                        <Link
+                          href={link.href}
+                          className="flex items-baseline justify-between py-4 sm:py-5"
+                        >
+                          <span className={cn("font-hero text-[2.6rem] leading-none sm:text-6xl", active ? "text-brand-300" : "text-white")}>
+                            {link.label}
+                          </span>
+                          <span className="font-sans text-[10px] tracking-[0.2em] text-white/35">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
+              className="mt-10"
+            >
+              <Link href="/consultation" className="site-button-primary w-full">
+                Start a project <RiArrowRightUpLine className="h-4 w-4" />
+              </Link>
+              <p className="mt-6 font-sans text-xs leading-relaxed text-white/45">
+                22 Oremerin, Itire Surulere, Lagos
+                <br />
+                <a href="tel:+2348079197554" className="hover:text-white">+234 807 919 7554</a>
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

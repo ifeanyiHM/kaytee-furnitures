@@ -5,8 +5,6 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils/cn";
 import {
   RiDashboardLine,
-  RiShoppingBag2Line,
-  RiGridLine,
   RiCalendarLine,
   RiImageLine,
   RiArticleLine,
@@ -15,7 +13,6 @@ import {
   RiMailLine,
   RiSettings3Line,
   RiLogoutBoxLine,
-  RiStoreLine,
 } from "react-icons/ri";
 
 const navGroups = [
@@ -24,17 +21,10 @@ const navGroups = [
     items: [{ href: "/admin", icon: RiDashboardLine, label: "Dashboard" }],
   },
   {
-    label: "Catalogue",
+    label: "Clients",
     items: [
-      { href: "/admin/products", icon: RiStoreLine, label: "Products" },
-      { href: "/admin/categories", icon: RiGridLine, label: "Categories" },
-    ],
-  },
-  {
-    label: "Commerce",
-    items: [
-      { href: "/admin/orders", icon: RiShoppingBag2Line, label: "Orders" },
       { href: "/admin/bookings", icon: RiCalendarLine, label: "Bookings" },
+      { href: "/admin/inquiries", icon: RiMailLine, label: "Inquiries" },
       { href: "/admin/customers", icon: RiUserLine, label: "Customers" },
     ],
   },
@@ -49,7 +39,6 @@ const navGroups = [
   {
     label: "Operations",
     items: [
-      { href: "/admin/inquiries", icon: RiMailLine, label: "Inquiries" },
       { href: "/admin/settings", icon: RiSettings3Line, label: "Settings" },
     ],
   },

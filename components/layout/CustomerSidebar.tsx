@@ -3,15 +3,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils/cn";
-import { RiDashboardLine, RiShoppingBag2Line, RiCalendarLine, RiHeartLine, RiUserLine, RiMapPinLine, RiLogoutBoxLine } from "react-icons/ri";
+import { RiDashboardLine, RiCalendarLine, RiUserLine, RiLogoutBoxLine } from "react-icons/ri";
 
 const navItems = [
   { href: "/dashboard",  icon: RiDashboardLine,      label: "Dashboard" },
-  { href: "/orders",     icon: RiShoppingBag2Line,    label: "My Orders" },
   { href: "/bookings",   icon: RiCalendarLine,        label: "My Bookings" },
-  { href: "/wishlist",   icon: RiHeartLine,           label: "Wishlist" },
   { href: "/profile",    icon: RiUserLine,            label: "Profile" },
-  { href: "/addresses",  icon: RiMapPinLine,          label: "Addresses" },
 ];
 
 export function CustomerSidebar() {
