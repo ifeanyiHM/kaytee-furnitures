@@ -143,44 +143,28 @@ body {
   font-family: var(--font-hero);
 }
 
-/* ── Add inside your existing @theme block ── */
-/* --font-hero: "Libre Caslon Display", var(--font-display), serif; */
-
-/* ── Add anywhere outside @theme ── */
-
-@keyframes kenburns {
-  0% {
-    transform: scale(1.06) translate3d(0, 0, 0);
-  }
-  100% {
-    transform: scale(1.16) translate3d(-1%, -1%, 0);
-  }
+/* Lenis smooth scroll — recommended resets */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
-
-@keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
-
-.hero-slide-active {
-  animation: kenburns 9s ease-out forwards;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
-
-.hero-reveal {
-  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slide-active {
-    animation: none;
+  html {
+    scroll-behavior: auto;
   }
-  .hero-reveal {
+  .hero-slide-active,
+  .hero-reveal,
+  .marquee-track {
     animation: none;
   }
 }

@@ -1,13 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { RevealLines } from "@/components/motion/Reveal";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { RiArrowDownLine, RiArrowRightUpLine } from "react-icons/ri";
-import { RevealLines } from "@/components/motion/Reveal";
 
 const SLIDES = [
   { src: "/images/hero/hero1.jpg", room: "Living Room", place: "Ikoyi" },
-  { src: "/images/hero/hero2.jpg", room: "Living Room", place: "Victoria Island" },
+  {
+    src: "/images/hero/hero2.jpg",
+    room: "Living Room",
+    place: "Victoria Island",
+  },
   { src: "/images/hero/hero3.jpg", room: "Kitchen & Dining", place: "Lekki" },
 ];
 const SLIDE_DURATION = 7000;
@@ -17,7 +21,10 @@ export function HeroSection() {
 
   // Re-keyed on `active` so any manual jump restarts the timer.
   useEffect(() => {
-    const t = setTimeout(() => setActive((i) => (i + 1) % SLIDES.length), SLIDE_DURATION);
+    const t = setTimeout(
+      () => setActive((i) => (i + 1) % SLIDES.length),
+      SLIDE_DURATION,
+    );
     return () => clearTimeout(t);
   }, [active]);
 
@@ -27,11 +34,13 @@ export function HeroSection() {
         {SLIDES.map((slide, i) => (
           <div
             key={slide.src}
-            className="absolute inset-0 transition-opacity duration-[1600ms] ease-in-out"
+            className="absolute inset-0 transition-opacity duration-1600 ease-in-out"
             style={{ opacity: i === active ? 1 : 0 }}
             aria-hidden={i !== active}
           >
-            <div className={`absolute inset-0 ${i === active ? "hero-slide-active" : ""}`}>
+            <div
+              className={`absolute inset-0 ${i === active ? "hero-slide-active" : ""}`}
+            >
               <Image
                 src={slide.src}
                 alt={`${slide.room}, ${slide.place} — interior by Kaytee Furnitures & Interior`}
@@ -61,7 +70,10 @@ export function HeroSection() {
         />
 
         <div className="mt-12 flex flex-col gap-10 xl3:mt-16 lg:flex-row lg:items-end lg:justify-between">
-          <div className="hero-reveal flex flex-col gap-4 opacity-0 sm:flex-row" style={{ animationDelay: "0.9s" }}>
+          <div
+            className="hero-reveal flex flex-col gap-4 opacity-0 sm:flex-row"
+            style={{ animationDelay: "0.9s" }}
+          >
             <Link href="/portfolio" className="site-button-primary">
               View our work <RiArrowRightUpLine className="h-4 w-4" />
             </Link>
@@ -71,11 +83,19 @@ export function HeroSection() {
           </div>
 
           {/* Slide index — doubles as manual control */}
-          <div className="hero-reveal opacity-0 lg:mr-44" style={{ animationDelay: "1.1s" }}>
+          <div
+            className="hero-reveal opacity-0 lg:mr-44"
+            style={{ animationDelay: "1.1s" }}
+          >
             <p className="mb-3 font-display text-lg text-white/85 xl3:text-2xl">
-              {SLIDES[active].room}, <span className="text-white/50">{SLIDES[active].place}</span>
+              {SLIDES[active].room},{" "}
+              <span className="text-white/50">{SLIDES[active].place}</span>
             </p>
-            <div className="flex gap-2" role="group" aria-label="Choose hero image">
+            <div
+              className="flex gap-2"
+              role="group"
+              aria-label="Choose hero image"
+            >
               {SLIDES.map((s, i) => (
                 <button
                   key={s.src}
@@ -91,7 +111,10 @@ export function HeroSection() {
                     className="absolute left-0 top-1/2 h-px bg-white origin-left"
                     style={
                       i === active
-                        ? { width: "100%", animation: `heroBar ${SLIDE_DURATION}ms linear forwards` }
+                        ? {
+                            width: "100%",
+                            animation: `heroBar ${SLIDE_DURATION}ms linear forwards`,
+                          }
                         : { width: 0 }
                     }
                   />
