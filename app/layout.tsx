@@ -1,7 +1,7 @@
+import KayteeChatWidget from "@/components/KayteeChatWidget";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-import KayteeChatWidget from "@/components/KayteeChatWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kaytee-furnitures.vercel.app"),

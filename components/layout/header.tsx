@@ -62,12 +62,12 @@ export function Header() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500",
           hidden && !open ? "-translate-y-full" : "translate-y-0",
-          light || open
-            ? "border-b border-transparent bg-transparent"
-            : "border-b border-sand-200 bg-sand-50/90 backdrop-blur-md",
+          scrolled && !open
+            ? "border-b border-sand-200 bg-sand-50/90 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="site-container flex h-20 items-center justify-between xl1:h-24 xl3:h-28">
+        <div className="site-container flex h-16 items-center justify-between xl1:h-20 xl3:h-24">
           <Link
             href="/"
             aria-label="Kaytee Furnitures & Interior — Home"
