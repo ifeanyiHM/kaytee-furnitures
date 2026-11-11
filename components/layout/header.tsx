@@ -1,23 +1,33 @@
 "use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
-import { RiArrowRightUpLine } from "react-icons/ri";
 import { cn } from "@/lib/utils/cn";
 import { NAV_LINKS } from "@/lib/utils/constants";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 // Routes that open on a dark full-bleed hero, so the bar starts transparent.
-const DARK_HERO = ["/", "/about", "/services", "/portfolio", "/contact", "/consultation", "/privacy", "/terms"];
+const DARK_HERO = [
+  "/",
+  "/about",
+  "/services",
+  "/portfolio",
+  "/contact",
+  "/consultation",
+  "/privacy",
+  "/terms",
+];
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
-  const hasDarkHero = DARK_HERO.includes(pathname) || pathname.startsWith("/portfolio/");
+  const hasDarkHero =
+    DARK_HERO.includes(pathname) || pathname.startsWith("/portfolio/");
 
   useEffect(() => {
     let last = window.scrollY;
@@ -58,9 +68,13 @@ export function Header() {
         )}
       >
         <div className="site-container flex h-20 items-center justify-between xl1:h-24 xl3:h-28">
-          <Link href="/" aria-label="Kaytee Furnitures & Interior — Home" className="relative z-10 shrink-0">
+          <Link
+            href="/"
+            aria-label="Kaytee Furnitures & Interior — Home"
+            className="relative z-10 shrink-0"
+          >
             <Image
-              src="/images/logo.png"
+              src="/images/kaytee_logo.png"
               alt="Kaytee Furnitures & Interior"
               width={717}
               height={421}
@@ -74,9 +88,13 @@ export function Header() {
             />
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-9 lg:flex xl1:gap-11 xl3:gap-14">
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-9 lg:flex xl1:gap-11 xl3:gap-14"
+          >
             {NAV_LINKS.filter((l) => l.href !== "/").map((link) => {
-              const active = pathname === link.href || pathname.startsWith(link.href + "/");
+              const active =
+                pathname === link.href || pathname.startsWith(link.href + "/");
               return (
                 <Link
                   key={link.href}
@@ -121,8 +139,18 @@ export function Header() {
               )}
             >
               <span className="relative block h-3 w-7">
-                <span className={cn("absolute left-0 block h-px w-full bg-current transition-all duration-500", open ? "top-1/2 rotate-45" : "top-0")} />
-                <span className={cn("absolute left-0 block h-px bg-current transition-all duration-500", open ? "top-1/2 w-full -rotate-45" : "top-full w-2/3")} />
+                <span
+                  className={cn(
+                    "absolute left-0 block h-px w-full bg-current transition-all duration-500",
+                    open ? "top-1/2 rotate-45" : "top-0",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 block h-px bg-current transition-all duration-500",
+                    open ? "top-1/2 w-full -rotate-45" : "top-full w-2/3",
+                  )}
+                />
               </span>
             </button>
           </div>
@@ -148,17 +176,29 @@ export function Header() {
                 {NAV_LINKS.map((link, i) => {
                   const active = pathname === link.href;
                   return (
-                    <li key={link.href} className="overflow-hidden border-b border-white/10">
+                    <li
+                      key={link.href}
+                      className="overflow-hidden border-b border-white/10"
+                    >
                       <motion.div
                         initial={{ y: "100%" }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 0.9, delay: 0.25 + i * 0.07, ease: EASE }}
+                        transition={{
+                          duration: 0.9,
+                          delay: 0.25 + i * 0.07,
+                          ease: EASE,
+                        }}
                       >
                         <Link
                           href={link.href}
                           className="flex items-baseline justify-between py-4 sm:py-5"
                         >
-                          <span className={cn("font-hero text-[2.6rem] leading-none sm:text-6xl", active ? "text-brand-300" : "text-white")}>
+                          <span
+                            className={cn(
+                              "font-hero text-[2.6rem] leading-none sm:text-6xl",
+                              active ? "text-brand-300" : "text-white",
+                            )}
+                          >
                             {link.label}
                           </span>
                           <span className="font-sans text-[10px] tracking-[0.2em] text-white/35">
@@ -184,7 +224,9 @@ export function Header() {
               <p className="mt-6 font-sans text-xs leading-relaxed text-white/45">
                 22 Oremerin, Itire Surulere, Lagos
                 <br />
-                <a href="tel:+2348079197554" className="hover:text-white">+234 807 919 7554</a>
+                <a href="tel:+2348079197554" className="hover:text-white">
+                  +234 807 919 7554
+                </a>
               </p>
             </motion.div>
           </motion.div>

@@ -83,7 +83,7 @@ export function HeroSection() {
           </div>
 
           {/* Slide index — doubles as manual control */}
-          <div
+          {/* <div
             className="hero-reveal opacity-0 lg:mr-44"
             style={{ animationDelay: "1.1s" }}
           >
@@ -121,7 +121,7 @@ export function HeroSection() {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

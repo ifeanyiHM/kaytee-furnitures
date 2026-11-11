@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 import { getServices } from "@/actions/bookings";
 import { ServicesAccordion } from "@/components/services/ServiceAccordion";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { RiArrowRightUpLine } from "react-icons/ri";
+import { PageHero } from "../../../components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -110,37 +110,16 @@ export default async function ServicesPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative pt-40 pb-24 bg-charcoal overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        {/* Legibility overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-charcoal/55 via-charcoal/15 to-charcoal/10" />
-        <div className="absolute inset-0 bg-linear-to-t from-charcoal via-charcoal/10 to-transparent" />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-sans text-[11px] text-brand-400 tracking-[0.28em] uppercase mb-5">
-            What we offer
-          </p>
-          <h1 className="font-hero text-[clamp(2.5rem,5.5vw,4.5rem)] text-white leading-[1.05] mb-6">
-            Our services
-          </h1>
-          <p className="font-sans text-white/55 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Everything you need to transform your space, under one roof. Select
-            a service below to see how it works.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        lines={["Everything a room", "needs, under one roof."]}
+        intro="From the first measured survey to the final styled shelf. Select a service to see how it works."
+        image="/images/hero/hero2.jpg"
+      />
 
       {/* ── Accordion index ── */}
       <section className="bg-white">
-        <div className="site-container max-w-5xl xxl:max-w-[56rem] xl2:max-w-[58rem] xl3:max-w-[60rem] xl4:max-w-[62rem] py-16 sm:py-20">
+        <div className="site-container max-w-5xl xxl:max-w-[56rem] xl2:max-w-232 xl3:max-w-240 xl4:max-w-248 py-16 sm:py-20">
           <div className="flex items-center justify-between mb-2">
             <p className="font-sans text-[10px] text-charcoal-muted uppercase tracking-[0.22em]">
               Full range
@@ -155,7 +134,7 @@ export default async function ServicesPage() {
 
       {/* ── CTA band — consistent with the rest of the site ── */}
       <section className="py-20 bg-charcoal">
-        <div className="mx-auto max-w-2xl xxl:max-w-[34rem] xl2:max-w-[36rem] xl3:max-w-[38rem] xl4:max-w-[40rem] px-4 text-center">
+        <div className="mx-auto max-w-2xl xxl:max-w-[34rem] xl2:max-w-xl xl3:max-w-152 xl4:max-w-160 px-4 text-center">
           <p className="font-sans text-[11px] text-brand-400 tracking-[0.25em] uppercase mb-4">
             Not sure where to start?
           </p>

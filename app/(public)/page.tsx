@@ -1,13 +1,23 @@
-import { HeroSection } from "@/components/home/HeroSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { PortfolioPreview } from "@/components/home/PortfolioPreview";
-import { ProcessSection } from "@/components/home/ProcessSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { CtaSection } from "@/components/home/CtaSection";
+import { getTestimonials } from "@/actions/admin";
 import { getFeaturedPortfolio } from "@/actions/portfolio";
 import { getFeaturedProducts } from "@/actions/products";
-import { getTestimonials } from "@/actions/admin";
+import { HeroSection } from "@/components/home/HeroSection";
+import { PortfolioPreview } from "@/components/home/PortfolioPreview";
+import { ProcessSection } from "@/components/home/ProcessSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
 import { StatsSection } from "@/components/home/StatsSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Kaytee Furnitures & Interior — Bespoke furniture and interior design, Lagos",
+  },
+  alternates: { canonical: "/" },
+};
+
+export const revalidate = 600;
 
 export default async function HomePage() {
   const [portfolio, products, testimonials] = await Promise.all([
@@ -16,8 +26,28 @@ export default async function HomePage() {
     getTestimonials(true).catch(() => []),
   ]);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    name: "Kaytee Furnitures & Interior",
+    description:
+      "Bespoke furniture and interior design studio in Lagos, Nigeria.",
+    url: "https://kaytee-furnitures.vercel.app",
+    telephone: "+234 807 919 7554",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "22 Oremerin, Itire, Surulere",
+      addressLocality: "Lagos",
+      addressCountry: "NG",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HeroSection />
       <ServicesSection />
       <StatsSection />
@@ -25,7 +55,6 @@ export default async function HomePage() {
       <ProcessSection />
       {/* <FeaturedProducts products={products} /> */}
       <TestimonialsSection testimonials={testimonials} />
-      <CtaSection />
     </>
   );
 }
