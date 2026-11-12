@@ -53,8 +53,7 @@ export function Header() {
     };
   }, [open]);
 
-  const light = hasDarkHero && !scrolled; // white text over imagery
-  const onDark = light || open;
+  const onDark = !scrolled || open;
 
   return (
     <>
