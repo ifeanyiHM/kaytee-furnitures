@@ -53,7 +53,7 @@ export function RevealLines({
       {lines.map((line, i) => (
         <span
           key={i}
-          className="block overflow-hidden pb-[0.08em] mb-[-0.08em]"
+          className="block overflow-hidden pb-[0.08em] mb-[-0.16em]"
         >
           <motion.span
             className="block"

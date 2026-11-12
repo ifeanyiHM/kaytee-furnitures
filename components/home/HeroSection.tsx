@@ -55,18 +55,30 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-linear-to-t from-charcoal/85 via-charcoal/20 to-charcoal/55" />
       </div>
 
-      <div className="site-container pb-10 pt-40 xl1:pb-14 xl3:pb-16">
+      <div className="site-container pb-10 pt-40 xl1:pb-14 xl3:pb-16 text-center lg:text-left">
         <p className="site-kicker hero-reveal mb-7 flex items-center gap-4 text-brand-200 opacity-0 xl3:mb-10">
-          <span className="h-px w-10 bg-brand-400" />
-          Interior design &amp; bespoke furniture — Lagos
+          <span className="hidden lg:inline h-px w-10 bg-brand-400" />
+          Interior Design Studio — Lagos, Nigeria
         </p>
 
         <RevealLines
           as="h1"
           immediate
           delay={0.15}
-          className="display-hero text-white"
-          lines={["Interiors considered", "down to the", "last chair."]}
+          className="lg:hidden display-hero text-white"
+          lines={["Every room", "designed to", "its last chair."]}
+        />
+        <RevealLines
+          as="h1"
+          immediate
+          delay={0.15}
+          className="hidden lg:block display-hero text-white"
+          lines={[
+            "Every room designed",
+            "with care, down to",
+            "its last chair.",
+          ]}
+          // lines={["Interiors considered", "down to the", "last chair."]}
         />
 
         <div className="mt-12 flex flex-col gap-10 xl3:mt-16 lg:flex-row lg:items-end lg:justify-between">
