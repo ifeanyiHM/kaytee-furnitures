@@ -1,11 +1,11 @@
 "use client";
 
+import { SYSTEM_PROMPT } from "@/lib/ai/systemPrompt";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { GoDash } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
-import { SYSTEM_PROMPT } from "@/lib/ai/systemPrompt";
 
 interface Message {
   role: "user" | "assistant";
@@ -77,7 +77,7 @@ function Brandmark({ size = 32 }: { size?: number }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/kaytee-logo.png"
+      src="/images/kaytee_logo.png"
       alt="Kaytee Furnitures"
       onError={() => setErrored(true)}
       className="shrink-0 rounded-full object-contain"
