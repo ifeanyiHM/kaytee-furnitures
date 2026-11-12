@@ -126,7 +126,7 @@ export function Header() {
               width={717}
               height={421}
               priority
-              className="h-9 w-auto object-contain transition-all duration-500 sm:h-10 lg:h-11 xl3:h-14"
+              className="h-9 w-auto object-contain sm:h-10 lg:h-11 xl3:h-14"
               style={{
                 filter: onDark
                   ? "none"
