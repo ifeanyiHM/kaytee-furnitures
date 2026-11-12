@@ -6,14 +6,14 @@ import { RiCheckLine } from "react-icons/ri";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description:
-    "The terms governing your use of the Kaytee Furnitures website and services.",
+    "The terms governing use of the Kaytee Furnitures & Interior website and interior design engagements.",
 };
 
-const LAST_UPDATED = "18 July 2026";
+const LAST_UPDATED = "12 November 2026";
 
 const PLAIN_ENGLISH = [
-  "Browsing our site or booking a call doesn't create a contract — that happens once we agree on a proposal.",
-  "Prices shown on the site are a starting point, not a final quote.",
+  "Submitting a project enquiry does not create a contract — a formal engagement begins when we agree on a written proposal or agreement.",
+  "Project-specific fees and deliverables are agreed in writing before work begins.",
   "Our project photography and content belong to us — please don't reuse it without asking.",
   "Nigerian law governs these terms, and we're always reachable if something's unclear.",
 ];
@@ -23,7 +23,7 @@ const SECTIONS = [
     id: "acceptance",
     title: "Acceptance of terms",
     body: [
-      "By accessing or using this website, or by booking a consultation or service with Kaytee Furnitures, you agree to be bound by these Terms of Use. If you do not agree, please do not use the website or our services.",
+      "By accessing or using this website, or by submitting a project enquiry to Kaytee Furnitures & Interior, you agree to be bound by these Terms of Use. If you do not agree, please do not use the website or our services.",
     ],
   },
   {
@@ -46,9 +46,8 @@ const SECTIONS = [
     id: "services-bookings",
     title: "Services & bookings",
     body: [
-      "Submitting a consultation or booking request through this website does not itself create a binding contract for services. A formal engagement begins only once both parties agree to a proposal, quote, or signed agreement.",
-      "Pricing shown on the website (including any 'from' pricing on the Services page) is indicative and subject to change based on project scope, materials, and site conditions.",
-      "[Placeholder: add specific payment terms, deposit requirements, and cancellation/refund policy once finalised — these are business decisions that should be reflected accurately here rather than assumed.]",
+      "Submitting a project enquiry through this website does not itself create a binding contract. A formal engagement begins only once both parties agree to a written proposal or agreement.",
+      "Project scope, deliverables, schedules, fees, payment arrangements and any cancellation terms will be set out in a separate proposal or agreement before work begins. A website enquiry alone does not establish those terms.",
     ],
   },
   {
@@ -76,8 +75,8 @@ const SECTIONS = [
     id: "limitation-of-liability",
     title: "Limitation of liability",
     body: [
-      "To the fullest extent permitted by law, Kaytee Furnitures shall not be liable for any indirect, incidental, or consequential damages arising from your use of this website or our services.",
-      "[Placeholder: liability caps and specific exclusions for actual design/furniture engagements should be defined in your services agreement, not solely in these website terms.]",
+      "To the fullest extent permitted by law, Kaytee Furnitures & Interior shall not be liable for any indirect, incidental, or consequential damages arising from your use of this website or our services.",
+      "Any project-specific responsibilities, limitations and remedies should be addressed in the written agreement for that engagement.",
     ],
   },
   {
@@ -91,8 +90,7 @@ const SECTIONS = [
     id: "governing-law",
     title: "Governing law",
     body: [
-      "These terms are governed by the laws of the Federal Republic of Nigeria. Any disputes arising from these terms or your use of the website shall be subject to the exclusive jurisdiction of the courts of Nigeria.",
-      "[Placeholder: confirm the specific state/venue for dispute resolution — e.g. Lagos State — with your legal counsel.]",
+      "These terms are governed by the laws of the Federal Republic of Nigeria. Any dispute will be handled by a court with appropriate jurisdiction under applicable law.",
     ],
   },
   {
@@ -109,7 +107,7 @@ export default function TermsOfUsePage() {
     <>
       <ReadingProgress />
 
-      {/* ── Hero — textured, echoing the Space Planning service tile ── */}
+      {/* ── Hero — textured, echoing the studio’s interior design palette ── */}
       <section className="relative pt-40 pb-20 bg-charcoal overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.07]"
@@ -203,11 +201,7 @@ export default function TermsOfUsePage() {
                     {s.body.map((p, pi) => (
                       <p
                         key={pi}
-                        className={`font-sans text-sm sm:text-base leading-relaxed ${
-                          p.startsWith("[Placeholder:")
-                            ? "text-brand-700 bg-brand-50 border-l-2 border-brand-400 pl-4 py-2 italic"
-                            : "text-charcoal-muted"
-                        }`}
+                        className="font-sans text-sm leading-relaxed text-charcoal-muted sm:text-base"
                       >
                         {p}
                       </p>

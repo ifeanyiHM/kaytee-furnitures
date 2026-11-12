@@ -1,54 +1,55 @@
-const stats = [
+const principles = [
   {
-    value: "200+",
-    label: "Projects completed",
-    desc: "Across residential and commercial spaces",
+    number: "01",
+    title: "Thoughtful by nature",
+    description:
+      "We begin by understanding the people, routines and possibilities behind every space.",
   },
   {
-    value: "12+",
-    label: "Years of expertise",
-    desc: "Creating beautiful interiors since 2012",
+    number: "02",
+    title: "Personal by design",
+    description:
+      "Each direction responds to the brief rather than following a fixed look or formula.",
   },
   {
-    value: "50+",
-    label: "Design awards",
-    desc: "Recognised for excellence and innovation",
-  },
-  {
-    value: "98%",
-    label: "Client satisfaction",
-    desc: "Based on post-project survey results",
+    number: "03",
+    title: "Considered in detail",
+    description:
+      "Materials, proportions, lighting and finishing touches are brought together with care.",
   },
 ];
 
 export function StatsSection() {
   return (
-    <section className="relative py-20 lg:py-24 bg-charcoal overflow-hidden">
-      {/* Faint brass corner rule — echoes the hero/services grid language */}
-      <div className="absolute top-0 left-0 w-24 h-24 border-t border-l border-brand-400/20 hidden lg:block" />
-      <div className="absolute bottom-0 right-0 w-24 h-24 border-b border-r border-brand-400/20 hidden lg:block" />
-
+    <section className="relative overflow-hidden bg-charcoal py-20 lg:py-24 xl3:py-32">
+      <div className="absolute left-0 top-0 hidden h-24 w-24 border-l border-t border-brand-400/20 lg:block" />
+      <div className="absolute bottom-0 right-0 hidden h-24 w-24 border-b border-r border-brand-400/20 lg:block" />
       <div className="site-container">
-        <p className="site-label text-brand-300 tracking-[0.24em] text-center lg:text-left mb-12">
-          By the numbers
-        </p>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-white/10">
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className="text-center lg:text-left py-8 px-2 lg:px-8 lg:first:pl-0 border-b border-white/10 lg:border-b-0 lg:border-r lg:border-r-white/10 lg:last:border-r-0"
+        <div className="mb-12 max-w-2xl lg:mb-16">
+          <p className="site-label mb-5 tracking-[0.24em] text-brand-300">
+            The way we see it
+          </p>
+          <h2 className="font-display text-[clamp(2.25rem,5vw,4.5rem)] font-light leading-[1.08] text-white">
+            Good design is felt
+            <br className="hidden sm:block" /> in the details.
+          </h2>
+        </div>
+        <div className="grid border-t border-white/15 md:grid-cols-3">
+          {principles.map((principle) => (
+            <article
+              key={principle.number}
+              className="border-b border-white/15 py-8 md:border-b-0 md:border-r md:px-8 md:py-10 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
             >
-              <p className="font-hero text-[clamp(2.5rem,5vw,3.75rem)] text-white leading-none mb-3">
-                {stat.value}
+              <p className="mb-8 font-sans text-[10px] tracking-[0.22em] text-brand-300">
+                {principle.number}
               </p>
-              <p className="font-sans font-medium text-white text-sm xxl:text-[15px] xl2:text-[15px] xl3:text-base xl4:text-base tracking-wide mb-1.5">
-                {stat.label}
+              <h3 className="font-display text-2xl font-light text-white xl3:text-3xl">
+                {principle.title}
+              </h3>
+              <p className="mt-4 max-w-sm font-sans text-sm leading-relaxed text-white/50">
+                {principle.description}
               </p>
-              <p className="font-sans text-white/40 text-xs xxl:text-[12px] xl2:text-[13px] xl3:text-[13px] xl4:text-[14px] leading-relaxed hidden lg:block max-w-[16rem] xxl:max-w-[18rem] xl2:max-w-[18rem] xl3:max-w-[19rem] xl4:max-w-[20rem]">
-                {stat.desc}
-              </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>

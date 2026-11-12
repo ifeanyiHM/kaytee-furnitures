@@ -16,11 +16,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const FROM_NAME = "kaytee Furnitures"; // Display name for the sender
-const FROM_EMAIL = process.env.SMTP_USER || "hello@kayteefurnitures.com";
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "hello@kayteefurnitures.com";
+const FROM_NAME = "Kaytee Furnitures & Interior";
+const FROM_EMAIL = process.env.SMTP_USER || "kayteefurnitureandinterior@gmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "kayteefurnitureandinterior@gmail.com";
 const SITE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://kayteefurnitures.com";
+  process.env.NEXT_PUBLIC_APP_URL || "https://www.kayteefurnitures.com";
 
 // ─── Brand colors (mirrors CSS theme) ───────────────────────────────────────
 const BRAND = {
@@ -74,13 +74,9 @@ function emailShell(content: string, previewText = ""): string {
                     <table cellpadding="0" cellspacing="0" role="presentation">
                       <tr>
                         <td>
-                          <img
-                            src="http://localhost:3000/logo.png"
-                            alt="Kaytee Furnitures"
-                            width="180"
-                            height="48"
-                            style="display:block;width:180px;height:48px;"
-                        />
+                          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:0.02em;color:#ffffff;">
+                            Kaytee Furnitures <span style="color:${BRAND.brand400};">&amp; Interior</span>
+                          </span>
                         </td>
                       </tr>
                     </table>
@@ -112,12 +108,12 @@ function emailShell(content: string, previewText = ""): string {
                 <tr>
                   <td style="border-top:1px solid ${BRAND.sand200};padding-top:24px;">
                     <p style="font-family:'Inter',Arial,sans-serif;font-size:11px;color:${BRAND.muted};line-height:1.6;margin-bottom:8px;">
-                      kaytee Furnitures Ltd · 14 Design Boulevard, Victoria Island, Lagos
+                      Kaytee Furnitures &amp; Interior · Lagos, Nigeria
                     </p>
                     <p style="font-family:'Inter',Arial,sans-serif;font-size:11px;color:${BRAND.muted};line-height:1.6;">
-                      <a href="${SITE_URL}" style="color:${BRAND.brand600};">kayteefurnitures.com</a> &nbsp;·&nbsp;
-                      <a href="mailto:hello@kayteefurnitures.com" style="color:${BRAND.brand600};">hello@kayteefurnitures.com</a> &nbsp;·&nbsp;
-                      +234 801 234 5678
+                      <a href="${SITE_URL}" style="color:${BRAND.brand600};">www.kayteefurnitures.com</a> &nbsp;·&nbsp;
+                      <a href="mailto:kayteefurnitureandinterior@gmail.com" style="color:${BRAND.brand600};">kayteefurnitureandinterior@gmail.com</a> &nbsp;·&nbsp;
+                      +234 807 919 7554
                     </p>
                   </td>
                 </tr>
@@ -197,7 +193,7 @@ function buildContactClientEmail(data: {
       Thank you, ${escapeHtml(data.name.split(" ")[0])}.
     </h1>
     <p style="font-family:'Inter',Arial,sans-serif;font-size:14px;color:${BRAND.muted};line-height:1.7;margin-bottom:0;">
-      We've received your message and will get back to you within 24 hours — usually sooner.
+      We've received your message. Our team will review your enquiry and be in touch to discuss the next steps.
     </p>
 
     ${divider()}
@@ -224,8 +220,8 @@ function buildContactClientEmail(data: {
     <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
       ${[
         "A member of our team will review your message personally.",
-        "You'll hear from us within 24 hours — weekdays, 9am–6pm WAT.",
-        "If your enquiry is project-related, we'll suggest a free consultation call.",
+        "Our team will review your enquiry and contact you to discuss the next steps.",
+        "If your enquiry concerns an interior design project, we'll discuss the brief and appropriate scope with you.",
       ]
         .map(
           (step, i) => `
@@ -251,7 +247,7 @@ function buildContactClientEmail(data: {
 
   return emailShell(
     content,
-    `We've received your message and will reply within 24 hours.`,
+    `We've received your message. Our team will review your enquiry and be in touch to discuss the next steps.`,
   );
 }
 
@@ -298,8 +294,11 @@ function buildConsultationClientEmail(data: {
   email: string;
   phone: string;
   serviceName: string;
+  projectType?: string;
+  projectLocation?: string;
   budget?: string;
   spaceSize?: string;
+  timeline?: string;
   preferredDate?: string;
   description: string;
 }): string {
@@ -308,7 +307,7 @@ function buildConsultationClientEmail(data: {
       Request received, ${escapeHtml(data.firstName)}.
     </h1>
     <p style="font-family:'Inter',Arial,sans-serif;font-size:14px;color:${BRAND.muted};line-height:1.7;margin-bottom:0;">
-      Your consultation request is in. A dedicated design lead will call you within 24 hours to discuss your project.
+      Your project brief has been received. Our team will review the information and contact you to discuss your space and possible next steps.
     </p>
 
     ${divider()}
@@ -320,12 +319,15 @@ function buildConsultationClientEmail(data: {
     ${divider()}
 
     <!-- Booking details -->
-    ${sectionHeading("Consultation details")}
+    ${sectionHeading("Project details")}
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
       ${metaRow("Service", data.serviceName)}
+      ${data.projectType ? metaRow("Type of space", data.projectType) : ""}
+      ${data.projectLocation ? metaRow("Project location", data.projectLocation) : ""}
       ${data.budget ? metaRow("Budget range", data.budget) : ""}
-      ${data.spaceSize ? metaRow("Space size", data.spaceSize) : ""}
-      ${data.preferredDate ? metaRow("Preferred date", data.preferredDate) : ""}
+      ${data.spaceSize ? metaRow("Property size", data.spaceSize) : ""}
+      ${data.timeline ? metaRow("Preferred timeline", data.timeline) : ""}
+      ${data.preferredDate ? metaRow("Preferred date to speak", data.preferredDate) : ""}
       ${metaRow("Phone", data.phone)}
       ${metaRow("Email", data.email)}
     </table>
@@ -338,23 +340,23 @@ function buildConsultationClientEmail(data: {
       ${[
         {
           step: "01",
-          label: "Design lead review",
-          desc: "A senior designer reviews your brief before reaching out — so the first call is already informed.",
+          label: "Project review",
+          desc: "Our team reviews the information you shared about your space and priorities.",
         },
         {
           step: "02",
-          label: "Call within 24 hours",
-          desc: "Expect a call on the number you provided. If we miss you, we'll leave a message and follow up by email.",
+          label: "A conversation",
+          desc: "We get in touch using the contact details you provided to discuss your brief.",
         },
         {
           step: "03",
-          label: "Detailed quote within 48h",
-          desc: "After the call, you'll receive a clear, itemised quote with no obligation to proceed.",
+          label: "Discussing the scope",
+          desc: "We clarify the project requirements and the appropriate scope of work.",
         },
         {
           step: "04",
-          label: "Consultation begins",
-          desc: "Virtual or in-person — we'll schedule at a time that suits you.",
+          label: "Agreeing next steps",
+          desc: "If the project is a fit, we outline the next steps and any proposal required.",
         },
       ]
         .map(
@@ -377,7 +379,7 @@ function buildConsultationClientEmail(data: {
     <!-- Portfolio CTA -->
     <div style="background-color:${BRAND.sand50};border-radius:10px;padding:24px;margin-top:8px;">
       <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;color:${BRAND.charcoal};margin-bottom:8px;">While you wait…</p>
-      <p style="font-family:'Inter',Arial,sans-serif;font-size:13px;color:${BRAND.muted};line-height:1.6;margin-bottom:16px;">Browse our portfolio to see what we've created for clients across Lagos and beyond.</p>
+      <p style="font-family:'Inter',Arial,sans-serif;font-size:13px;color:${BRAND.muted};line-height:1.6;margin-bottom:16px;">Explore selected interior design projects and see how we bring spaces together through considered details.</p>
       ${ctaButton("Explore our portfolio", `${SITE_URL}/portfolio`)}
     </div>
 
@@ -387,7 +389,7 @@ function buildConsultationClientEmail(data: {
 
   return emailShell(
     content,
-    `Your consultation request has been received. A design lead will call within 24 hours.`,
+    `Your interior design project brief has been received. Our team will be in touch to discuss the next steps.`,
   );
 }
 
@@ -398,17 +400,20 @@ function buildConsultationAdminEmail(data: {
   email: string;
   phone: string;
   serviceName: string;
+  projectType?: string;
+  projectLocation?: string;
   budget?: string;
   spaceSize?: string;
+  timeline?: string;
   preferredDate?: string;
   description: string;
 }): string {
   const content = `
     <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:400;color:${BRAND.charcoal};margin-bottom:8px;">
-      New consultation request
+      New interior design project enquiry
     </h1>
     <p style="font-family:'Inter',Arial,sans-serif;font-size:13px;color:${BRAND.muted};margin-bottom:0;">
-      ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)} submitted a booking via the website.
+      ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)} submitted a project enquiry through the website.
     </p>
 
     ${divider()}
@@ -419,9 +424,12 @@ function buildConsultationAdminEmail(data: {
       ${metaRow("Email", data.email)}
       ${metaRow("Phone", data.phone)}
       ${metaRow("Service", data.serviceName)}
+      ${data.projectType ? metaRow("Type of space", data.projectType) : ""}
+      ${data.projectLocation ? metaRow("Project location", data.projectLocation) : ""}
       ${data.budget ? metaRow("Budget", data.budget) : ""}
-      ${data.spaceSize ? metaRow("Space size", data.spaceSize) : ""}
-      ${data.preferredDate ? metaRow("Preferred date", data.preferredDate) : ""}
+      ${data.spaceSize ? metaRow("Property size", data.spaceSize) : ""}
+      ${data.timeline ? metaRow("Preferred timeline", data.timeline) : ""}
+      ${data.preferredDate ? metaRow("Preferred date to speak", data.preferredDate) : ""}
     </table>
 
     ${divider()}
@@ -433,7 +441,7 @@ function buildConsultationAdminEmail(data: {
 
   return emailShell(
     content,
-    `New booking: ${data.firstName} ${data.lastName} — ${data.serviceName}`,
+    `New project enquiry: ${data.firstName} ${data.lastName} — ${data.serviceName}`,
   );
 }
 
@@ -471,8 +479,11 @@ export async function sendConsultationEmails(data: {
   email: string;
   phone: string;
   serviceName: string;
+  projectType?: string;
+  projectLocation?: string;
   budget?: string;
   spaceSize?: string;
+  timeline?: string;
   preferredDate?: string;
   description: string;
 }) {
@@ -481,7 +492,7 @@ export async function sendConsultationEmails(data: {
     transporter.sendMail({
       from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
       to: data.email,
-      subject: `Your ${data.serviceName} consultation request — Kaytee Furnitures`,
+      subject: `Your interior design enquiry — Kaytee Furnitures & Interior`,
       html: buildConsultationClientEmail(data),
     }),
     // Notification to admin
@@ -489,7 +500,7 @@ export async function sendConsultationEmails(data: {
       from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
       to: ADMIN_EMAIL,
       replyTo: data.email,
-      subject: `[Booking] ${data.firstName} ${data.lastName} — ${data.serviceName}`,
+      subject: `[Project enquiry] ${data.firstName} ${data.lastName} — ${data.serviceName}`,
       html: buildConsultationAdminEmail(data),
     }),
   ]);

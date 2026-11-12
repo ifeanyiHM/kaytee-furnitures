@@ -60,9 +60,9 @@ function generatePDF(title: string, content: string): Buffer {
   doc.setTextColor(110, 231, 183); // mint accent
   doc.setFontSize(9);
   doc.setFont("helvetica", "bold");
-  doc.text("KAYTEE FURNITURES", margin, 10);
+  doc.text("KAYTEE FURNITURES & INTERIOR", margin, 10);
   doc.setTextColor(113, 113, 122);
-  doc.text("Mood Board Brief", pageW - margin, 10, { align: "right" });
+  doc.text("Project Brief", pageW - margin, 10, { align: "right" });
 
   y = 28;
 

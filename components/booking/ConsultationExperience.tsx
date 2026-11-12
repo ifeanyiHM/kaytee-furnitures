@@ -1,482 +1,622 @@
 "use client";
+
+import type {
+  InputHTMLAttributes,
+  ReactNode,
+  SelectHTMLAttributes,
+} from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import {
+  RiArrowDownSLine,
+  RiArrowLeftLine,
+  RiArrowRightLine,
+  RiBuilding2Line,
+  RiCalendarLine,
+  RiCheckLine,
+  RiLoader4Line,
+  RiSparkling2Line,
+  RiUser3Line,
+} from "react-icons/ri";
+
 import { bookingSchema, type BookingFormData } from "@/lib/validations/booking";
+
 import { createBooking } from "@/actions/bookings";
 import { BUDGET_RANGES, SPACE_SIZES } from "@/lib/utils/constants";
-import {
-  RiArrowRightLine,
-  RiArrowLeftLine,
-  RiCheckLine,
-  RiCalendarLine,
-  RiUser3Line,
-  RiBuilding2Line,
-} from "react-icons/ri";
-import type { ServiceType } from "@/types";
 
-/* ─── Underline field primitive ─────────────────────────── */
+const INPUT_CLASS =
+  "w-full min-w-0 border-b border-sand-300 bg-transparent px-0 py-3 text-sm text-charcoal outline-none transition-colors duration-300 placeholder:text-charcoal-muted/50 focus:border-brand-600";
+
+const LABEL_CLASS =
+  "mb-2 block text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-700";
+
+const STEPS = [
+  {
+    id: 1,
+    icon: RiUser3Line,
+    label: "About you",
+    heading: "Let's get to know you.",
+    description:
+      "First, tell us how to reach you so we can follow up about your project.",
+  },
+  {
+    id: 2,
+    icon: RiBuilding2Line,
+    label: "Your space",
+    heading: "What are we designing?",
+    description: "Help us understand the space you're looking to transform.",
+  },
+  {
+    id: 3,
+    icon: RiCalendarLine,
+    label: "Project brief",
+    heading: "Tell us more about your vision.",
+    description:
+      "Share your preferences, expectations and any details that will help us understand your project.",
+  },
+];
+
 function Field({
   label,
   error,
+  id,
   children,
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
+  id: string;
+  children: ReactNode;
 }) {
   return (
-    <div className="group">
-      <label className="block site-label mb-2 text-charcoal-muted tracking-[0.2em]">
+    <div className="group min-w-0">
+      <label htmlFor={id} className={LABEL_CLASS}>
         {label}
       </label>
+
       {children}
+
       {error && (
-        <p className="font-sans text-xs text-red-500 mt-1.5">{error}</p>
+        <p
+          id={`${id}-error`}
+          className="mt-2 text-xs leading-5 text-red-600"
+          role="alert"
+        >
+          {error}
+        </p>
       )}
     </div>
   );
 }
 
-function UnderlineInput({
-  label,
-  error,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   error?: string;
-}) {
+  id: string;
+};
+
+function UnderlineInput({ label, error, id, ...props }: InputProps) {
   return (
-    <Field label={label} error={error}>
+    <Field label={label} error={error} id={id}>
       <input
+        id={id}
         {...props}
-        className="w-full border-0 border-b border-charcoal-muted/50 bg-transparent rounded-none px-0 py-2.5 font-sans text-sm text-charcoal placeholder:text-charcoal-muted/40 focus:outline-none focus:border-charcoal-muted/50 transition-colors"
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={INPUT_CLASS}
       />
     </Field>
   );
 }
 
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+  label: string;
+  error?: string;
+  id: string;
+  children: ReactNode;
+};
+
 function UnderlineSelect({
   label,
   error,
+  id,
   children,
   ...props
-}: React.SelectHTMLAttributes<HTMLSelectElement> & {
-  label: string;
-  error?: string;
-}) {
+}: SelectProps) {
   return (
-    <Field label={label} error={error}>
-      <select
-        {...props}
-        className="w-full appearance-none border-0 border-b border-charcoal-muted/50 bg-transparent rounded-none px-0 py-2.5 pr-5 font-sans text-sm text-charcoal focus:outline-none focus:border-charcoal-muted/50 transition-colors cursor-pointer"
-      >
-        {children}
-      </select>
+    <Field label={label} error={error} id={id}>
+      <div className="relative">
+        <select
+          id={id}
+          {...props}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={`${INPUT_CLASS} cursor-pointer appearance-none pr-8`}
+        >
+          {children}
+        </select>
+
+        <RiArrowDownSLine
+          size={18}
+          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-brand-600"
+        />
+      </div>
     </Field>
   );
 }
 
-/* ─── Service picker cards ───────────────────────────────── */
-function ServicePicker({
-  services,
-  values,
-  onChange,
-  error,
-}: {
-  services: ServiceType[];
-  values: string[];
-  onChange: (ids: string[]) => void;
-  error?: string;
-}) {
-  const fallback = [
+function SuccessState() {
+  const nextSteps = [
     {
-      _id: "id",
-      name: "Interior Design",
-      slug: "interior-design",
-      description: "",
-      features: [],
-      active: true,
-      order: 1,
+      icon: RiCalendarLine,
+      title: "Your brief is reviewed",
+      description: "Our team considers your project details.",
     },
     {
-      _id: "sp",
-      name: "Space Planning",
-      slug: "space-planning",
-      description: "",
-      features: [],
-      active: true,
-      order: 2,
+      icon: RiUser3Line,
+      title: "We get in touch",
+      description: "We'll contact you using the details you provided.",
     },
     {
-      _id: "fp",
-      name: "Furniture Procurement",
-      slug: "furniture-procurement",
-      description: "",
-      features: [],
-      active: true,
-      order: 3,
+      icon: RiBuilding2Line,
+      title: "We discuss the next steps",
+      description: "We'll talk through the right direction for your project.",
     },
-    {
-      _id: "vc",
-      name: "Virtual Consultation",
-      slug: "virtual-consultation",
-      description: "",
-      features: [],
-      active: true,
-      order: 4,
-    },
-    {
-      _id: "rm",
-      name: "Renovation Management",
-      slug: "renovation-management",
-      description: "",
-      features: [],
-      active: true,
-      order: 5,
-    },
-    {
-      _id: "ld",
-      name: "Lighting Design",
-      slug: "lighting-design",
-      description: "",
-      features: [],
-      active: true,
-      order: 6,
-    },
-  ] as ServiceType[];
-
-  const list = services.length > 0 ? services : fallback;
-
-  function toggle(id: string) {
-    if (values.includes(id)) {
-      onChange(values.filter((v) => v !== id));
-    } else {
-      onChange([...values, id]);
-    }
-  }
+  ];
 
   return (
-    <div>
-      <div className="flex items-baseline justify-between mb-3">
-        <p className="site-label text-charcoal-muted tracking-[0.2em]">
-          What can we help with?
-        </p>
-        <p className="site-label text-charcoal-muted/50 tracking-[0.2em]">
-          Select all that apply
-        </p>
+    <div
+      className="flex min-h-[520px] flex-col items-center justify-center py-12 text-center"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="flex size-16 items-center justify-center rounded-full border border-brand-300 bg-sand-100 text-brand-700">
+        <RiCheckLine size={28} />
       </div>
-      <div className="grid grid-cols-2 gap-2">
-        {list.map((s) => {
-          const selected = values.includes(s._id);
+
+      <p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-600">
+        Project brief submitted
+      </p>
+
+      <h2 className="mt-3 max-w-md font-hero text-3xl leading-tight tracking-[-0.04em] text-charcoal sm:text-4xl">
+        Your brief is now{" "}
+        <span className="font-light italic text-brand-600">with us.</span>
+      </h2>
+
+      <p className="mt-4 max-w-sm text-sm leading-7 text-charcoal-muted">
+        Thank you for telling us about your project. Our team will review the
+        details and get in touch using the contact information you provided.
+      </p>
+
+      <div className="mt-10 w-full max-w-md border-t border-sand-200 text-left">
+        {nextSteps.map((item, index) => {
+          const Icon = item.icon;
+
           return (
-            <button
-              key={s._id}
-              type="button"
-              onClick={() => toggle(s._id)}
-              className={`relative text-left px-4 py-3.5 rounded-lg border transition-all duration-150 ${
-                selected
-                  ? "border-charcoal-muted/80 bg-brand-50 text-charcoal"
-                  : "border-charcoal-muted/50 bg-white text-charcoal-muted hover:border-charcoal-muted/60 hover:text-charcoal"
-              }`}
+            <div
+              key={item.title}
+              className="flex items-start gap-4 border-b border-sand-200 py-5"
             >
-              {/* Check mark */}
-              <span
-                className={`absolute top-2.5 right-2.5 w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-150 ${
-                  selected
-                    ? "bg-charcoal-light/80 border-charcoal-light/90"
-                    : "border-charcoal-muted/50"
-                }`}
-              >
-                {selected && <RiCheckLine className="w-2.5 h-2.5 text-white" />}
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-sand-200 bg-sand-50 text-brand-600">
+                <Icon size={17} />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-charcoal">
+                  {item.title}
+                </p>
+
+                <p className="mt-1 text-xs leading-6 text-charcoal-muted">
+                  {item.description}
+                </p>
+              </div>
+
+              <span className="pt-1 text-[10px] tracking-wider text-brand-500">
+                0{index + 1}
               </span>
-              <p className="font-sans text-sm leading-snug pr-5">{s.name}</p>
-            </button>
+            </div>
           );
         })}
       </div>
-      {values.length > 0 && (
-        <p className="font-sans text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] text-charcoal-light/70 mt-2.5">
-          {values.length} service{values.length > 1 ? "s" : ""} selected
-        </p>
-      )}
-      {error && <p className="font-sans text-xs text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
 
-/* ─── Success state ──────────────────────────────────────── */
-function SuccessState() {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="w-16 h-16 rounded-full bg-brand-50 border border-brand-100 flex items-center justify-center mb-7">
-        <RiCheckLine className="w-7 h-7 text-brand-600" />
-      </div>
-      <h3 className="font-display text-3xl text-charcoal mb-3">
-        Request received.
-      </h3>
-      <p className="font-sans text-charcoal-muted text-sm leading-relaxed max-w-xs">
-        We&apos;ll review your project details and a design lead will call you
-        within 24 hours.
-      </p>
-      <div className="mt-10 flex flex-col gap-3 w-full max-w-xs">
-        {[
-          { icon: RiCalendarLine, label: "Call within 24 hours" },
-          { icon: RiUser3Line, label: "Dedicated design lead assigned" },
-          {
-            icon: RiBuilding2Line,
-            label: "Site visit or virtual — your choice",
-          },
-        ].map(({ icon: Icon, label }) => (
-          <div key={label} className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-sand-100 flex items-center justify-center shrink-0">
-              <Icon className="w-4 h-4 text-brand-600" />
-            </div>
-            <span className="font-sans text-sm text-charcoal-muted">
-              {label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ─── Main form ──────────────────────────────────────────── */
-const STEPS = [
-  { id: 1, icon: RiUser3Line, label: "You" },
-  { id: 2, icon: RiBuilding2Line, label: "Project" },
-  { id: 3, icon: RiCalendarLine, label: "Detail" },
-];
-
-export function ConsultationExperience({
-  services,
-}: {
-  services: ServiceType[];
-}) {
+export function ConsultationExperience() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [serviceIds, setServiceIds] = useState<string[]>([]);
 
   const {
     register,
     handleSubmit,
     trigger,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      serviceId: "1",
+    },
   });
 
+  const currentStep = STEPS[step - 1];
+  const progress = (step / STEPS.length) * 100;
+
   async function next() {
-    let fields: (keyof BookingFormData)[] = [];
-    if (step === 1) fields = ["firstName", "lastName", "email", "phone"];
-    if (step === 2) {
-      if (serviceIds.length === 0) {
-        // manually show error by triggering
-        fields = ["serviceId"];
-      }
+    const fields: (keyof BookingFormData)[] =
+      step === 1
+        ? ["firstName", "lastName", "email", "phone"]
+        : ["projectType", "spaceSize"];
+
+    const valid = await trigger(fields);
+
+    if (valid && step < STEPS.length) {
+      setStep((current) => current + 1);
+      setSubmitError(null);
     }
-    const ok = await trigger(fields);
-    if (ok) setStep((s) => s + 1);
+  }
+
+  function previous() {
+    if (step > 1) {
+      setStep((current) => current - 1);
+      setSubmitError(null);
+    }
   }
 
   async function onSubmit(data: BookingFormData) {
     setSubmitError(null);
-    const result = await createBooking(data);
-    if (result.success) setSubmitted(true);
-    else setSubmitError(result.error ?? "Something went wrong. Please try again.");
+
+    try {
+      const result = await createBooking(data);
+
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(
+          result.error ?? "Something went wrong. Please try again.",
+        );
+      }
+    } catch {
+      setSubmitError(
+        "We couldn't submit your brief. Please try again in a moment.",
+      );
+    }
   }
 
-  if (submitted) return <SuccessState />;
+  if (submitted) {
+    return <SuccessState />;
+  }
 
   return (
-    <div>
-      {/* Header */}
-      <div className="mb-10">
-        <h2 className="font-display text-3xl text-charcoal mb-1.5">
-          Book your free consultation
+    <div className="w-full min-w-0">
+      {/* Form heading */}
+      <div className="mb-9">
+        <div className="mb-4 flex items-center gap-2 text-brand-600">
+          <RiSparkling2Line size={15} />
+
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em]">
+            Project enquiry
+          </p>
+        </div>
+
+        <h2 className="font-hero text-2xl leading-tight tracking-[-0.04em] text-charcoal sm:text-3xl lg:text-4xl">
+          {currentStep.heading}
         </h2>
-        <p className="font-sans text-sm text-charcoal-muted">
-          Takes about 2 minutes · No commitment required
+
+        <p className="mt-3 max-w-lg text-sm leading-7 text-charcoal-muted">
+          {currentStep.description}
         </p>
       </div>
 
-      {/* Step indicator */}
-      <div className="flex items-center gap-0 mb-10">
-        {STEPS.map((s, i) => {
-          const done = step > s.id;
-          const current = step === s.id;
-          return (
-            <div key={s.id} className="flex items-center flex-1">
-              <div className="flex flex-col items-center gap-1.5 shrink-0">
+      {/* Progress indicator */}
+      <div className="mb-10 border-y border-sand-200 py-6">
+        <div className="mb-5 flex items-center justify-between">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-700">
+            Your progress
+          </span>
+
+          <span className="text-xs tabular-nums text-charcoal-muted">
+            Step 0{step} <span className="mx-1 text-sand-400">/</span> 03
+          </span>
+        </div>
+
+        <div
+          className="mb-6 h-1 w-full overflow-hidden bg-sand-100"
+          role="progressbar"
+          aria-label="Consultation form progress"
+          aria-valuemin={1}
+          aria-valuemax={3}
+          aria-valuenow={step}
+        >
+          <div
+            className="h-full bg-brand-600 transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {STEPS.map((item) => {
+            const Icon = item.icon;
+            const done = step > item.id;
+            const active = step === item.id;
+
+            return (
+              <div
+                key={item.id}
+                className="flex min-w-0 items-center gap-2"
+                aria-current={active ? "step" : undefined}
+              >
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
                     done
-                      ? "bg-charcoal-light/90 border-charcoal-light/90"
-                      : current
-                        ? "bg-white border border-charcoal-light/90"
-                        : "bg-white border border-charcoal-light/30"
+                      ? "border-brand-900 bg-brand-900 text-white"
+                      : active
+                        ? "border-brand-600 bg-brand-600 text-white"
+                        : "border-sand-300 bg-sand-50 text-charcoal-muted"
                   }`}
                 >
-                  {done ? (
-                    <RiCheckLine className="w-4 h-4 text-white" />
-                  ) : (
-                    <s.icon
-                      className={`w-3.5 h-3.5 ${current ? "text-charcoal-light/90" : "text-charcoal-light/30"}`}
-                    />
-                  )}
+                  {done ? <RiCheckLine size={15} /> : <Icon size={15} />}
                 </div>
+
                 <span
-                  className={`site-label ${current ? "text-charcoal" : "text-charcoal-muted/50"}`}
+                  className={`hidden truncate text-[10px] font-semibold sm:block ${
+                    active ? "text-brand-800" : "text-charcoal-muted"
+                  }`}
                 >
-                  {s.label}
+                  {item.label}
                 </span>
               </div>
-              {i < STEPS.length - 1 && (
-                <div
-                  className={`flex-1 h-px mx-2 mb-4 transition-colors duration-300 ${step > s.id ? "bg-charcoal-light/70" : "bg-charcoal-light/30"}`}
-                />
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Step 1 — Personal details */}
+      {/* Form fields */}
+      <form
+        onSubmit={
+          step < 3
+            ? (event) => {
+                event.preventDefault();
+                void next();
+              }
+            : handleSubmit(onSubmit)
+        }
+        noValidate
+      >
+        {/* Step 1: Personal details */}
         {step === 1 && (
-          <div className="space-y-6 animate-fade-up">
-            <div className="grid grid-cols-2 gap-5">
+          <div className="space-y-7">
+            <div className="grid grid-cols-1 gap-x-7 gap-y-7 sm:grid-cols-2">
               <UnderlineInput
-                label="First name"
+                id="booking-first-name"
+                label="First name *"
                 {...register("firstName")}
                 error={errors.firstName?.message}
                 placeholder="Adaeze"
+                autoComplete="given-name"
               />
+
               <UnderlineInput
-                label="Last name"
+                id="booking-last-name"
+                label="Last name *"
                 {...register("lastName")}
                 error={errors.lastName?.message}
                 placeholder="Okonkwo"
+                autoComplete="family-name"
               />
             </div>
+
             <UnderlineInput
-              label="Email address"
+              id="booking-email"
+              label="Email address *"
               type="email"
               {...register("email")}
               error={errors.email?.message}
-              placeholder="you@email.com"
+              placeholder="you@example.com"
+              autoComplete="email"
             />
+
             <UnderlineInput
-              label="Phone number"
+              id="booking-phone"
+              label="Phone number *"
               type="tel"
               {...register("phone")}
               error={errors.phone?.message}
               placeholder="+234 801 234 5678"
+              autoComplete="tel"
             />
           </div>
         )}
 
-        {/* Step 2 — Service selection */}
+        {/* Step 2: Space details */}
         {step === 2 && (
-          <div className="animate-fade-up">
-            <ServicePicker
-              services={services}
-              values={serviceIds}
-              onChange={(ids) => {
-                setServiceIds(ids);
-                // Store first selected ID in form (schema expects string); full list in description
-                setValue("serviceId", ids[0] || "");
-              }}
-              error={errors.serviceId?.message}
+          <div className="space-y-8">
+            <div className="border-l-2 border-brand-400 pl-4">
+              <p className="text-sm leading-7 text-charcoal-muted">
+                Choose the space that best describes your project. This helps us
+                understand the scale and nature of the work you're considering.
+              </p>
+            </div>
+
+            <UnderlineSelect
+              id="booking-project-type"
+              label="Type of space *"
+              {...register("projectType")}
+              error={errors.projectType?.message}
+            >
+              <option value="">Choose a space</option>
+
+              {[
+                "Living room",
+                "Bedroom",
+                "Kitchen",
+                "Dining space",
+                "Full residence",
+                "Other interior space",
+              ].map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </UnderlineSelect>
+
+            <UnderlineSelect
+              id="booking-space-size"
+              label="Property size *"
+              {...register("spaceSize")}
+              error={errors.spaceSize?.message}
+            >
+              <option value="">Select an approximate size</option>
+
+              {SPACE_SIZES.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </UnderlineSelect>
+
+            <UnderlineInput
+              id="booking-project-location"
+              label="Project location"
+              {...register("projectLocation")}
+              placeholder="e.g. Lekki, Lagos"
+              autoComplete="address-level2"
             />
           </div>
         )}
 
-        {/* Step 3 — Project details */}
+        {/* Step 3: Project brief */}
         {step === 3 && (
-          <div className="space-y-6 animate-fade-up">
-            <div className="grid grid-cols-2 gap-5">
-              <UnderlineSelect label="Budget range" {...register("budget")}>
-                <option value="">Select range</option>
-                {BUDGET_RANGES.map((b) => (
-                  <option key={b}>{b}</option>
+          <div className="space-y-8">
+            <div className="border-l-2 border-brand-400 pl-4">
+              <p className="text-sm leading-7 text-charcoal-muted">
+                These details help us understand your expectations and the
+                direction you'd like your project to take.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-7 gap-y-7 sm:grid-cols-2">
+              <UnderlineSelect
+                id="booking-budget"
+                label="Approximate budget"
+                {...register("budget")}
+              >
+                <option value="">Prefer not to say</option>
+
+                {BUDGET_RANGES.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
                 ))}
               </UnderlineSelect>
-              <UnderlineSelect label="Space size" {...register("spaceSize")}>
-                <option value="">Select size</option>
-                {SPACE_SIZES.map((s) => (
-                  <option key={s}>{s}</option>
+
+              <UnderlineSelect
+                id="booking-timeline"
+                label="Preferred timeline"
+                {...register("timeline")}
+              >
+                <option value="">Not decided</option>
+
+                {[
+                  "As soon as possible",
+                  "Within 1–3 months",
+                  "Within 3–6 months",
+                  "More than 6 months",
+                  "Just exploring",
+                ].map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
                 ))}
               </UnderlineSelect>
             </div>
+
             <UnderlineInput
-              label="Preferred date (optional)"
+              id="booking-preferred-date"
+              label="Preferred date to speak (optional)"
               type="date"
               {...register("preferredDate")}
             />
+
             <Field
-              label="Tell us about your project"
+              id="booking-description"
+              label="Tell us about your project *"
               error={errors.description?.message}
             >
               <textarea
+                id="booking-description"
                 {...register("description")}
-                rows={4}
-                placeholder="Describe your space, style preferences, and what you'd like to achieve…"
-                className="w-full border-0 border-b border-charcoal-muted/50 bg-transparent rounded-none px-0 py-2.5 font-sans text-sm text-charcoal placeholder:text-charcoal-muted/40 focus:outline-none focus:border-charcoal-muted/50 transition-colors resize-none"
+                rows={5}
+                aria-invalid={Boolean(errors.description)}
+                aria-describedby={
+                  errors.description ? "booking-description-error" : undefined
+                }
+                placeholder="Describe the space, what you would like to change, and any ideas or references you already have..."
+                className={`${INPUT_CLASS} resize-y`}
               />
             </Field>
           </div>
         )}
 
-        {/* Navigation */}
-        <div
-          className={`flex mt-10 gap-3 ${step > 1 ? "justify-between" : "justify-end"}`}
-        >
-          {step > 1 && (
+        {/* Submission error */}
+        {submitError && (
+          <p
+            role="alert"
+            className="mt-6 border border-red-200 bg-red-50 px-4 py-3 text-xs leading-6 text-red-700"
+          >
+            {submitError}
+          </p>
+        )}
+
+        {/* Form navigation */}
+        <div className="mt-10 flex flex-col-reverse gap-4 border-t border-sand-200 pt-7 sm:flex-row sm:items-center sm:justify-between">
+          {step > 1 ? (
             <button
               type="button"
-              onClick={() => setStep((s) => s - 1)}
-              className="inline-flex items-center gap-2 font-sans text-sm text-charcoal-muted hover:text-charcoal transition-colors"
+              onClick={previous}
+              className="inline-flex items-center justify-center gap-2 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-charcoal-muted transition-colors hover:text-brand-700 sm:justify-start"
             >
-              <RiArrowLeftLine className="w-4 h-4" />
-              Back
+              <RiArrowLeftLine size={16} />
+              Previous step
             </button>
+          ) : (
+            <span className="hidden text-xs text-charcoal-muted sm:block">
+              Your information is used for this project enquiry.
+            </span>
           )}
 
           {step < 3 ? (
             <button
-              type="button"
-              onClick={next}
-              className="group inline-flex items-center gap-2 bg-charcoal hover:bg-brand-800 text-white font-sans text-sm font-medium px-7 py-3 rounded-xl transition-all"
+              type="submit"
+              className="group inline-flex w-full items-center justify-center gap-4 bg-brand-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-brand-700 sm:w-auto"
             >
               Continue
-              <RiArrowRightLine className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <RiArrowRightLine
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </button>
           ) : (
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group inline-flex items-center gap-2 bg-charcoal hover:bg-brand-800 text-white font-sans text-sm font-medium px-8 py-3 rounded-xl transition-all disabled:opacity-60"
+              className="group inline-flex w-full items-center justify-center gap-4 bg-brand-600 px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
-              {isSubmitting ? "Sending…" : "Submit request"}
-              <RiArrowRightLine className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              {isSubmitting ? "Submitting brief..." : "Submit project brief"}
+
+              {isSubmitting ? (
+                <RiLoader4Line className="animate-spin" size={17} />
+              ) : (
+                <RiArrowRightLine
+                  size={17}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              )}
             </button>
           )}
         </div>
-
-        {/* Step counter */}
-        <p className="font-sans text-[10px] text-charcoal-muted/40 text-center mt-6 tracking-wider">
-          Step {step} of {STEPS.length}
-        </p>
-        {submitError && (
-          <p role="alert" className="mt-4 font-sans text-xs text-red-500">
-            {submitError}
-          </p>
-        )}
       </form>
     </div>
   );

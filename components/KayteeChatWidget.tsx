@@ -292,7 +292,7 @@ export default function KayteeChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: "Kaytee Furnitures — Mood Board Brief",
+          title: "Kaytee Furnitures & Interior — Project Brief",
           content,
           format,
         }),
@@ -393,7 +393,7 @@ export default function KayteeChatWidget() {
         ...prev,
         {
           role: "assistant",
-          content: `All set, ${contact.name}. Your brief is with the Kaytee team, and a confirmation is on its way to ${contact.email}. Expect to hear from us within 24 hours.`,
+          content: `Thank you, ${contact.name}. Your brief has been sent to the Kaytee team, and a confirmation is on its way to ${contact.email}. We will review the details and be in touch to discuss the next steps.`,
         },
       ]);
     } catch (err) {

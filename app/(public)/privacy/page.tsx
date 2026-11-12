@@ -6,16 +6,16 @@ import { RiCheckLine } from "react-icons/ri";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Kaytee Furnitures collects, uses, and protects your information.",
+    "How Kaytee Furnitures & Interior collects, uses and protects information submitted through its website.",
 };
 
-const LAST_UPDATED = "18 July 2026";
+const LAST_UPDATED = "12 November 2026";
 
 const PLAIN_ENGLISH = [
-  "We collect only what's needed to plan your project — contact details, budget range, and space info.",
-  "We never sell your personal information to anyone, for any reason.",
-  "You can ask to see, correct, or delete your data at any time.",
-  "Cookies help the site run smoothly — you're always free to turn them off in your browser.",
+  "We collect the contact and project details you choose to share through our enquiry forms.",
+  "We do not sell your personal information.",
+  "You may contact us to ask about accessing or correcting the information you submitted.",
+  "We explain how website technologies and service providers may handle technical information in this policy.",
 ];
 
 const SECTIONS = [
@@ -23,17 +23,16 @@ const SECTIONS = [
     id: "information-we-collect",
     title: "Information we collect",
     body: [
-      "We collect information you give us directly — for example, when you fill in a consultation booking form, a contact form, or subscribe to updates. This typically includes your name, email address, phone number, and details about your project (budget range, space size, location, and description).",
-      "We also collect limited technical information automatically when you use our website, such as your IP address, browser type, device type, and pages visited, through cookies and similar technologies.",
+      "We collect information you give us directly when you submit a project enquiry or contact form. This may include your name, email address, phone number, project location, budget range, space size and project description.",
+      "The hosting platform and technical services that deliver the website may process basic connection information, such as IP address, browser type and device information, for security and operation.",
     ],
   },
   {
     id: "how-we-use-it",
     title: "How we use your information",
     body: [
-      "We use the information we collect to respond to enquiries, schedule and manage consultations, provide quotes, deliver our design and furniture services, and communicate with you about your project.",
-      "With your consent, we may also use your contact details to send updates about our work, offers, or studio news. You can opt out of these at any time.",
-      "We use aggregated, non-identifying technical data to understand how the website is used and to improve it.",
+      "We use the information we collect to respond to enquiries, discuss interior design projects, prepare project-specific proposals where appropriate, and communicate with you about your enquiry.",
+      "We do not use project enquiry details for unrelated marketing communications.",
     ],
   },
   {
@@ -41,8 +40,8 @@ const SECTIONS = [
     title: "Sharing your information",
     body: [
       "We do not sell your personal information.",
-      "We may share your information with trusted third parties who help us run our business — for example, hosting providers, booking/form processing tools, email delivery services, and payment processors — solely to the extent needed for them to perform those services.",
-      "[Placeholder: name your actual payment processor and any CRM/booking tool here once decided, since each has its own data-handling terms that should be referenced specifically.]",
+      "We may share your information with service providers that help host the website, process forms or deliver email, only where needed to operate the site and respond to your enquiry.",
+      "This website does not currently take online payments or create customer accounts. Enquiry details are sent to the studio by email so the team can respond to the request.",
       "We may disclose information where required by law, to protect our legal rights, or in connection with a business transfer such as a merger or acquisition.",
     ],
   },
@@ -50,9 +49,8 @@ const SECTIONS = [
     id: "cookies",
     title: "Cookies & tracking",
     body: [
-      "We use cookies and similar technologies to keep the website functioning properly, remember your preferences, and understand how visitors use our site.",
-      "[Placeholder: list the specific analytics or marketing tools in use — e.g. Google Analytics, Meta Pixel — once finalised, since each requires its own disclosure and, in some cases, a consent banner under Nigerian and international rules.]",
-      "You can control cookies through your browser settings. Disabling cookies may affect how parts of the website function.",
+      "The website may rely on essential technical storage or cookies provided by the hosting platform and services used to operate the site. We do not currently describe any separate advertising or analytics tracking programme here.",
+      "You can review and manage cookies through your browser settings. Blocking essential cookies or storage may affect site functionality.",
     ],
   },
   {
@@ -99,7 +97,7 @@ export default function PrivacyPolicyPage() {
     <>
       <ReadingProgress />
 
-      {/* ── Hero — textured, echoing the Space Planning service tile ── */}
+      {/* ── Hero — textured, echoing the studio’s interior design palette ── */}
       <section className="relative pt-40 pb-20 bg-charcoal overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.07]"
@@ -193,11 +191,7 @@ export default function PrivacyPolicyPage() {
                     {s.body.map((p, pi) => (
                       <p
                         key={pi}
-                        className={`font-sans text-sm sm:text-base leading-relaxed ${
-                          p.startsWith("[Placeholder:")
-                            ? "text-brand-700 bg-brand-50 border-l-2 border-brand-400 pl-4 py-2 italic"
-                            : "text-charcoal-muted"
-                        }`}
+                        className="font-sans text-sm leading-relaxed text-charcoal-muted sm:text-base"
                       >
                         {p}
                       </p>

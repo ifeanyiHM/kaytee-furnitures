@@ -3,7 +3,7 @@ export const runtime = "nodejs";
 import nodemailer from "nodemailer";
 import { jsPDF } from "jspdf";
 
-const KAYTEE_EMAIL = "ifeanyihm@gmail.com";
+const KAYTEE_EMAIL = process.env.ADMIN_EMAIL || "kayteefurnitureandinterior@gmail.com";
 
 function parseContent(content: string) {
   const lines = content.split("\n").filter((l) => l.trim());
@@ -49,9 +49,9 @@ function generateBriefPDF(content: string, clientName: string): Buffer {
   doc.setTextColor(254, 249, 195);
   doc.setFontSize(9);
   doc.setFont("helvetica", "bold");
-  doc.text("KAYTEE FURNITURES", margin, 10);
+  doc.text("KAYTEE FURNITURES & INTERIOR", margin, 10);
   doc.setTextColor(161, 98, 7);
-  doc.text("Mood Board Brief", pageW - margin, 10, { align: "right" });
+  doc.text("Project Brief", pageW - margin, 10, { align: "right" });
 
   y = 28;
 
@@ -165,13 +165,13 @@ export async function POST(req: Request) {
 
     // 1. Email to Kaytee team with the brief PDF
     await transporter.sendMail({
-      from: `"Kaytee Design Assistant" <${gmailUser}>`,
+      from: `"Kaytee Interior Design Assistant" <${gmailUser}>`,
       to: KAYTEE_EMAIL,
       subject: `New Design Brief — ${contact.name} · ${date}`,
       html: `
         <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;color:#1c1917;">
           <div style="background:#1c1917;padding:20px 24px;border-radius:8px 8px 0 0;">
-            <h1 style="color:#fef9c3;margin:0;font-size:18px;">Kaytee Furnitures</h1>
+            <h1 style="color:#fef9c3;margin:0;font-size:18px;">Kaytee Furnitures &amp; Interior</h1>
             <p style="color:#a16207;margin:4px 0 0;font-size:12px;">New Client Design Brief</p>
           </div>
           <div style="background:#fafaf9;border:1px solid #e7e5e4;border-top:none;padding:24px;border-radius:0 0 8px 8px;">
@@ -197,22 +197,22 @@ export async function POST(req: Request) {
 
     // 2. Confirmation email to the client
     await transporter.sendMail({
-      from: `"Kaytee Furnitures" <${gmailUser}>`,
+      from: `"Kaytee Furnitures & Interior" <${gmailUser}>`,
       to: contact.email,
       subject: `We've received your design brief, ${contact.name}!`,
       html: `
         <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;color:#1c1917;">
           <div style="background:#1c1917;padding:20px 24px;border-radius:8px 8px 0 0;">
-            <h1 style="color:#fef9c3;margin:0;font-size:18px;">Kaytee Furnitures</h1>
-            <p style="color:#a16207;margin:4px 0 0;font-size:12px;">Design Brief Assistant</p>
+            <h1 style="color:#fef9c3;margin:0;font-size:18px;">Kaytee Furnitures &amp; Interior</h1>
+            <p style="color:#a16207;margin:4px 0 0;font-size:12px;">Interior Design Project Brief</p>
           </div>
           <div style="background:#fafaf9;border:1px solid #e7e5e4;border-top:none;padding:24px;border-radius:0 0 8px 8px;">
             <p style="font-size:15px;font-weight:600;margin:0 0 12px;">Hi ${contact.name},</p>
             <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">
-              Thank you for reaching out to Kaytee Furnitures! We've received your design brief and our team is already looking it over.
+              Thank you for reaching out to Kaytee Furnitures &amp; Interior. We've received your project brief.
             </p>
             <p style="font-size:14px;line-height:1.7;margin:0 0 20px;">
-              A member of our team will be in touch with you within <strong>24 hours</strong> to discuss the next steps.
+              Our team will review the information and contact you to discuss your space and possible next steps.
             </p>
             <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin-bottom:20px;">
               <p style="margin:0;font-size:13px;color:#78716c;">Submitted on ${date}</p>
@@ -221,7 +221,7 @@ export async function POST(req: Request) {
               If you have any urgent questions, feel free to reply to this email.
             </p>
           </div>
-          <p style="text-align:center;font-size:11px;color:#a8a29e;margin-top:16px;">Kaytee Furnitures · Interior Design & Furniture</p>
+          <p style="text-align:center;font-size:11px;color:#a8a29e;margin-top:16px;">Kaytee Furnitures & Interior · Interior Design Studio</p>
         </div>
       `,
     });
@@ -240,7 +240,7 @@ export async function POST(req: Request) {
 // import nodemailer from "nodemailer";
 // import { jsPDF } from "jspdf";
 
-// const KAYTEE_EMAIL = "ifeanyihm@gmail.com";
+// const KAYTEE_EMAIL = process.env.ADMIN_EMAIL || "kayteefurnitureandinterior@gmail.com";
 
 // function parseContent(content: string) {
 //   const lines = content.split("\n").filter((l) => l.trim());
@@ -286,9 +286,9 @@ export async function POST(req: Request) {
 //   doc.setTextColor(254, 249, 195);
 //   doc.setFontSize(9);
 //   doc.setFont("helvetica", "bold");
-//   doc.text("KAYTEE FURNITURES", margin, 10);
+//   doc.text("KAYTEE FURNITURES & INTERIOR", margin, 10);
 //   doc.setTextColor(161, 98, 7);
-//   doc.text("Mood Board Brief", pageW - margin, 10, { align: "right" });
+//   doc.text("Project Brief", pageW - margin, 10, { align: "right" });
 
 //   y = 28;
 
@@ -407,14 +407,14 @@ export async function POST(req: Request) {
 //     const date = new Date().toLocaleDateString("en-GB", { dateStyle: "long" });
 
 //     await transporter.sendMail({
-//       from: `"Kaytee Design Assistant" <${gmailUser}>`,
+//       from: `"Kaytee Interior Design Assistant" <${gmailUser}>`,
 //       to: KAYTEE_EMAIL,
 //       subject: `New Design Brief — ${date}`,
 //       html: `
 //         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; color: #1c1917;">
 //           <div style="background: #1c1917; padding: 20px 24px; border-radius: 8px 8px 0 0;">
-//             <h1 style="color: #fef9c3; margin: 0; font-size: 18px; letter-spacing: -0.3px;">Kaytee Furnitures</h1>
-//             <p style="color: #a16207; margin: 4px 0 0; font-size: 12px;">Design Brief Assistant</p>
+//             <h1 style="color: #fef9c3; margin: 0; font-size: 18px; letter-spacing: -0.3px;">Kaytee Furnitures &amp; Interior</h1>
+//             <p style="color: #a16207; margin: 4px 0 0; font-size: 12px;">Interior Design Project Brief</p>
 //           </div>
 //           <div style="background: #fafaf9; border: 1px solid #e7e5e4; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
 //             <p style="margin: 0 0 16px; font-size: 14px; line-height: 1.6;">

@@ -6,17 +6,17 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.kayteefurnitures.com"),
 
   title: {
-    default: "Kaytee Furnitures",
-    template: "%s | Kaytee Furnitures",
+    default: "Kaytee Furnitures & Interior | Interior Design Studio",
+    template: "%s | Kaytee Furnitures & Interior",
   },
 
   description:
-    "Premium furniture thoughtfully designed to elevate every space you call home.",
+    "Kaytee Furnitures & Interior is a Lagos-based interior design studio creating thoughtful, functional and beautifully considered spaces.",
 
   openGraph: {
     type: "website",
     locale: "en_NG",
-    siteName: "Kaytee Furnitures",
+    siteName: "Kaytee Furnitures & Interior",
     url: "https://www.kayteefurnitures.com",
 
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "https://www.kayteefurnitures.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kaytee Furnitures",
+        alt: "Kaytee Furnitures & Interior — Interior Design Studio",
       },
     ],
   },

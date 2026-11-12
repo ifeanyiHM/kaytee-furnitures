@@ -4,12 +4,12 @@ import { PortfolioPreview } from "@/components/home/PortfolioPreview";
 import { ProcessSection } from "@/components/home/ProcessSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { StatsSection } from "@/components/home/StatsSection";
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Kaytee Furnitures & Interior — Bespoke furniture and interior design, Lagos",
+      "Kaytee Furnitures & Interior — Interior Design Studio in Lagos",
   },
   alternates: { canonical: "/" },
 };
@@ -19,11 +19,11 @@ export default function HomePage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
+    "@type": "ProfessionalService",
     name: "Kaytee Furnitures & Interior",
     description:
-      "Bespoke furniture and interior design studio in Lagos, Nigeria.",
-    url: "https://kaytee-furnitures.vercel.app",
+      "A Lagos-based interior design studio creating thoughtful, considered spaces.",
+    url: "https://www.kayteefurnitures.com",
     telephone: "+234 807 919 7554",
     address: {
       "@type": "PostalAddress",

@@ -1,6 +1,6 @@
 # Kaytee Furnitures & Interior — Portfolio Website
 
-A portfolio website for a furniture manufacturing and interior design studio in Lagos. No accounts, no shop, no database.
+A portfolio website for Kaytee Furnitures & Interior, a Lagos-based interior design studio. Interior design is the studio’s single service; space planning, materials, furniture, lighting and styling are considered within each project. No accounts, no shop, no database.
 
 ## Tech Stack
 
@@ -41,7 +41,7 @@ GMAIL_APP_PASSWORD="..."
 
 ## Content
 
-Projects live in `lib/portfolio-data.ts` (`PORTFOLIO_PROJECTS`), in display order. Set `featured: true` to show a project on the home page. Services are defined in `lib/services-data.ts` and used by both `/services` and the `/consultation` form. `lib/portfolio.ts` provides the read helpers used by the pages.
+Projects live in `lib/portfolio-data.ts` (`PORTFOLIO_PROJECTS`), in display order. Set `featured: true` to show a project on the home page. The studio’s single interior design service is defined in `lib/services-data.ts`. The `/services` page explains the design approach, while `/consultation` collects a project brief. `lib/portfolio.ts` provides the read helpers used by the pages.
 
 ## Structure
 

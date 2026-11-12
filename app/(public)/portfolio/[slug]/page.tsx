@@ -341,15 +341,14 @@ export default async function PortfolioDetailPage({
               Let&apos;s create something as remarkable for your space.
             </h2>
             <p className="font-sans text-white/50 text-sm leading-relaxed mb-10 max-w-md mx-auto">
-              Book a free 30-minute consultation and let&apos;s explore
-              what&apos;s possible.
+              Tell us about your space and what you would like to create.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/consultation"
                 className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-sans text-[11px] font-medium tracking-[0.14em] uppercase px-8 py-4 rounded-sm transition-colors"
               >
-                Book free consultation
+                Start a project
                 <RiArrowRightUpLine className="w-4 h-4" />
               </Link>
               <Link

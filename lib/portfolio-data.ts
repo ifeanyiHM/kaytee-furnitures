@@ -82,7 +82,7 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
     description:
       "A complete transformation of a simple bedroom into a warm, contemporary retreat featuring a bespoke walnut feature wall, ambient lighting, coordinated furnishings, and refined styling that elevates everyday comfort.",
 
-    category: ["Bedroom", "Wardrobe"],
+    category: ["Bedroom"],
     style: "Contemporary Modern",
     client: "Private Residence",
     location: "Lekki, Lagos",
@@ -138,12 +138,12 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
   },
   {
     _id: "3",
-    title: "Luxury Walk-In Wardrobe & Display Unit",
+    title: "Bedroom Interior with Walk-In Wardrobe",
     slug: "luxury-walk-in-wardrobe-display-unit",
     description:
       "A bespoke floor-to-ceiling wardrobe system that combines generous storage, illuminated display shelving, and a multifunctional entertainment niche. Designed with contemporary finishes, premium materials, and integrated lighting, the installation transforms the bedroom into a sophisticated and highly organized living space.",
 
-    category: ["Bedroom", "Wardrobe"],
+    category: ["Bedroom"],
     style: "Modern Luxury",
 
     client: "Private Residence",
@@ -212,11 +212,11 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
   },
   {
     _id: "4",
-    title: "Modern TV Wall & Media Console",
+    title: "Contemporary Living Room Interior",
     slug: "modern-tv-wall-media-console",
     description:
       "A bespoke TV wall transformation featuring floating cabinetry, fluted wall panels, integrated LED lighting, illuminated display shelving, and premium finishes that create a refined contemporary living space.",
-    category: ["TV Console", "Living Room"],
+    category: ["Living Room"],
     style: "Modern Contemporary",
     client: "Private Residence",
     location: "Lagos, Nigeria",
@@ -288,13 +288,13 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
   },
   {
     _id: "5",
-    title: "Contemporary Built-In Wardrobe with Illuminated Display Shelving",
+    title: "Contemporary Bedroom Interior",
     slug: "contemporary-built-in-wardrobe-illuminated-display-shelving",
 
     description:
       "A bespoke floor-to-ceiling wardrobe designed to maximize bedroom storage while creating a refined architectural feature. The design combines minimalist full-height cabinetry with a centrally illuminated open shelving unit, offering the perfect balance of concealed storage and decorative display. Premium finishes, integrated lighting, and carefully planned internal organization deliver a clean, contemporary solution for modern living.",
 
-    category: ["Bedroom", "Wardrobe"],
+    category: ["Bedroom"],
 
     style: "Contemporary Minimalist",
 
@@ -378,13 +378,13 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
   },
   {
     _id: "6",
-    title: "Luxury TV Feature Wall & Floating Media Console",
+    title: "Living Room Interior with Feature Wall",
     slug: "luxury-tv-feature-wall-floating-media-console",
 
     description:
       "A bespoke TV feature wall transformation combining textured stone cladding, premium wall panelling, floating media cabinetry, illuminated display shelving, and integrated ambient lighting. Designed to conceal services while creating a sophisticated focal point that elevates the entire living room.",
 
-    category: ["Living Room", "TV Console"],
+    category: ["Living Room"],
     style: "Modern Luxury",
 
     client: "Private Residence",
@@ -516,7 +516,7 @@ export const PORTFOLIO_PROJECTS: PortfolioItemType[] = [
     description:
       "A complete kitchen transformation featuring bespoke cabinetry, premium countertops, kitchen islands, integrated appliances, layered lighting, and contemporary finishes that elevate both functionality and aesthetics.",
 
-    category: ["Kitchen", "Renovation"],
+    category: ["Kitchen"],
     style: "Modern Contemporary",
     client: "Private Residence",
     location: "Lagos, Nigeria",

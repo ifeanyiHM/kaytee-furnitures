@@ -11,7 +11,7 @@ import { RiArrowRightLine, RiArrowRightUpLine } from "react-icons/ri";
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "200+ award-winning interior design projects across Nigeria and beyond.",
+    "A selection of interior design projects shaped by thoughtful layouts, materials and detail.",
 };
 
 const getCategories = (item: PortfolioItemType): string[] => {
@@ -54,7 +54,7 @@ export default async function PortfolioPage({
       <PageHero
         eyebrow="Portfolio"
         lines={["Work made", "to be lived in."]}
-        intro="A selection of completed interiors and bespoke furniture projects across Lagos — before, after, and everything in between."
+        intro="A selection of considered interiors, showing how space, material, light and detail come together across our projects."
         image="/images/hero/hero1.jpg"
       />
 
@@ -265,7 +265,7 @@ export default async function PortfolioPage({
               transition-colors hover:bg-brand-700
             "
           >
-            Book your free consultation
+            Start a project
             <RiArrowRightLine className="h-4 w-4" />
           </Link>
         </div>

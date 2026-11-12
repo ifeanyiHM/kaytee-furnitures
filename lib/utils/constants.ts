@@ -1,13 +1,13 @@
 export const SITE_NAME = "Kaytee Furnitures & Interior";
 export const SITE_DESCRIPTION =
-  "Bespoke furniture and interior design studio in Lagos";
+  "A Lagos-based interior design studio creating thoughtful, considered spaces.";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_APP_URL || "https://www.kayteefurnitures.com";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
+  { href: "/services", label: "Interior Design" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact" },
 ];
@@ -18,11 +18,6 @@ export const PORTFOLIO_CATEGORIES = [
   "Bedroom",
   "Kitchen",
   "Dining Room",
-  "Home Office",
-  "Bathroom",
-  "Commercial",
-  "Wardrobe",
-  "TV Console",
 ];
 
 export const BUDGET_RANGES = [
@@ -35,9 +30,9 @@ export const BUDGET_RANGES = [
 ];
 
 export const SPACE_SIZES = [
-  "Studio / 1-bed",
+  "Single room / area",
+  "Studio / 1-bedroom",
   "2–3 bedroom",
   "4+ bedroom",
-  "Commercial space",
-  "Office space",
+  "Multiple spaces",
 ];

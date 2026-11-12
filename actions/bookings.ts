@@ -24,8 +24,11 @@ export async function createBooking(data: unknown): Promise<ActionResult> {
       email: parsed.data.email,
       phone: parsed.data.phone,
       serviceName,
+      projectType: parsed.data.projectType,
+      projectLocation: parsed.data.projectLocation,
       budget: parsed.data.budget,
       spaceSize: parsed.data.spaceSize,
+      timeline: parsed.data.timeline,
       preferredDate: parsed.data.preferredDate,
       description: parsed.data.description,
     });

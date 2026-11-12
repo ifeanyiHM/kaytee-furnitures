@@ -93,47 +93,6 @@ export function HeroSection() {
               Start a project
             </Link>
           </div>
-
-          {/* Slide index — doubles as manual control */}
-          {/* <div
-            className="hero-reveal opacity-0 lg:mr-44"
-            style={{ animationDelay: "1.1s" }}
-          >
-            <p className="mb-3 font-display text-lg text-white/85 xl3:text-2xl">
-              {SLIDES[active].room},{" "}
-              <span className="text-white/50">{SLIDES[active].place}</span>
-            </p>
-            <div
-              className="flex gap-2"
-              role="group"
-              aria-label="Choose hero image"
-            >
-              {SLIDES.map((s, i) => (
-                <button
-                  key={s.src}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-label={`Show ${s.room}, ${s.place}`}
-                  aria-current={i === active}
-                  className="group relative h-6 w-14 xl3:w-20"
-                >
-                  <span className="absolute inset-x-0 top-1/2 h-px bg-white/25" />
-                  <span
-                    key={i === active ? `on-${active}` : "off"}
-                    className="absolute left-0 top-1/2 h-px bg-white origin-left"
-                    style={
-                      i === active
-                        ? {
-                            width: "100%",
-                            animation: `heroBar ${SLIDE_DURATION}ms linear forwards`,
-                          }
-                        : { width: 0 }
-                    }
-                  />
-                </button>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
 
