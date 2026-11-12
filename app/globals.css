@@ -49,7 +49,7 @@
   /* Width is capped and stepped per breakpoint instead of stretching to a
      percentage, so wide monitors get more room *and* a controlled measure. */
   .site-container {
-    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12 xl1:max-w-[1400px] xl1:px-14 xl2:max-w-[1500px] xl3:max-w-[1640px] xl3:px-16 xl4:max-w-[1800px] xl4:px-20;
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 xl1:max-w-350 xl1:px-14 xl2:max-w-375 xl3:max-w-[1640px] xl3:px-16 xl4:max-w-[1800px] xl4:px-20;
   }
 
   /* A narrower reading column that steps up with the container. */
@@ -113,15 +113,15 @@
 
   /* ── Buttons — square-cornered, restrained ── */
   .site-button-primary {
-    @apply inline-flex items-center justify-center gap-2.5 bg-brand-600 text-white font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-[18px] transition-colors duration-300 hover:bg-brand-700;
+    @apply inline-flex items-center justify-center gap-2.5 bg-brand-600 text-white font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-4.5 transition-colors duration-300 hover:bg-brand-700;
   }
 
   .site-button-secondary {
-    @apply inline-flex items-center justify-center gap-2.5 border border-white/30 text-white font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-[18px] transition-colors duration-300 hover:bg-white hover:text-charcoal;
+    @apply inline-flex items-center justify-center gap-2.5 border border-white/30 text-white font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-4.5 transition-colors duration-300 hover:bg-white hover:text-charcoal;
   }
 
   .site-button-outline {
-    @apply inline-flex items-center justify-center gap-2.5 border border-charcoal/70 text-charcoal font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-[18px] transition-colors duration-300 hover:bg-charcoal hover:text-white;
+    @apply inline-flex items-center justify-center gap-2.5 border border-charcoal/70 text-charcoal font-sans font-medium text-[11px] xl1:text-[12px] xl3:text-[13px] tracking-[0.18em] uppercase px-6 py-3.5 xl1:px-7 xl1:py-4 xl3:px-9 xl3:py-4.5 transition-colors duration-300 hover:bg-charcoal hover:text-white;
   }
 
   /* Text link with a line that draws in on hover. */
