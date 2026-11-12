@@ -24,24 +24,22 @@ const DARK_HERO = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
   const hasDarkHero =
     DARK_HERO.includes(pathname) || pathname.startsWith("/portfolio/");
 
   useEffect(() => {
-    let last = window.scrollY;
     const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 40);
-      // Tuck away while reading down, return on any upward scroll.
-      setHidden(y > 500 && y > last + 4 ? true : y < last - 4 ? false : hidden);
-      last = y;
+      setScrolled(window.scrollY > 40);
     };
+
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -60,7 +58,6 @@ export function Header() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500",
-          hidden && !open ? "-translate-y-full" : "translate-y-0",
           scrolled && !open
             ? "border-b border-sand-200 bg-sand-50/90 backdrop-blur-md"
             : "border-b border-transparent bg-transparent",
