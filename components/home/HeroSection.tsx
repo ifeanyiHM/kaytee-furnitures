@@ -3,7 +3,7 @@ import { RevealLines } from "@/components/motion/Reveal";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { RiArrowRightUpLine } from "react-icons/ri";
+import { RiArrowDownLine, RiArrowRightUpLine } from "react-icons/ri";
 
 const SLIDES = [
   { src: "/images/hero/hero1.jpg", room: "Living Room", place: "Ikoyi" },
@@ -29,7 +29,7 @@ export function HeroSection() {
   }, [active]);
 
   return (
-    <section className="relative isolate flex min-h-svh flex-col md:justify-end overflow-hidden bg-charcoal">
+    <section className="relative isolate flex min-h-svh flex-col lg:justify-end overflow-hidden bg-charcoal">
       <div className="absolute inset-0 -z-10">
         {SLIDES.map((slide, i) => (
           <div
@@ -125,11 +125,11 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* <div className="site-container hidden pb-8 lg:block">
+      <div className="site-container hidden pb-8 lg:block">
         <p className="flex items-center gap-3 font-sans text-[10px] uppercase tracking-[0.3em] text-white/45">
           <RiArrowDownLine className="h-3.5 w-3.5" /> Scroll
         </p>
-      </div> */}
+      </div>
       <style>{`@keyframes heroBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}@media (prefers-reduced-motion:reduce){[style*="heroBar"]{animation:none!important}}`}</style>
     </section>
   );

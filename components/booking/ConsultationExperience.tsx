@@ -256,6 +256,7 @@ export function ConsultationExperience({
 }) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [serviceIds, setServiceIds] = useState<string[]>([]);
 
   const {
@@ -282,8 +283,10 @@ export function ConsultationExperience({
   }
 
   async function onSubmit(data: BookingFormData) {
+    setSubmitError(null);
     const result = await createBooking(data);
     if (result.success) setSubmitted(true);
+    else setSubmitError(result.error ?? "Something went wrong. Please try again.");
   }
 
   if (submitted) return <SuccessState />;
@@ -469,6 +472,11 @@ export function ConsultationExperience({
         <p className="font-sans text-[10px] text-charcoal-muted/40 text-center mt-6 tracking-wider">
           Step {step} of {STEPS.length}
         </p>
+        {submitError && (
+          <p role="alert" className="mt-4 font-sans text-xs text-red-500">
+            {submitError}
+          </p>
+        )}
       </form>
     </div>
   );

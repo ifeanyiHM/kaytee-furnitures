@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getServices } from "@/actions/bookings";
+import { SERVICES } from "@/lib/services-data";
 import { ConsultationExperience } from "@/components/booking/ConsultationExperience";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
@@ -18,8 +18,8 @@ const STEPS = [
   { n: "04", label: "Consultation begins", sub: "Virtual or in person" },
 ];
 
-export default async function ConsultationPage() {
-  const services = await getServices().catch(() => []);
+export default function ConsultationPage() {
+  const services = SERVICES;
 
   return (
     <>

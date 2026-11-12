@@ -41,11 +41,6 @@ const config: Config = {
           hover: "#bfbfbf90",
         },
       },
-      fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-cormorant)", "Georgia", "serif"],
-        hero: ["var(--font-libre)", "sans-serif"],
-      },
       animation: {
         "fade-up": "fadeUp 0.6s ease forwards",
         "fade-in": "fadeIn 0.4s ease forwards",

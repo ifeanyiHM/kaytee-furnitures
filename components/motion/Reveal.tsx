@@ -51,7 +51,10 @@ export function RevealLines({
   return (
     <Tag className={className}>
       {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+        <span
+          key={i}
+          className="block overflow-hidden pb-[0.08em] mb-[-0.08em]"
+        >
           <motion.span
             className="block"
             initial={reduce ? false : { y: "110%" }}

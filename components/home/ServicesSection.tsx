@@ -1,13 +1,13 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  RiPaletteLine,
-  RiLayoutGridLine,
-  RiStoreLine,
-  RiSmartphoneLine,
-  RiBuildingLine,
-  RiLightbulbLine,
   RiArrowRightLine,
+  RiBuildingLine,
+  RiLayoutGridLine,
+  RiLightbulbLine,
+  RiPaletteLine,
+  RiSmartphoneLine,
+  RiStoreLine,
 } from "react-icons/ri";
 
 const services = [
@@ -117,18 +117,17 @@ export function ServicesSection() {
                 className={`relative w-full sm:w-48 lg:w-64 xxl:w-72 xl2:w-80 xl3:w-96 xl4:w-md shrink-0 overflow-hidden ${i % 2 !== 0 ? "sm:order-last" : "sm:order-first"}`}
               > */}
               <div
-                style={{ width: "clamp(18rem, 25%, 24rem)" }}
                 className={`relative w-full sm:w-48 lg:w-64 shrink-0 overflow-hidden ${
                   i % 2 !== 0 ? "sm:order-last" : "sm:order-first"
                 }`}
               >
-                <div className="sm:h-full min-h-36 xxl:min-h-40">
+                <div className="relative w-full h-52 sm:h-full sm:min-h-36 xxl:min-h-40">
                   <Image
                     src={s.image}
                     alt={s.title}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1536px) 25vw, 384px"
                     className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                    // sizes="(max-width: 640px) 100vw, (max-width: 1440px) 288px, (max-width: 1536px) 320px, (max-width: 1680px) 384px, (max-width: 1920px) 448px, 448px"
                   />
                   {/* Subtle warm scrim on mobile so text on top of image reads */}
                   <div className="absolute inset-0 bg-linear-to-t from-charcoal/30 to-transparent sm:hidden" />
@@ -153,7 +152,7 @@ export function ServicesSection() {
                 {/* Title + description */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5">
-                    <h3 className="font-display text-xl xxl:text-[1.4rem] xl2:text-[1.5rem] xl3:text-[1.7rem] xl4:text-[1.9rem] text-charcoal transition-colors">
+                    <h3 className="font-sans text-xl xxl:text-[1.4rem] xl2:text-[1.5rem] xl3:text-[1.7rem] xl4:text-[1.9rem] text-charcoal transition-colors">
                       {s.title}
                     </h3>
                     <span className="site-tag hidden sm:inline-block text-charcoal-light/70">
@@ -167,7 +166,7 @@ export function ServicesSection() {
 
                 {/* Stat — large screens only */}
                 <div className="hidden lg:flex flex-col items-end shrink-0 border-l border-sand-200 pl-8 xxl:pl-10 xl2:pl-10 xl3:pl-12 xl4:pl-12">
-                  <span className="font-display text-3xl xxl:text-[2.1rem] xl2:text-[2.25rem] xl3:text-[2.5rem] xl4:text-[2.75rem] text-charcoal/80 leading-none">
+                  <span className="font-sans text-3xl xxl:text-[2.1rem] xl2:text-[2.25rem] xl3:text-[2.5rem] xl4:text-[2.75rem] text-charcoal/80 leading-none">
                     {s.stat}
                   </span>
                   <span className="font-sans text-[11px] xxl:text-[12px] xl2:text-[12px] xl3:text-[13px] xl4:text-[13px] text-charcoal-muted mt-1 whitespace-nowrap">

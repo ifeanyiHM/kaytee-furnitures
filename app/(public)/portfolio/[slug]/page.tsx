@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { getPortfolioItemBySlug, getPortfolioItems } from "@/actions/portfolio";
-import { PORTFOLIO_MOCK } from "@/lib/portfolio-data";
+import { getPortfolioItemBySlug, getPortfolioItems } from "@/lib/portfolio";
+import { PORTFOLIO_PROJECTS } from "@/lib/portfolio-data";
 import {
   RiArrowLeftLine,
   RiArrowRightUpLine,
@@ -19,14 +19,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const item =
-    (await getPortfolioItemBySlug(slug).catch(() => null)) ??
-    PORTFOLIO_MOCK.find((p) => p.slug === slug);
+  const item = getPortfolioItemBySlug(slug);
   if (!item) return { title: "Project not found" };
   return {
-    title: item.title || item.title,
-    description: item.description || item.description,
+    title: item.title,
+    description: item.description,
   };
+}
+
+export function generateStaticParams() {
+  return PORTFOLIO_PROJECTS.filter((p) => p.published !== false).map((p) => ({
+    slug: p.slug,
+  }));
 }
 
 /** Picks a single representative file for a project — used for the display
@@ -42,8 +46,7 @@ export default async function PortfolioDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const dbItem = await getPortfolioItemBySlug(slug).catch(() => null);
-  const item = dbItem ?? PORTFOLIO_MOCK.find((p) => p.slug === slug);
+  const item = getPortfolioItemBySlug(slug);
   if (!item) notFound();
 
   const normalizedItemCategories: string[] = Array.isArray(item.category)
@@ -51,15 +54,10 @@ export default async function PortfolioDetailPage({
     : item.category
       ? [item.category]
       : [];
-  const categoryParam = normalizedItemCategories[0] ?? "";
   const categoryLabel = normalizedItemCategories.join(", ");
 
-  const { data: relatedDb } = await getPortfolioItems({
-    category: categoryParam,
-    limit: 3,
-  }).catch(() => ({ data: [] }));
-  const related = (relatedDb.length > 0 ? relatedDb : PORTFOLIO_MOCK)
-    .filter((p) => {
+  const related = getPortfolioItems({ limit: 100 })
+    .data.filter((p) => {
       const pCategories = Array.isArray(p.category)
         ? p.category
         : p.category

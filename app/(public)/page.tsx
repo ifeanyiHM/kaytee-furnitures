@@ -1,12 +1,9 @@
-import { getTestimonials } from "@/actions/admin";
-import { getFeaturedPortfolio } from "@/actions/portfolio";
-import { getFeaturedProducts } from "@/actions/products";
+import { getFeaturedPortfolio } from "@/lib/portfolio";
 import { HeroSection } from "@/components/home/HeroSection";
 import { PortfolioPreview } from "@/components/home/PortfolioPreview";
 import { ProcessSection } from "@/components/home/ProcessSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { StatsSection } from "@/components/home/StatsSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 export const metadata: Metadata = {
@@ -17,14 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export const revalidate = 600;
-
-export default async function HomePage() {
-  const [portfolio, products, testimonials] = await Promise.all([
-    getFeaturedPortfolio(6).catch(() => []),
-    getFeaturedProducts(8).catch(() => []),
-    getTestimonials(true).catch(() => []),
-  ]);
+export default function HomePage() {
+  const portfolio = getFeaturedPortfolio(6);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -53,8 +44,6 @@ export default async function HomePage() {
       <StatsSection />
       <PortfolioPreview items={portfolio} />
       <ProcessSection />
-      {/* <FeaturedProducts products={products} /> */}
-      <TestimonialsSection testimonials={testimonials} />
     </>
   );
 }

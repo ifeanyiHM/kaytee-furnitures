@@ -1,116 +1,3 @@
-import { ReactNode } from "react";
-
-export interface ProductType {
-  _id: string;
-  name: string;
-  slug: string;
-  description: string;
-  price: number;
-  comparePrice?: number;
-  sku?: string;
-  stock: number;
-  status: "DRAFT" | "ACTIVE" | "ARCHIVED";
-  featured: boolean;
-  images: string[];
-  categoryId: string;
-  category?: CategoryType;
-  tags: string[];
-  materials: string[];
-  colors: string[];
-  metaTitle?: string;
-  metaDesc?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CategoryType {
-  _id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  image?: string;
-  parentId?: string;
-}
-
-export interface CartItemType {
-  productId: string;
-  product?: ProductType;
-  quantity: number;
-  color?: string;
-}
-
-export interface CartType {
-  _id: string;
-  items: CartItemType[];
-}
-
-export interface OrderItemType {
-  productId: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  color?: string;
-}
-
-export interface OrderType {
-  _id: string;
-  orderNumber: string;
-  status: string;
-  paymentStatus: string;
-  subtotal: number;
-  discount: number;
-  shipping: number;
-  tax: number;
-  total: number;
-  shippingAddress: AddressType;
-  items: OrderItemType[];
-  createdAt: string;
-}
-
-export interface AddressType {
-  _id?: string;
-  label?: string;
-  firstName: string;
-  lastName: string;
-  street: string;
-  city: string;
-  state: string;
-  country: string;
-  postalCode?: string;
-  phone?: string;
-  isDefault?: boolean;
-}
-
-export interface ServiceType {
-  _id: string;
-  name: string;
-  slug: string;
-  description: string;
-  icon?: string;
-  features: string[];
-  priceFrom?: number;
-  duration?: string;
-  image?: string;
-  active: boolean;
-  order: number;
-}
-
-export interface BookingType {
-  _id: string;
-  serviceId: string;
-  service?: ServiceType;
-  status: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  budget?: string;
-  spaceSize?: string;
-  description: string;
-  createdAt: string;
-}
-
 export interface PortfolioMedia {
   type: "image" | "video";
   src: string;
@@ -162,71 +49,6 @@ export type PortfolioItemType = {
   };
 };
 
-export interface BlogPostType {
-  _id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  coverImage?: string;
-  authorId: string;
-  author?: UserType;
-  status: string;
-  featured: boolean;
-  tags: string[];
-  category?: string;
-  readTime?: number;
-  metaTitle?: string;
-  metaDesc?: string;
-  publishedAt?: string;
-  createdAt: string;
-}
-
-export interface TestimonialType {
-  projectRef: string;
-  _id: string;
-  name: string;
-  role?: string;
-  company?: string;
-  content: string;
-  rating: number;
-  image?: string;
-  featured: boolean;
-  approved: boolean;
-}
-
-export interface InquiryType {
-  _id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  subject: string;
-  message: string;
-  status: string;
-  adminReply?: string;
-  createdAt: string;
-}
-
-export interface UserType {
-  _id: string;
-  name?: string;
-  email: string;
-  image?: string;
-  phone?: string;
-  role: "CUSTOMER" | "ADMIN";
-  createdAt: string;
-}
-
-export interface NotificationType {
-  _id: string;
-  type: string;
-  title: string;
-  message: string;
-  read: boolean;
-  link?: string;
-  createdAt: string;
-}
-
 export interface PaginatedResult<T> {
   data: T[];
   total: number;
@@ -238,4 +60,18 @@ export interface ActionResult<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
+}
+
+export interface ServiceType {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  icon?: string;
+  features: string[];
+  priceFrom?: number;
+  duration?: string;
+  image?: string;
+  active: boolean;
+  order: number;
 }

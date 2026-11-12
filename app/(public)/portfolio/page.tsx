@@ -1,8 +1,7 @@
-import { getPortfolioItems } from "@/actions/portfolio";
+import { getPortfolioItems } from "@/lib/portfolio";
 import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 import { PageHero } from "@/components/ui/PageHero";
 import { Pagination } from "@/components/ui/pagination";
-import { PORTFOLIO_MOCK } from "@/lib/portfolio-data";
 import { PORTFOLIO_CATEGORIES } from "@/lib/utils/constants";
 import type { PortfolioItemType } from "@/types";
 import type { Metadata } from "next";
@@ -43,33 +42,11 @@ export default async function PortfolioPage({
 
   const limit = 12;
 
-  let items: PortfolioItemType[] = [];
-  let total = 0;
-  let pages = 0;
-
-  try {
-    const result = await getPortfolioItems({
-      category,
-      page,
-      limit,
-    });
-
-    items = result.data;
-    total = result.total;
-    pages = result.pages;
-  } catch (error) {
-    console.error("Failed to fetch portfolio items:", error);
-
-    // Use mock data only when the database request fails.
-    const mockItems = category
-      ? PORTFOLIO_MOCK.filter((item) => getCategories(item).includes(category))
-      : PORTFOLIO_MOCK;
-
-    total = mockItems.length;
-    pages = Math.ceil(total / limit);
-
-    items = mockItems.slice((page - 1) * limit, page * limit);
-  }
+  const { data: items, total, pages } = getPortfolioItems({
+    category,
+    page,
+    limit,
+  });
 
   return (
     <>

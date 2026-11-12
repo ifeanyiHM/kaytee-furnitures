@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const steps = [
   {
@@ -164,7 +164,7 @@ export function ProcessSection() {
                 <div className="flex-1 flex items-start justify-between gap-5">
                   <div className="pt-2">
                     <h3
-                      className={`font-display text-xl sm:text-2xl xxl:text-[2.1rem] xl2:text-[2.25rem] xl3:text-[2.5rem] xl4:text-[2.8rem] mb-3 transition-colors duration-300 ${
+                      className={`font-sans text-xl sm:text-2xl xxl:text-[2.1rem] xl2:text-[2.25rem] xl3:text-[2.5rem] xl4:text-[2.8rem] mb-3 transition-colors duration-300 ${
                         i === active
                           ? "text-charcoal"
                           : "text-charcoal/70 group-hover:text-charcoal"

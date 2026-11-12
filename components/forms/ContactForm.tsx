@@ -56,6 +56,7 @@ function UnderlineTextarea({
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -63,8 +64,10 @@ export function ContactForm() {
   } = useForm<InquiryFormData>({ resolver: zodResolver(inquirySchema) });
 
   async function onSubmit(data: InquiryFormData) {
+    setSubmitError(null);
     const result = await createInquiry(data);
     if (result.success) setSubmitted(true);
+    else setSubmitError(result.error ?? "Something went wrong. Please try again.");
   }
 
   if (submitted) {
@@ -136,6 +139,11 @@ export function ContactForm() {
         </span>
         {isSubmitting ? "Sending…" : "Send message"}
       </button>
+      {submitError && (
+        <p role="alert" className="font-sans text-xs text-red-500">
+          {submitError}
+        </p>
+      )}
     </form>
   );
 }

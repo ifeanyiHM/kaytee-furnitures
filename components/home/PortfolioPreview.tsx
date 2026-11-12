@@ -1,12 +1,12 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import type { PortfolioItemType } from "@/types";
 import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
 import {
-  RiArrowRightLine,
   RiArrowLeftLine,
+  RiArrowRightLine,
   RiArrowRightUpLine,
 } from "react-icons/ri";
-import type { PortfolioItemType } from "@/types";
 import { Media } from "../ui/Media";
 
 const PROJECTS = [
@@ -239,7 +239,7 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
                       {p.category}
                     </p>
                     <p
-                      className={`font-display text-base xxl:text-[1.15rem] xl2:text-[1.25rem] xl3:text-[1.4rem] xl4:text-[1.5rem] leading-snug truncate ${active === i ? "text-charcoal" : "text-charcoal-muted"}`}
+                      className={`font-sans text-base xxl:text-[1.15rem] xl2:text-[1.25rem] xl3:text-[1.4rem] xl4:text-[1.5rem] leading-snug truncate ${active === i ? "text-charcoal" : "text-charcoal-muted"}`}
                     >
                       {p.title}
                     </p>
@@ -259,7 +259,7 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
 
             {/* CTA card */}
             <div className="mt-4 bg-brand-50 border border-strike rounded-xl p-5">
-              <p className="font-display text-lg xxl:text-[1.5rem] xl2:text-[1.7rem] xl3:text-[1.9rem] xl4:text-[2.1rem] text-charcoal mb-1">
+              <p className="font-sans text-lg xxl:text-[1.5rem] xl2:text-[1.7rem] xl3:text-[1.9rem] xl4:text-[2.1rem] text-charcoal mb-1">
                 Ready to transform your space?
               </p>
               <p className="font-sans text-xs xxl:text-[13px] xl2:text-[13px] xl3:text-[14px] xl4:text-[15px] text-charcoal-muted leading-relaxed mb-4">

@@ -65,7 +65,7 @@ export function Footer() {
             <Link
               href="/"
               aria-label="Kaytee Furnitures & Interior — Home"
-              className="mb-6 inline-block"
+              className="mb-3 inline-block"
             >
               <Image
                 src="/images/kaytee_logo.png"
@@ -75,7 +75,7 @@ export function Footer() {
                 className="h-12 w-auto xl3:h-14"
               />
             </Link>
-            <p className="max-w-xs font-display text-xl font-light leading-snug text-white/60 xl3:text-2xl">
+            <p className="max-w-xs font-sans text-md font-extralight leading-snug text-white/60 xl3:text-2xl">
               Bespoke furniture and considered interiors, built room by room
               across Lagos.
             </p>
