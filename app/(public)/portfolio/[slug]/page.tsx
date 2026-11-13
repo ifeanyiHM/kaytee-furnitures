@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import ProjectGallery from "@/components/portfolio/ProjectGallery";
+import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 import { getPortfolioItemBySlug, getPortfolioItems } from "@/lib/portfolio";
 import { PORTFOLIO_PROJECTS } from "@/lib/portfolio-data";
+import { MediaFile, PortfolioItemType } from "@/types";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   RiArrowLeftLine,
   RiArrowRightUpLine,
   RiCheckLine,
 } from "react-icons/ri";
-import { MediaFile, PortfolioItemType } from "@/types";
-import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
-import ProjectGallery from "@/components/portfolio/ProjectGallery";
 
 export async function generateMetadata({
   params,
@@ -329,36 +329,6 @@ export default async function PortfolioDetailPage({
               </div>
             </div>
           )}
-        </div>
-
-        {/* Full-width CTA */}
-        <div className="bg-charcoal py-24">
-          <div className="max-w-2xl mx-auto px-4 text-center">
-            <p className="font-sans text-[11px] text-brand-400 tracking-[0.28em] uppercase mb-5">
-              Inspired by this project?
-            </p>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-white leading-tight mb-5">
-              Let&apos;s create something as remarkable for your space.
-            </h2>
-            <p className="font-sans text-white/50 text-sm leading-relaxed mb-10 max-w-md mx-auto">
-              Tell us about your space and what you would like to create.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/consultation"
-                className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-sans text-[11px] font-medium tracking-[0.14em] uppercase px-8 py-4 rounded-sm transition-colors"
-              >
-                Start a project
-                <RiArrowRightUpLine className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-sans text-[11px] tracking-[0.14em] uppercase px-8 py-4 rounded-sm transition-colors"
-              >
-                Back to portfolio
-              </Link>
-            </div>
-          </div>
         </div>
       </article>
     </>
