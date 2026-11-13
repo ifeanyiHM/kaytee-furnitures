@@ -36,6 +36,7 @@ export async function POST(req: Request) {
   try {
     first = await generator.next();
   } catch (err) {
+    console.error("[chat] all providers failed:", err);
     return new Response((err as Error).message, { status: 502 });
   }
 
@@ -51,6 +52,7 @@ export async function POST(req: Request) {
         // A failure here happens mid-stream, after output has already been
         // sent — too late to fall back or change the response status, so
         // we surface it inline instead.
+        console.error("[chat] stream failed mid-response:", err);
         controller.enqueue(
           encoder.encode(`\n\n[error: ${(err as Error).message}]`),
         );

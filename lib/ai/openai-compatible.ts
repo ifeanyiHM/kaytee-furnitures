@@ -11,6 +11,9 @@ interface OpenAICompatibleConfig {
   apiKey: string;
   model: string;
   extraHeaders?: Record<string, string>;
+  /** Overrides the default max_tokens (useful for models that spend part of
+   *  the budget on hidden reasoning, e.g. Gemini 2.5). */
+  maxTokens?: number;
 }
 
 /**
@@ -24,6 +27,7 @@ export class OpenAICompatibleProvider implements AIProvider {
   private apiKey: string;
   private model: string;
   private extraHeaders: Record<string, string>;
+  private maxTokens?: number;
 
   constructor(config: OpenAICompatibleConfig) {
     this.id = config.id;
@@ -31,6 +35,7 @@ export class OpenAICompatibleProvider implements AIProvider {
     this.apiKey = config.apiKey;
     this.model = config.model;
     this.extraHeaders = config.extraHeaders ?? {};
+    this.maxTokens = config.maxTokens;
   }
 
   private headers() {
@@ -49,7 +54,7 @@ export class OpenAICompatibleProvider implements AIProvider {
         model: this.model,
         messages: params.messages,
         temperature: params.temperature ?? 0.7,
-        max_tokens: params.maxTokens ?? 1024,
+        max_tokens: params.maxTokens ?? this.maxTokens ?? 1024,
         stream: false,
       }),
     });
@@ -79,13 +84,15 @@ export class OpenAICompatibleProvider implements AIProvider {
         model: this.model,
         messages: params.messages,
         temperature: params.temperature ?? 0.7,
-        max_tokens: params.maxTokens ?? 1024,
+        max_tokens: params.maxTokens ?? this.maxTokens ?? 1024,
         stream: true,
       }),
     });
 
     if (!res.ok || !res.body) {
-      const text = res.body ? "" : await res.text();
+      // Read the body so the real reason (bad key, quota, retired model)
+      // shows up in logs instead of an empty message.
+      const text = await res.text().catch(() => "");
       throw new ProviderError(
         `[${this.id}] streaming chat failed (${res.status}): ${text}`,
         {

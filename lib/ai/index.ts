@@ -141,6 +141,7 @@ export async function* chatStreamWithFallback(
 ): AsyncGenerator<string> {
   const order = buildOrder(preferredId);
   let lastError: unknown;
+  const failures: string[] = [];
 
   for (const id of order) {
     const provider = registry[id];
@@ -159,12 +160,24 @@ export async function* chatStreamWithFallback(
           await sleep(delay);
           continue; // retry same provider once
         }
+        failures.push(
+          err instanceof ProviderError
+            ? `${id}: ${err.status} ${err.type}`
+            : `${id}: ${(err as Error).message.slice(0, 120)}`,
+        );
+        console.error(`[ai] ${id} failed:`, err);
         break; // move to next provider
       }
 
-      onProviderSelected?.(provider.id);
+      // An empty stream is a failed attempt, not an answer — try the next
+      // provider instead of sending the visitor a blank reply.
+      if (first.done) {
+        lastError = new Error(`[${provider.id}] returned an empty response`);
+        failures.push(`${id}: empty response`);
+        break;
+      }
 
-      if (first.done) return; // provider returned an empty but valid stream
+      onProviderSelected?.(provider.id);
 
       // Committed to this provider now — no more fallback past this point.
       yield first.value;
@@ -176,7 +189,9 @@ export async function* chatStreamWithFallback(
     }
   }
 
-  throw lastError ?? new Error("No AI providers available.");
+  throw failures.length
+    ? new Error(`All AI providers failed — ${failures.join("; ")}`)
+    : (lastError ?? new Error("No AI providers available."));
 }
 
 export * from "./types";

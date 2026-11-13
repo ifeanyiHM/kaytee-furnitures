@@ -95,9 +95,11 @@ export const cohereProvider: AIProvider = {
       buffer = lines.pop() ?? "";
 
       for (const line of lines) {
-        if (!line.trim()) continue;
+        // Cohere v2 streams server-sent events: "event: ..." / "data: {...}".
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data:")) continue;
         try {
-          const json = JSON.parse(line);
+          const json = JSON.parse(trimmed.slice(5).trim());
           if (json.type === "content-delta") {
             const delta = json.delta?.message?.content?.text;
             if (delta) yield delta;

@@ -7,4 +7,7 @@ export const geminiProvider = new OpenAICompatibleProvider({
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
   apiKey: process.env.GEMINI_API_KEY ?? "",
   model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash",
+  // Gemini's hidden "thinking" tokens count against max_tokens, so a low cap
+  // can leave the visible reply empty.
+  maxTokens: 4096,
 });

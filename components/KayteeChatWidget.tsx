@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { GoDash } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,6 +14,7 @@ interface Message {
   provider?: string;
   files?: AttachedFile[];
   isEmailPrompt?: boolean; // marks the "send to team?" message
+  isError?: boolean; // renders as a red error bubble; never sent to the AI
 }
 
 interface AttachedFile {
@@ -27,6 +29,23 @@ interface AttachedFile {
 // open    -> chat panel visible (see isMaximized for its size/position)
 // docked  -> taken out via the dash, collapsed to a small bar at the bottom — conversation preserved
 type WidgetState = "closed" | "open" | "docked";
+
+const CONTACT_HINT =
+  "You can also reach the team on +234 807 919 7554 or through our Contact page.";
+
+/** Turns a failed request into a message a visitor can understand. */
+function friendlyError(status?: number): string {
+  if (status === undefined) {
+    return `We couldn't reach the assistant. Please check your internet connection and try again. ${CONTACT_HINT}`;
+  }
+  if (status === 429) {
+    return `The assistant is very busy right now. Please wait a moment and try again. ${CONTACT_HINT}`;
+  }
+  if (status === 400) {
+    return "Something about that message couldn't be processed. Please rephrase it and try again.";
+  }
+  return `The assistant is temporarily unavailable. Please try again in a few minutes. ${CONTACT_HINT}`;
+}
 
 function detectExportTrigger(content: string): "pdf" | "docx" | "email" | null {
   if (content.includes("[EXPORT_PDF]")) return "pdf";
@@ -262,7 +281,7 @@ export default function KayteeChatWidget() {
 
   function buildApiMessages(history: Message[]) {
     return history
-      .filter((m) => !m.isEmailPrompt)
+      .filter((m) => !m.isEmailPrompt && !m.isError)
       .map((m) => {
         if (m.role === "user" && m.files?.length) {
           return {
@@ -432,10 +451,15 @@ export default function KayteeChatWidget() {
       });
 
       if (!res.ok) {
-        const err = await res.text();
+        // Details stay in the server logs; the visitor gets a plain message.
+        console.error("[chat] request failed:", res.status, await res.text());
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: `Error: ${err}` },
+          {
+            role: "assistant",
+            content: friendlyError(res.status),
+            isError: true,
+          },
         ]);
         return;
       }
@@ -474,6 +498,37 @@ export default function KayteeChatWidget() {
         }
       }
 
+      // The server appends "[error: ...]" if the stream breaks mid-reply.
+      const streamError = /\n\n\[error: [\s\S]*\]\s*$/.exec(full);
+      if (streamError) {
+        console.error("[chat] stream error:", streamError[0].trim());
+        full = full.slice(0, streamError.index);
+        const partial = stripTriggers(full);
+        setMessages((prev) => {
+          const next = prev.slice(0, partial ? -1 : prev.length);
+          return [
+            ...next,
+            ...(partial
+              ? [{ role: "assistant" as const, content: partial, provider }]
+              : []),
+            {
+              role: "assistant" as const,
+              content: friendlyError(500),
+              isError: true,
+            },
+          ];
+        });
+        return;
+      }
+
+      if (!full.trim()) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: friendlyError(500), isError: true },
+        ]);
+        return;
+      }
+
       const trigger = detectExportTrigger(full);
       const cleanContent = stripTriggers(full);
 
@@ -492,9 +547,10 @@ export default function KayteeChatWidget() {
         ]);
       }
     } catch (err) {
+      console.error("[chat] network error:", err);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: `Error: ${err}` },
+        { role: "assistant", content: friendlyError(), isError: true },
       ]);
     } finally {
       setLoading(false);
@@ -572,7 +628,7 @@ export default function KayteeChatWidget() {
           className="animate-fade-in fixed bottom-0 right-7 z-9999 flex w-65 items-center justify-between gap-2 rounded-t-xl border border-b-0 border-brand-200/30 bg-charcoal px-3.5 py-3 shadow-[0_-8px_24px_-8px_rgba(17,17,17,0.35)] transition-colors hover:bg-charcoal-light"
         >
           <Image
-            src="/images/logo.png"
+            src="/images/kaytee_logo.png"
             alt="Kaytee Furnitures"
             width={317}
             height={121}
@@ -624,7 +680,7 @@ export default function KayteeChatWidget() {
             <div className="flex items-center gap-3">
               {/* <Brandmark size={40} /> */}
               <Image
-                src="/images/logo.png"
+                src="/images/kaytee_logo.png"
                 alt="Kaytee Furnitures"
                 width={317}
                 height={121}
@@ -730,7 +786,9 @@ export default function KayteeChatWidget() {
                     className={`relative max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
                       m.role === "user"
                         ? "rounded-br-md bg-charcoal text-sand-50"
-                        : "rounded-bl-md border border-brand-200/70 bg-white text-charcoal shadow-[0_1px_2px_rgba(17,17,17,0.04)]"
+                        : m.isError
+                          ? "rounded-bl-md border border-red-200 bg-red-50 text-red-700 shadow-[0_1px_2px_rgba(185,28,28,0.08)]"
+                          : "rounded-bl-md border border-brand-200/70 bg-white text-charcoal shadow-[0_1px_2px_rgba(17,17,17,0.04)]"
                     }`}
                   >
                     {m.files?.length && (
@@ -764,6 +822,12 @@ export default function KayteeChatWidget() {
                             </span>
                           </div>
                         ))}
+                      </div>
+                    )}
+                    {m.isError && (
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] font-medium">
+                        <RiErrorWarningLine className="h-4 w-4 shrink-0" />
+                        Something went wrong
                       </div>
                     )}
                     <pre className="whitespace-pre-wrap wrap-break-word font-sans text-[13px] leading-relaxed">
