@@ -11,7 +11,8 @@ const steps = [
     tagline: "Understanding your vision.",
     desc: "We begin with a detailed discussion about your vision, lifestyle, budget, and timeline to understand exactly what you need.",
     image:
-      "https://i.pinimg.com/736x/0d/e6/8a/0de68a44cdc59f579184ce503d2c61b7.jpg",
+      "https://i.pinimg.com/1200x/1b/ac/10/1bac109b1b2cb3b67be991ff80a0dc5d.jpg",
+    // "https://i.pinimg.com/736x/0d/e6/8a/0de68a44cdc59f579184ce503d2c61b7.jpg",
   },
   {
     num: "02",
@@ -28,8 +29,7 @@ const steps = [
     label: "CRAFTSMANSHIP",
     tagline: "Every detail, thoughtfully executed.",
     desc: "We source and procure all furniture, materials, and fixtures, then manage the build process with trusted contractors.",
-    image:
-      "https://i.pinimg.com/736x/21/67/73/21677319732c039add87c0d6dc1ebb9f.jpg",
+    image: "/images/process/process_procurement_buildd.jpeg",
   },
   {
     num: "04",

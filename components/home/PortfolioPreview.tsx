@@ -301,11 +301,11 @@ export function PortfolioPreview({ items }: { items: PortfolioItemType[] }) {
               <div
                 className={`absolute inset-0 transition-colors ${active === i ? "bg-brand-900/10" : "bg-charcoal/20"}`}
               />
-              <div className="absolute bottom-0 left-0 right-0 px-2.5 pb-2">
+              {/* <div className="absolute bottom-0 left-0 right-0 px-2.5 pb-2">
                 <p className="font-sans text-[9px] text-white truncate leading-tight">
                   {p.title}
                 </p>
-              </div>
+              </div> */}
             </button>
           ))}
         </div>

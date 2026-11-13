@@ -17,8 +17,8 @@ const designElements = [
     title: "Materials & detail",
     description:
       "A considered mix of finishes, textures and colours that gives every space its character.",
-    image:
-      "https://i.pinimg.com/1200x/c3/38/8a/c3388a246ab83cfecc8b572bea7a6700.jpg",
+    image: "/images/services_materials_detail.jpeg",
+    // "https://i.pinimg.com/1200x/c3/38/8a/c3388a246ab83cfecc8b572bea7a6700.jpg",
     alt: "Interior material and finish selection",
   },
   {
@@ -26,6 +26,8 @@ const designElements = [
     title: "Furniture & lighting",
     description:
       "Furniture, lighting and finishing touches selected to work together as one composition.",
+    // image: "/images/services_furniture_lighting.jpeg",
+
     image:
       "https://i.pinimg.com/1200x/64/e4/08/64e4087d8dfc7db8bccf7eca46d0135e.jpg",
     alt: "Carefully styled interior with considered lighting",
@@ -67,9 +69,10 @@ export function ServicesSection() {
         </div>
 
         <div className="mt-14 grid overflow-hidden rounded-2xl border border-sand-200 bg-sand-50 lg:mt-20 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative min-h-[22rem] sm:min-h-[30rem] lg:min-h-[42rem]">
+          <div className="relative min-h-88 sm:min-h-120 lg:min-h-168">
             <Image
-              src="https://i.pinimg.com/1200x/1b/ac/10/1bac109b1b2cb3b67be991ff80a0dc5d.jpg"
+              src="/images/services_interior_design.jpeg"
+              // src="https://i.pinimg.com/1200x/1b/ac/10/1bac109b1b2cb3b67be991ff80a0dc5d.jpg"
               alt="Refined contemporary interior designed with a warm, natural palette"
               fill
               sizes="(max-width: 1024px) 100vw, 52vw"
@@ -126,7 +129,7 @@ export function ServicesSection() {
         <div className="mt-16 grid gap-7 sm:grid-cols-3 lg:mt-20 lg:gap-8">
           {designElements.map((item) => (
             <article key={item.number} className="group">
-              <div className="relative mb-5 aspect-[5/4] overflow-hidden bg-sand-100">
+              <div className="relative mb-5 aspect-5/4 overflow-hidden bg-sand-100">
                 <Image
                   src={item.image}
                   alt={item.alt}
