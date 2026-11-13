@@ -1,12 +1,12 @@
-import { getPortfolioItems } from "@/lib/portfolio";
 import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 import { PageHero } from "@/components/ui/PageHero";
 import { Pagination } from "@/components/ui/pagination";
+import { getPortfolioItems } from "@/lib/portfolio";
 import { PORTFOLIO_CATEGORIES } from "@/lib/utils/constants";
 import type { PortfolioItemType } from "@/types";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { RiArrowRightLine, RiArrowRightUpLine } from "react-icons/ri";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -42,7 +42,11 @@ export default async function PortfolioPage({
 
   const limit = 12;
 
-  const { data: items, total, pages } = getPortfolioItems({
+  const {
+    data: items,
+    total,
+    pages,
+  } = getPortfolioItems({
     category,
     page,
     limit,
@@ -237,37 +241,6 @@ export default async function PortfolioPage({
               )}
             </>
           )}
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="bg-charcoal py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.25em] text-brand-400">
-            Start your project
-          </p>
-
-          <h2 className="mb-5 font-display text-[clamp(2rem,4vw,3.25rem)] leading-tight text-white">
-            Ready to see your name in our portfolio?
-          </h2>
-
-          <p className="mb-10 font-sans leading-relaxed text-white/50">
-            Book a free discovery call — no commitment, no pressure — and
-            let&apos;s talk about what&apos;s possible for your space.
-          </p>
-
-          <Link
-            href="/consultation"
-            className="
-              inline-flex items-center gap-2.5
-              rounded-xl bg-brand-600 px-8 py-4
-              font-sans text-sm font-medium text-white
-              transition-colors hover:bg-brand-700
-            "
-          >
-            Start a project
-            <RiArrowRightLine className="h-4 w-4" />
-          </Link>
         </div>
       </section>
     </>
