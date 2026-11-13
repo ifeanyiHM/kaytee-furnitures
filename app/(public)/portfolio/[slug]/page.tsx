@@ -2,6 +2,8 @@ import ProjectGallery from "@/components/portfolio/ProjectGallery";
 import { ProjectMediaViewer } from "@/components/portfolio/ProjectMediaViewer";
 import { getPortfolioItemBySlug, getPortfolioItems } from "@/lib/portfolio";
 import { PORTFOLIO_PROJECTS } from "@/lib/portfolio-data";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, projectImageUrls, projectJsonLd } from "@/lib/seo";
 import { MediaFile, PortfolioItemType } from "@/types";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -21,9 +23,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const item = getPortfolioItemBySlug(slug);
   if (!item) return { title: "Project not found" };
+  const images = projectImageUrls(item, 1);
   return {
     title: item.title,
     description: item.description,
+    alternates: { canonical: `/portfolio/${item.slug}` },
+    openGraph: {
+      type: "article",
+      title: item.title,
+      description: item.description,
+      url: `/portfolio/${item.slug}`,
+      ...(images.length ? { images } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: item.title,
+      description: item.description,
+      ...(images.length ? { images } : {}),
+    },
   };
 }
 
@@ -90,6 +107,14 @@ export default async function PortfolioDetailPage({
 
   return (
     <>
+      <JsonLd data={projectJsonLd(item)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Portfolio", path: "/portfolio" },
+          { name: item.title, path: `/portfolio/${item.slug}` },
+        ])}
+      />
       {/* ── Lean display — title only, meta lives in the spec band below ── */}
       <div className="relative h-[70vh] min-h-105 max-h-180 bg-charcoal overflow-hidden">
         {cover?.type === "video" ? (

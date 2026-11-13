@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   RiArrowRightUpLine,
@@ -13,7 +14,13 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { PageHero } from "../../../components/ui/PageHero";
 
-// Keep your existing PageHero import and metadata.
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Kaytee Furnitures & Interior — visit our Surulere studio in Lagos, call, email or message us on Instagram about your interior design project.",
+  alternates: { canonical: "/contact" },
+};
+
 
 const DETAILS = [
   {

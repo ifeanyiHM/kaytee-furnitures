@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description:
     "The terms governing use of the Kaytee Furnitures & Interior website and interior design engagements.",
+  alternates: { canonical: "/terms" },
 };
 
 const LAST_UPDATED = "12 November 2026";

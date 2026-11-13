@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description:
     "A selection of interior design projects shaped by thoughtful layouts, materials and detail.",
+  alternates: { canonical: "/portfolio" },
 };
 
 const getCategories = (item: PortfolioItemType): string[] => {

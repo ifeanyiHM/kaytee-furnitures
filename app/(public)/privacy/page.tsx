@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How Kaytee Furnitures & Interior collects, uses and protects information submitted through its website.",
+  alternates: { canonical: "/privacy" },
 };
 
 const LAST_UPDATED = "12 November 2026";

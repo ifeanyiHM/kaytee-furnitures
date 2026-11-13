@@ -1,4 +1,6 @@
 import KayteeChatWidget from "@/components/KayteeChatWidget";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -12,6 +14,24 @@ export const metadata: Metadata = {
 
   description:
     "Kaytee Furnitures & Interior is a Lagos-based interior design studio creating thoughtful, functional and beautifully considered spaces.",
+
+  applicationName: "Kaytee Furnitures & Interior",
+  keywords: [
+    "interior design Lagos",
+    "interior designer Lagos",
+    "luxury interior design Nigeria",
+    "bespoke furniture Lagos",
+    "living room design",
+    "bedroom design",
+    "kitchen renovation Lagos",
+    "Kaytee Furnitures & Interior",
+  ],
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: false, email: false, address: false },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the token from Search Console.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 
   openGraph: {
     type: "website",
@@ -33,7 +53,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["https://www.kayteefurnitures.com/og-image.jpg"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -44,6 +74,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-sand-50 text-charcoal antialiased">
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={websiteJsonLd} />
         {children}
         <KayteeChatWidget />
       </body>
