@@ -110,7 +110,7 @@ export function Header() {
         <div
           className={cn(
             "site-container flex items-center justify-between",
-            "h-[68px] sm:h-[72px] lg:h-20 xl3:h-24",
+            "h-17 sm:h-18 lg:h-20 xl3:h-24",
           )}
         >
           {/* Brand */}
@@ -311,7 +311,7 @@ export function Header() {
                         href={link.href}
                         onClick={() => setOpen(false)}
                         aria-current={active ? "page" : undefined}
-                        className="group flex min-h-[66px] items-center justify-between gap-4 py-4 sm:min-h-[76px]"
+                        className="group flex min-h-16.5 items-center justify-between gap-4 py-4 sm:min-h-19"
                       >
                         <div className="flex min-w-0 items-center gap-4 sm:gap-6">
                           <span
