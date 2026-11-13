@@ -149,6 +149,7 @@ export default function KayteeChatWidget() {
   const [widgetState, setWidgetState] = useState<WidgetState>("closed");
   const [isMaximized, setIsMaximized] = useState(false);
   const [hasEverOpened, setHasEverOpened] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -175,6 +176,25 @@ export default function KayteeChatWidget() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (revealed) return;
+    const check = () => {
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      // Pages too short to scroll show the launcher straight away.
+      if (scrollable <= 0 || window.scrollY / scrollable >= 0.5) {
+        setRevealed(true);
+      }
+    };
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [revealed]);
 
   useEffect(() => {
     if (widgetState === "open") {
@@ -595,11 +615,11 @@ export default function KayteeChatWidget() {
         Chat with our design assistant
       </span>
 
-      {widgetState === "closed" && (
+      {widgetState === "closed" && revealed && (
         <button
           onClick={openPanel}
           aria-label="Chat with the Kaytee design concierge"
-          className={`${showPulse ? "kaytee-pulse" : ""} group animate-fade-up fixed bottom-7 right-7 z-9998 flex items-center gap-2.5 rounded-full border border-white/6 bg-charcoal px-4 py-2.5 shadow-[0_14px_30px_-6px_rgba(17,17,17,0.45)] transition-all duration-300 hover:border-teal/20 hover:text-sand-50 hover:shadow-[0_18px_36px_-6px_rgba(17,17,17,0.55)]`}
+          className={`${showPulse ? "kaytee-pulse" : ""} group animate-fade-up fixed bottom-32 lg:bottom-24 right-7 z-9998 flex items-center gap-2.5 rounded-full border border-white/6 bg-charcoal px-4 py-2.5 shadow-[0_14px_30px_-6px_rgba(17,17,17,0.45)] transition-all duration-300 hover:border-teal/20 hover:text-sand-50 hover:shadow-[0_18px_36px_-6px_rgba(17,17,17,0.55)]`}
         >
           {/* Animated status dot */}
           <span className="relative flex h-2 w-2 shrink-0">
