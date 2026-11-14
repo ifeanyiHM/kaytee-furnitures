@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next";
 import { BASE_URL } from "@/lib/seo";
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: "/api/",
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
